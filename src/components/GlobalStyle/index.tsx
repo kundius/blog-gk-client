@@ -13,4 +13,10 @@ export const GlobalStyle = createGlobalStyle`
   ::-moz-focus-inner {
     border: ${props => props.theme.focusVisible ? 'initial' : '0 !important'};
   }
+  h1 {
+    letter-spacing: 0.025em;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 700;
+  }
 `

@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { FaSearch } from 'react-icons/fa'
 import { useSpring, animated, useSpringRef, useChain } from 'react-spring'
 
 import * as styles from './styles'
 
 export const Search = () => {
+  const router = useRouter()
   const wrapperRef = useRef<HTMLDivElement>(null)
   const fieldRef = useRef<HTMLInputElement>(null)
   const [opened, setOpened] = useState(false)
@@ -37,8 +39,13 @@ export const Search = () => {
       setOpened(true)
       fieldRef.current?.focus()
     } else {
-      console.log(search)
+      router.push(`/search?q=${search}`)
     }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    router.push(`/search?q=${search}`)
   }
 
   const handleClickOutside = (e) => {
@@ -55,7 +62,7 @@ export const Search = () => {
   }, [])
 
   return (
-    <styles.Wrapper ref={wrapperRef}>
+    <styles.Wrapper ref={wrapperRef} onSubmit={handleSubmit}>
       <styles.Field
         as={animated.input}
         ref={fieldRef}
