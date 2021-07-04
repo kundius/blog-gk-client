@@ -4,6 +4,10 @@ import { Header } from '@components/Header'
 import { Footer } from '@components/Footer'
 import { Container } from '@components/Container'
 import { SideAuthor } from '@components/SideAuthor'
+import { SubscribeForm } from '@components/SubscribeForm'
+import { SideAdvert } from '@components/SideAdvert'
+import { SidePopular } from '@components/SidePopular'
+import { SideLatest } from '@components/SideLatest'
 
 import * as styles from './styles'
 
@@ -22,8 +26,12 @@ export function MainLayout ({
           <styles.Content>
             {children}
           </styles.Content>
-          <styles.Side>
+          <styles.Side className="flex flex-col gap-24">
             <SideAuthor />
+            <SideAdvert />
+            <SidePopular />
+            <SubscribeForm />
+            <SideLatest />
           </styles.Side>
         </styles.Main>
       </Container>

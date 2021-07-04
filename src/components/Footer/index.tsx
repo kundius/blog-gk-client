@@ -128,10 +128,10 @@ export const Footer = () => {
               }}
               items={[{
                 title: 'Политика конфиденциальности',
-                href: '#'
+                href: '/pages/privacy-policy'
               }, {
                 title: 'Пользовательское соглашение',
-                href: '#'
+                href: '/pages/user-agreement'
               }]}
             />
           </div>

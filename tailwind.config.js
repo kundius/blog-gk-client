@@ -13,15 +13,12 @@ module.exports = {
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
-      gray: colors.trueGray,
+      gray: colors.warmGray,
       blueGray: colors.blueGray,
-      purple: colors.purple,
-      pink: colors.pink,
       blue: colors.blue,
-      orange: colors.orange,
       red: {
         ...colors.rose,
-        600: '#c66'
+        400: '#c66'
       },
       yellow: colors.amber,
     },

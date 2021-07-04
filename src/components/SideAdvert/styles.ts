@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapepr = styled.div`
+export const Wrapper = styled.div`
   position: relative;
   padding: 24px;
   z-index: 1;

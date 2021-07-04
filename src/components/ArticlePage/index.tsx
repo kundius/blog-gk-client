@@ -4,7 +4,6 @@ import useSWR from 'swr'
 import { Helmet } from 'react-helmet'
 import { DateTime } from 'luxon'
 import { AiOutlineTag } from 'react-icons/ai'
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi'
 import {
   FacebookShareButton,
@@ -21,6 +20,7 @@ import {
   VKIcon
 } from 'react-share'
 
+import { Content } from '@components/Content'
 import { Image } from '@components/Image'
 import { ClocheIcon } from '@components/Icon/cloche'
 import { ToqueIcon } from '@components/Icon/toque'
@@ -32,6 +32,7 @@ import { ArticleRelated } from '@components/ArticleRelated'
 import { Comments } from '@components/Comments'
 import { Ingredients } from '@components/Ingredients'
 
+import { Hits } from './Hits'
 import * as api from './api'
 import * as styles from './styles'
 
@@ -46,24 +47,21 @@ export function ArticlePage ({
 }: ArticlePageProps) {
   const preload = useContext(PreloadContext)
 
-  const [articleKey, articleFetcher] = api.getArticle({
-    alias
-  })
-
-  const { data: articleResult } = useSWR<api.GetArticleData>(articleKey, articleFetcher, {
-    initialData: preload[articleKey]
+  const [key, fetcher] = api.getArticle({ alias })
+  const { data: result } = useSWR<api.GetArticleData>(key, fetcher, {
+    initialData: preload[key]
   })
 
   let previousApi: api.GetPreviousResult | undefined
   let nextApi: api.GetNextResult | undefined
-  if (articleResult?.data) {
+  if (result?.data) {
     previousApi = api.getPrevious({
-      id: articleResult.data.id,
-      date: articleResult.data.date_created
+      id: result.data.id,
+      date: result.data.date_created
     })
     nextApi = api.getNext({
-      id: articleResult.data.id,
-      date: articleResult.data.date_created
+      id: result.data.id,
+      date: result.data.date_created
     })
   }
 
@@ -73,92 +71,98 @@ export function ArticlePage ({
   return (
     <WideLayout>
       <Helmet>
-        <title>{articleResult?.data?.name}</title>
+        <title>{result?.data?.name}</title>
       </Helmet>
-      {articleResult?.data && (
+      {result?.data && (
         <div className="grid gap-24">
           <div className="max-w-2xl ml-auto mr-auto">
             <div className="mb-8 flex justify-around items-center tracking-wide">
-              <div className="flex gap-1 text-xs uppercase text-red-600">
-                <Link href={`/${articleResult.data.category.section.alias}`} passHref>
-                  <a className="hover:text-red-400">{articleResult.data.category.section.name}</a>
+              <div className="flex gap-1 text-xs uppercase text-red-400">
+                <Link href={`/${result.data.category.section.alias}`} passHref>
+                  <a className="hover:text-red-400">{result.data.category.section.name}</a>
                 </Link>
                 /
-                <Link href={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}`} passHref>
-                  <a className="hover:text-red-400">{articleResult.data.category.name}</a>
+                <Link href={`/${result.data.category.section.alias}/${result.data.category.alias}`} passHref>
+                  <a className="hover:text-red-400">{result.data.category.name}</a>
                 </Link>
               </div>
               <div className="text-xs text-gray-400">
-                {DateTime.fromISO(articleResult.data.date_created).setLocale('ru').toFormat('DDD')}
+                {DateTime.fromISO(result.data.date_created).setLocale('ru').toFormat('DDD')}
               </div>
             </div>
 
             <h1 className="text-5xl text-center font-bold tracking-wide">
-              {articleResult.data.name}
+              {result.data.name}
             </h1>
 
             <div className="transition duration-300 ease-out border-b border-gray-200 dark:border-gray-600 mt-14 pb-2 flex items-center gap-8 justify-between">
               <div className="flex items-center gap-8">
-                {articleResult.data.cooking_time && (
+                {result.data.cooking_time && (
                   <div className="flex items-center gap-2">
                     <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                       <ToqueIcon />
                     </div>
                     <div className="text-xs uppercase">
-                      {articleResult.data.cooking_time}
+                      {result.data.cooking_time}
                     </div>
                   </div>
                 )}
-                {articleResult.data.portion_count && (
+                {result.data.portion_count && (
                   <div className="flex items-center gap-2">
                     <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                       <ClocheIcon />
                     </div>
                     <div className="text-xs uppercase">
-                      {articleResult.data.portion_count || 0}
+                      {result.data.portion_count || 0}
                     </div>
                   </div>
                 )}
               </div>
-              <a href={`#comments`} className="flex items-center gap-8">
-                <span className="flex items-center gap-2">
-                  <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
-                    <CommentsIcon />
+              <div className="flex items-center gap-8">
+                <Hits
+                  id={result.data.id}
+                  initialHits={result.data.hits_count || 0}
+                />
+                <a href={`#comments`} className="flex items-center gap-8">
+                  <span className="flex items-center gap-2">
+                    <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
+                      <CommentsIcon />
+                    </span>
+                    <span className="text-xs uppercase">
+                      {result.data.comments_count || 0}
+                    </span>
                   </span>
-                  <span className="text-xs uppercase">
-                    {articleResult.data.comments_count || 0}
-                  </span>
-                </span>
-              </a>
+                </a>
+              </div>
             </div>
 
-            {articleResult.data.thumbnail && (
+            {result.data.thumbnail && (
               <figure className="mt-8 mb-8">
                 <Image
-                  src={`${publicRuntimeConfig.API_URL}/assets/${articleResult.data.thumbnail?.filename_disk}`}
-                  alt={articleResult.data.thumbnail?.title}
-                  blurHash={articleResult.data.thumbnail.blurhash}
+                  src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
+                  alt={result.data.thumbnail?.title}
+                  blurHash={result.data.thumbnail.blurhash}
                   width={675}
-                  height={(675 / articleResult.data.thumbnail.width * articleResult.data.thumbnail.height)}
+                  height={(675 / result.data.thumbnail.width * result.data.thumbnail.height)}
                   objectFit="cover"
                   layout="responsive"
                 />
               </figure>
             )}
 
-            {articleResult.data.ingredients && (
+            {result.data.ingredients && (
               <div className="mt-8 mb-16">
-                <Ingredients items={articleResult.data.ingredients} />
+                <Ingredients items={result.data.ingredients} />
               </div>
             )}
 
-            <styles.Content dangerouslySetInnerHTML={{ __html: articleResult.data.content }} />
+            <Content dangerouslySetInnerHTML={{ __html: result.data.content }} />
 
             <styles.Advert className="mt-16">
               Реклама
             </styles.Advert>
 
-            {articleResult.data.tags && (
+            {result.data.tags && (
               <div className="flex items-start leading-none mt-16">
                 <div className="flex items-center">
                   <AiOutlineTag />
@@ -167,7 +171,7 @@ export function ArticlePage ({
                   </div>
                 </div>
                 <div className="ml-4 flex flex-wrap text-sm text-gray-400 uppercase gap-1">
-                  {articleResult.data.tags.map(item => (
+                  {result.data.tags.map(item => (
                     <a key={item.tag.alias}>#{item.tag.name}</a>
                   ))}
                 </div>
@@ -182,23 +186,23 @@ export function ArticlePage ({
                 Поделись с друзьями
               </div>
               <div className="flex gap-2">
-                <FacebookShareButton url={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}/${articleResult.data.alias}`}>
+                <FacebookShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
                   <FacebookIcon size={32} borderRadius={6} />
                 </FacebookShareButton>
-                <TwitterShareButton url={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}/${articleResult.data.alias}`}>
+                <TwitterShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
                   <TwitterIcon size={32} borderRadius={6} />
                 </TwitterShareButton>
-                <VKShareButton url={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}/${articleResult.data.alias}`}>
+                <VKShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
                   <VKIcon size={32} borderRadius={6} />
                 </VKShareButton>
-                <OKShareButton url={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}/${articleResult.data.alias}`}>
+                <OKShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
                   <OKIcon size={32} borderRadius={6} />
                 </OKShareButton>
-                <TelegramShareButton url={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}/${articleResult.data.alias}`}>
+                <TelegramShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
                   <TelegramIcon size={32} borderRadius={6} />
                 </TelegramShareButton>
-                {articleResult.data.thumbnail && (
-                  <PinterestShareButton url={`/${articleResult.data.category.section.alias}/${articleResult.data.category.alias}/${articleResult.data.alias}`} media={`${publicRuntimeConfig.API_URL}/assets/${articleResult.data.thumbnail.filename_disk}`}>
+                {result.data.thumbnail && (
+                  <PinterestShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`} media={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail.filename_disk}`}>
                     <PinterestIcon size={32} borderRadius={6} />
                   </PinterestShareButton>
                 )}
@@ -208,7 +212,7 @@ export function ArticlePage ({
             <div className="flex items-center gap-2">
               {previousResult?.data && (
                 <Link href={`/${previousResult.data.category.section.alias}/${previousResult.data.category.alias}/${previousResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-600 hover:bg-red-700 text-white text-sm tracking-widest leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
+                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-sm tracking-widest leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
                     <HiOutlineChevronDoubleLeft className="mr-1" />
                     Предыдущая
                   </a>
@@ -216,7 +220,7 @@ export function ArticlePage ({
               )}
               {nextResult?.data && (
                 <Link href={`/${nextResult.data.category.section.alias}/${nextResult.data.category.alias}/${nextResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-600 hover:bg-red-700 text-white text-sm tracking-widest leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
+                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-sm tracking-widest leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
                     Следующая
                     <HiOutlineChevronDoubleRight className="mr-1" />
                   </a>
@@ -226,11 +230,11 @@ export function ArticlePage ({
           </div>
           
           <ArticleRelated
-            id={articleResult.data.id}
+            id={result.data.id}
           />
           
           <Comments
-            threadId={articleResult.data.id}
+            threadId={result.data.id}
             threadType="articles"
           />
         </div>

@@ -11,8 +11,33 @@ export interface SearchArgs {
 
 export interface SearchData {
   meta: {
-    filter_count: number
+    search_count: number
   }
+  data: string[]
+}
+
+export type SearchResult = [string, (url: string) => Promise<SearchData>]
+
+export function Search ({
+  search,
+  limit,
+  page
+}: SearchArgs): SearchResult {
+  const params = queryString.stringify({
+    search,
+    limit,
+    page
+  })
+  const key = `${publicRuntimeConfig.API_URL}/custom/articles/search?${params}`
+  const fetcher = url => fetch(url).then(r => r.json())
+  return [key, fetcher]
+}
+
+export interface GetArticleArgs {
+  id: string
+}
+
+export interface GetArticleData {
   data: {
     alias: string
     name: string
@@ -33,24 +58,18 @@ export interface SearchData {
       title: string
       blurhash: string
     }
-  }[]
+  }
 }
 
-export type SearchResult = [string, (url: string) => Promise<SearchData>]
+export type GetArticleResult = [string, (url: string) => Promise<GetArticleData>]
 
-export function Search ({
-  search,
-  limit,
-  page
-}: SearchArgs): SearchResult {
+export function GetArticle ({
+  id
+}: GetArticleArgs): GetArticleResult {
   const params = queryString.stringify({
-    search,
-    fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
-    limit,
-    page,
-    meta: 'filter_count'
+    fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash'
   })
-  const key = `${publicRuntimeConfig.API_URL}/items/articles?${params}`
+  const key = `${publicRuntimeConfig.API_URL}/items/articles/${id}?${params}`
   const fetcher = url => fetch(url).then(r => r.json())
   return [key, fetcher]
 }

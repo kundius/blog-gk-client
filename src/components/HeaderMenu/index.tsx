@@ -10,7 +10,9 @@ export const HeaderMenu = () => {
     <styles.Wrapper>
       <styles.List>
         <li>
-          <a href="#">Обо мне</a>
+          <Link href="/pages/about" passHref>
+            <a>Обо мне</a>
+          </Link>
         </li>
         <Popover
           content={
@@ -82,7 +84,9 @@ export const HeaderMenu = () => {
           )}
         </Popover>
         <li>
-          <a href="#">Храмы</a>
+          <Link href="/article/temples" passHref>
+            <a>Храмы</a>
+          </Link>
         </li>
       </styles.List>
       <Link href="/" passHref>
@@ -170,7 +174,9 @@ export const HeaderMenu = () => {
           )}
         </Popover>
         <li>
-          <a href="#">Альбомы</a>
+          <Link href="/albums" passHref>
+            <a>Альбомы</a>
+          </Link>
         </li>
       </styles.List>
     </styles.Wrapper>

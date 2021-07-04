@@ -20,6 +20,7 @@ export interface GetArticlesData {
     portion_count?: string
     cooking_time?: string
     comments_count: number | null
+    hits_count: number | null
     excerpt?: string
     category: {
       name: string
@@ -45,7 +46,7 @@ export function getArticles ({
 }: GetArticlesArgs): GetArticlesResult {
   const params = queryString.stringify({
     'filter[category][alias][_eq]': alias,
-    fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
+    fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,hits_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
     limit,
     page,
     meta: 'filter_count'

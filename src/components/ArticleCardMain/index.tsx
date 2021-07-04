@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Image } from '@components/Image'
 import { ClocheIcon } from '@components/Icon/cloche'
 import { ToqueIcon } from '@components/Icon/toque'
+import { EyeIcon } from '@components/Icon/eye'
 import { CommentsIcon } from '@components/Icon/comments'
 
 import * as styles from './styles'
@@ -15,6 +16,7 @@ export interface ArticleCardMainProps {
   portionCount?: string
   cookingTime?: string
   commentsCount: number
+  hitsCount?: number
   excerpt?: string
   category: {
     name: string
@@ -35,6 +37,7 @@ export function ArticleCardMain ({
   portionCount,
   cookingTime,
   commentsCount,
+  hitsCount,
   thumbnail,
   excerpt
 }: ArticleCardMainProps) {
@@ -74,18 +77,32 @@ export function ArticleCardMain ({
             </div>
           )}
         </div>
-        <Link href={`${url}#comments`} passHref>
-          <a className="flex items-center gap-8">
-            <span className="flex items-center gap-2">
-              <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
-                <CommentsIcon />
+        <div className="flex items-center gap-8">
+          {typeof hitsCount !== 'undefined' && (
+            <a className="flex items-center gap-8">
+              <span className="flex items-center gap-2">
+                <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
+                  <EyeIcon />
+                </span>
+                <span className="text-xs uppercase">
+                  {hitsCount}
+                </span>
               </span>
-              <span className="text-xs uppercase">
-                {commentsCount}
+            </a>
+          )}
+          <Link href={`${url}#comments`} passHref>
+            <a className="flex items-center gap-8">
+              <span className="flex items-center gap-2">
+                <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
+                  <CommentsIcon />
+                </span>
+                <span className="text-xs uppercase">
+                  {commentsCount}
+                </span>
               </span>
-            </span>
-          </a>
-        </Link>
+            </a>
+          </Link>
+        </div>
       </styles.Info>
       {thumbnail && (
         <Link href={url}>

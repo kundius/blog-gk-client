@@ -25,7 +25,7 @@ export function SectionPage ({
   const listRef = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
   const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(10)
+  const [limit, setLimit] = useState(5)
 
   useEffect(() => {
     if (mounted) {
@@ -91,6 +91,7 @@ export function SectionPage ({
             portionCount={article.portion_count}
             cookingTime={article.cooking_time}
             commentsCount={article.comments_count || 0}
+            hitsCount={article.hits_count || 0}
             excerpt={article.excerpt}
             createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD')}
             thumbnail={

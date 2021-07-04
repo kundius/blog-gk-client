@@ -18,11 +18,11 @@ export function Ingredients ({
       <div className="space-y-4">
         {items.map((item, i) => (
           <div className="flex items-end leading-none justify-between gap-2" key={i}>
-            <div className="">{item.name}</div>
+            <div>{item.name}</div>
             {item.value && (
               <>
-                <div className="flex-grow border-b border-dotted"></div>
-                <div className="">{item.value}</div>
+                <div className="transition duration-300 ease-out flex-grow border-b border-dotted border-gray-300 dark:border-gray-600"></div>
+                <div>{item.value}</div>
               </>
             )}
           </div>
