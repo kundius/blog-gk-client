@@ -49,7 +49,7 @@ const getRssXml = blogPosts => {
   >
     <channel>
         <title><![CDATA[Кулинарные рецепты Галины Кундиус]]></title>
-        <link>https://myamazingwebsite.com</link>
+        <link>https://blog-gk.ru</link>
         <description>
           <![CDATA[Блог с рецептами кулинарных блюд для домашнего приготовления и обычные истории из жизни. На сайте можно найти интересные рецепты; салатов, первых, вторых блюд и выпечки.]]>
         </description>

@@ -71,7 +71,9 @@ export function ArticlePage ({
   return (
     <WideLayout>
       <Helmet>
-        <title>{result?.data?.name}</title>
+        <title>{result?.data?.seo_title || result?.data?.name}</title>
+        <meta name="description" content={result?.data?.seo_keywords} />
+        <meta name="keywords" content={result?.data?.seo_description} />
       </Helmet>
       {result?.data && (
         <div className="grid gap-24">
@@ -181,29 +183,29 @@ export function ArticlePage ({
 
           <div className="transition duration-300 ease-out flex items-center justify-between gap-8 pt-4 pb-4 border-t border-b border-gray-200 dark:border-gray-600">
             <div className="flex items-center gap-8">
-              <div className="text-sm leading-none text-gray-400">
+              <div className="text-sm leading-none text-gray-400 hidden lg:block">
                 Понравилась статья?<br />
                 Поделись с друзьями
               </div>
               <div className="flex gap-2">
                 <FacebookShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
-                  <FacebookIcon size={32} borderRadius={6} />
+                  <FacebookIcon size={32} borderRadius={32} />
                 </FacebookShareButton>
                 <TwitterShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
-                  <TwitterIcon size={32} borderRadius={6} />
+                  <TwitterIcon size={32} borderRadius={32} />
                 </TwitterShareButton>
                 <VKShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
-                  <VKIcon size={32} borderRadius={6} />
+                  <VKIcon size={32} borderRadius={32} />
                 </VKShareButton>
                 <OKShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
-                  <OKIcon size={32} borderRadius={6} />
+                  <OKIcon size={32} borderRadius={32} />
                 </OKShareButton>
                 <TelegramShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
-                  <TelegramIcon size={32} borderRadius={6} />
+                  <TelegramIcon size={32} borderRadius={32} />
                 </TelegramShareButton>
                 {result.data.thumbnail && (
                   <PinterestShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`} media={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail.filename_disk}`}>
-                    <PinterestIcon size={32} borderRadius={6} />
+                    <PinterestIcon size={32} borderRadius={32} />
                   </PinterestShareButton>
                 )}
               </div>

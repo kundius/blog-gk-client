@@ -11,6 +11,10 @@ export const List = styled.ul`
     margin-left: 20px;
     margin-right: 20px;
     position: relative;
+    ${props => props.theme.media.below.lg} {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
     a {
       font-size: 18px;
       font-weight: 600;
@@ -20,10 +24,20 @@ export const List = styled.ul`
       letter-spacing: 0.1em;
       display: block;
       white-space: nowrap;
+      ${props => props.theme.media.below.lg} {
+        font-size: 14px;
+      }
       &:hover {
         color: #c99;
       }
     }
+  }
+  ${props => props.theme.media.below.xl} {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  ${props => props.theme.media.below.md} {
+    display: none;
   }
 `
 
@@ -56,6 +70,11 @@ export const Logo = styled.a`
   width: 118px;
   height: 118px;
   flex-shrink: 0;
+  ${props => props.theme.media.below.lg} {
+    top: -12px;
+    width: 100px;
+    height: 100px;
+  }
   img {
     display: block;
   }
@@ -63,6 +82,14 @@ export const Logo = styled.a`
     top: 0;
     width: 60px;
     height: 60px;
+  }
+  ${props => props.theme.media.below.md} {
+    top: -72px;
+    .isHeaderFixed & {
+      top: 3px;
+      width: 54px;
+      height: 54px;
+    }
   }
 `
 
@@ -78,6 +105,9 @@ export const Dropdown = styled.button`
   top: 50%;
   transform: translateY(-50%);
   right: -20px;
+  ${props => props.theme.media.below.lg} {
+    right: -16px;
+  }
   ::before {
     content: '';
     position: absolute;
@@ -130,5 +160,8 @@ export const Wrapper = styled.nav`
   }
   .isHeaderFixed & {
     height: 60px;
+  }
+  ${props => props.theme.media.below.md} {
+    height: 0;
   }
 `

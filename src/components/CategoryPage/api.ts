@@ -64,6 +64,9 @@ export interface GetCategoryData {
   data: {
     alias: string
     name: string
+    seo_title: string
+    seo_keywords: string
+    seo_description: string
   } | undefined
 }
 
@@ -74,7 +77,7 @@ export function getCategory ({
 }: GetCategoryArgs): GetCategoryResult {
   const params = queryString.stringify({
     'filter[alias][_eq]': alias,
-    fields: 'alias,name'
+    fields: 'alias,name,seo_title,seo_keywords,seo_description'
   })
   const key = `${publicRuntimeConfig.API_URL}/items/categories?${params}`
   const fetcher = url => fetch(url).then(r => r.json()).then(r => ({ data: r?.data?.[0] }))

@@ -7,6 +7,10 @@ export const VARIABLES = {
     light: '#ffffff',
     dark: '#111827',
   },
+  'color-blurred-background': {
+    light: 'rgba(255, 255, 255, 0.85)',
+    dark: 'rgba(17, 24, 39, 0.85)',
+  },
   'slogan-border-top-color': {
     light: '#ccc',
     dark: '#6B7280'

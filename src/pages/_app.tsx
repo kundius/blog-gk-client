@@ -8,6 +8,7 @@ import { PreloadContext } from '@components/PreloadContext'
 import { GlobalStyle } from '@components/GlobalStyle'
 import '@components/GlobalStyle/globals.css'
 import '@components/Pagination/styles.css'
+import 'react-image-lightbox/style.css'
 
 export default function App ({ Component, pageProps }: AppProps) {
   // const apolloClient = useApollo({

@@ -68,7 +68,9 @@ export function SectionPage ({
   return (
     <MainLayout>
       <Helmet>
-        <title>{sectionResult?.data?.name}</title>
+        <title>{sectionResult?.data?.seo_title || sectionResult?.data?.name}</title>
+        <meta name="description" content={sectionResult?.data?.seo_keywords} />
+        <meta name="keywords" content={sectionResult?.data?.seo_description} />
       </Helmet>
 
       <div
@@ -85,30 +87,34 @@ export function SectionPage ({
         )}
 
         {articlesResult?.data?.map(article => (
-          <ArticleCardMain
+          <div
             key={article.alias}
-            name={article.name}
-            portionCount={article.portion_count}
-            cookingTime={article.cooking_time}
-            commentsCount={article.comments_count || 0}
-            hitsCount={article.hits_count || 0}
-            excerpt={article.excerpt}
-            createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD')}
-            thumbnail={
-              article.thumbnail
-                ? {
-                    name: article.thumbnail?.title,
-                    blurHash: article.thumbnail?.blurhash,
-                    url: `${publicRuntimeConfig.API_URL}/assets/${article.thumbnail?.filename_disk}`
-                  }
-                : undefined
-            }
-            url={`/${article.category.section.alias}/${article.category.alias}/${article.alias}`}
-            category={{
-              name: article.category.name,
-              url: `/${article.category.section.alias}/${article.category.alias}`
-            }}
-          />
+            className="max-w-2xl mx-auto"
+          >
+            <ArticleCardMain
+              name={article.name}
+              portionCount={article.portion_count}
+              cookingTime={article.cooking_time}
+              commentsCount={article.comments_count || 0}
+              hitsCount={article.hits_count || 0}
+              excerpt={article.excerpt}
+              createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD')}
+              thumbnail={
+                article.thumbnail
+                  ? {
+                      name: article.thumbnail?.title,
+                      blurHash: article.thumbnail?.blurhash,
+                      url: `${publicRuntimeConfig.API_URL}/assets/${article.thumbnail?.filename_disk}`
+                    }
+                  : undefined
+              }
+              url={`/${article.category.section.alias}/${article.category.alias}/${article.alias}`}
+              category={{
+                name: article.category.name,
+                url: `/${article.category.section.alias}/${article.category.alias}`
+              }}
+            />
+          </div>
         ))}
 
         {(articlesResult?.meta?.filter_count || 0) > limit && (

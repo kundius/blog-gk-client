@@ -152,7 +152,7 @@ export const Quote = styled.a`
   margin-bottom: 16px;
   position: relative;
   line-height: 1;
-  background: #ffd59c;
+  background: #ffe6c5;
   padding: 8px;
   border-radius: 4px;
   text-decoration: none;

@@ -1,18 +1,37 @@
 import { AlbumPage } from '@components/AlbumPage'
-import * as api from '@components/AlbumPage/api'
+import fetch from 'isomorphic-unfetch'
+import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 
-// export async function getStaticProps({ params }) {
-//   const apiAbout = api.getAbout()
+import * as albumApi from '@components/AlbumPage/api'
 
-//   const preloadData = {
-//     [apiAbout[0]]: await apiAbout[1](apiAbout[0])
-//   }
+const { publicRuntimeConfig } = getRuntimeConfig()
 
-//   return {
-//     props: {
-//       preloadData
-//     }
-//   }
-// }
+export async function getStaticPaths() {
+  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/albums?fields=alias`)
+  const albums = await res.json()
+  const paths = albums.data.map((album) => ({
+    params: {
+      album: album.alias
+    }
+  }))
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+  const preloadData = {}
+
+  const [albumKey, albumFetcher] = albumApi.getAlbum({
+    alias: params.album
+  })
+  const albumData = await albumFetcher(albumKey)
+  preloadData[albumKey] = albumData
+
+  return {
+    props: {
+      preloadData,
+      alias: params.album
+    }
+  }
+}
 
 export default AlbumPage

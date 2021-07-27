@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { FaSearch, FaRss } from 'react-icons/fa'
-import { useTrail, useSpring, animated } from 'react-spring'
+import React, { useState, useEffect, useContext, useRef } from 'react'
+import { FaRss } from 'react-icons/fa'
+import { useSpring, animated } from 'react-spring'
 import { throttle } from 'throttle-debounce'
+// import Link from 'next/link'
 
 import { Container } from '@components/Container'
 import { HeaderMenu } from '@components/HeaderMenu'
+import { MobileMenu } from '@components/MobileMenu'
 import { ThemeContext } from '@components/ThemeContext'
 
 import { useLightToggle } from './useLightToggle'
@@ -14,7 +16,7 @@ import * as styles from './styles'
 export const Header = () => {
   const [isFixed, setIsFixed] = useState(false)
   const { colorMode, setColorMode } = useContext(ThemeContext)
-  const lightToggle = useLightToggle({ theme: colorMode})
+  const lightToggle = useLightToggle({ theme: colorMode })
   const headerSpring = useSpring({
     y: isFixed ? 0 : -100
   })
@@ -57,9 +59,11 @@ export const Header = () => {
                   {lightToggle}
                 </styles.Button>
               )}
-              <styles.Button>
-                <FaRss />
-              </styles.Button>
+              <a href="/rss" target="_blank">
+                <styles.Button>
+                  <FaRss />
+                </styles.Button>
+              </a>
             </styles.Buttons>
             <HeaderMenu />
             <styles.Slogan>
@@ -68,6 +72,7 @@ export const Header = () => {
           </styles.Inner>
         </Container>
       </styles.Wrapper>
+      <MobileMenu />
     </>
   )
 }

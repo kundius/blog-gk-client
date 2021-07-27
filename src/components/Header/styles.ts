@@ -2,6 +2,9 @@ import styled from 'styled-components'
 
 export const Placeholder = styled.div`
   height: 324px;
+  ${props => props.theme.media.below.md} {
+    height: 180px;
+  }
 `
 
 export const Inner = styled.header`
@@ -12,7 +15,11 @@ export const Inner = styled.header`
     display: block;
     width: 100%;
     background: url("/images/header-top.png") no-repeat calc(50% - 20px) 0;
+    background-size: cover;
     transition: 300ms ease-out;
+    ${props => props.theme.media.below.md} {
+      height: 140px;
+    }
     .isHeaderFixed & {
       display: none;
     }
@@ -23,10 +30,25 @@ export const Inner = styled.header`
     display: block;
     width: 100%;
     background: url("/images/header-bottom.png") no-repeat calc(50% - 20px) 0;
+    background-size: cover;
     transition: 300ms ease-out;
+    ${props => props.theme.media.below.md} {
+      height: 40px;
+    }
     .isHeaderFixed & {
       display: none;
     }
+  }
+  ${props => props.theme.media.below.md} {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    /* .isHeaderFixed & {
+      height: 48px;
+      background: var(--color-background);
+      background: var(--color-blurred-background);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px dashed var(--header-nav-border-color);
+    } */
   }
 `
 
@@ -43,6 +65,7 @@ export const Slogan = styled.div`
   text-indent: 12px;
   position: absolute;
   line-height: 1;
+  white-space: nowrap;
   top: 292px;
   left: 50%;
   transform: translateX(-50%);
@@ -85,13 +108,29 @@ export const Slogan = styled.div`
       transition: 300ms ease-out;
     }
   }
+  ${props => props.theme.media.below.md} {
+    top: 160px;
+    border-top: 0;
+    /* .isHeaderFixed & {
+      display: none;
+    } */
+  }
 `
 
 export const Search = styled.div`
   position: absolute;
   left: 1rem;
   top: 1rem;
+  z-index: 20;
   .isHeaderFixed & {
+    display: none;
+  }
+  ${props => props.theme.media.below.md} {
+    .isHeaderFixed & {
+      display: block;
+    }
+  }
+  /* .isHeaderFixed & {
     top: 60px;
     padding-left: 16px;
     padding-right: 16px;
@@ -126,8 +165,25 @@ export const Search = styled.div`
       z-index: -1;
       transition: 300ms ease-out;
     }
-  }
+  } */
 `
+
+// export const SmallLogo = styled.a`
+//   width: 100px;
+//   height: 100px;
+//   position: absolute;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   top: 50px;
+//   .isHeaderFixed & {
+//     width: 44px;
+//     height: 44px;
+//     top: 2px;
+//   }
+//   ${props => props.theme.media.above.md} {
+//     display: none;
+//   }
+// `
 
 export const Buttons = styled.div`
   position: absolute;
@@ -137,6 +193,12 @@ export const Buttons = styled.div`
   align-items: center;
   gap: 16px;
   .isHeaderFixed & {
+    display: none;
+  }
+  ${props => props.theme.media.below.md} {
+    display: none;
+  }
+  /* .isHeaderFixed & {
     top: 60px;
     padding-left: 16px;
     padding-right: 16px;
@@ -170,7 +232,7 @@ export const Buttons = styled.div`
       z-index: -1;
       transition: 300ms ease-out;
     }
-  }
+  } */
 `
 
 export const Button = styled.button`
@@ -184,10 +246,10 @@ export const Button = styled.button`
   :hover {
     opacity: 1;
   }
-  .isHeaderFixed & {
+  /* .isHeaderFixed & {
     width: 28px;
     height: 28px;
-  }
+  } */
 `
 
 export const Wrapper = styled.header`

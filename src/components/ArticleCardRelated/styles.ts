@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+export const MainLink = styled.a`
+  display: block;
+  ::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+  }
+`
+
 export const Thumbnail = styled.figure`
 `
 
@@ -20,17 +33,19 @@ export const Inner = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   background: rgba(250,235,215,.95);
   display: flex;
   transform: translateX(-100%);
   transition: .3s ease-out;
+  z-index: 20;
 `
 
 export const Info = styled.div`
   flex-grow: 1;
   padding: 16px;
+  width: 100%;
 `
 
 export const Category = styled.a`
@@ -69,7 +84,6 @@ export const Name = styled.div`
   color: #000;
   padding: 16px 16px;
   transform: translateX(100%) rotate(-180deg);
-  transform-origin: 50% 50%;
   writing-mode: vertical-rl;
   transition: .3s ease-out;
   z-index: 1;
@@ -107,10 +121,12 @@ export const More = styled.a`
 export const Wrapper = styled.article`
   position: relative;
   overflow: hidden;
-  :hover ${Inner} {
-    transform: translateX(0);
-  }
-  :hover ${Name} {
-    transform: translateX(0) rotate(-180deg);
+  ${props => props.theme.media.above.lg} {
+    :hover ${Inner} {
+      transform: translateX(0);
+    }
+    :hover ${Name} {
+      transform: translateX(0) rotate(-180deg);
+    }
   }
 `

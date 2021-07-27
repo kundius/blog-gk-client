@@ -58,6 +58,8 @@ export const useLightToggle = ({
     cx: theme === 'light' ? 25 : 10,
     cy: theme === 'light' ? 0 : 2
   })
+
+  const id = Math.random().toString(36).substring(7)
   
   return (
     <animated.svg
@@ -68,7 +70,7 @@ export const useLightToggle = ({
         transform: wrap.rotate.to(rotate => `rotate(${rotate}deg)`)
       }}
     >
-      <mask id="moon-mask-main-nav">
+      <mask id={`moon-mask-main-nav-${id}`}>
         <rect x="0" y="0" width="18" height="18" fill="#FFF" />
         <animated.circle
           cx={shadow.cx.to(cx => cx)}
@@ -81,7 +83,7 @@ export const useLightToggle = ({
         cx="9"
         cy="9"
         fill="currentColor"
-        mask="url(#moon-mask-main-nav)"
+        mask={`url(#moon-mask-main-nav-${id})`}
         r={middle.r.to(r => r)}
       />
       <g>

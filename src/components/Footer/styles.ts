@@ -16,6 +16,9 @@ export const Primary = styled.div`
     position: absolute;
     bottom: 0;
     right: 0;
+    ${props => props.theme.media.below.lg} {
+      display: none;
+    }
   }
 `
 
@@ -26,12 +29,19 @@ export const Secondary = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2em;
+  ${props => props.theme.media.below.md} {
+    flex-wrap: wrap;
+  }
 `
 
 export const Copyright = styled.div`
   font-size: 13px;
   line-height: 1.3;
   letter-spacing: .14px;
+  ${props => props.theme.media.below.md} {
+    font-size: 12px;
+  }
 `
 
 export const Creator = styled.a`
@@ -41,6 +51,8 @@ export const Creator = styled.a`
   text-align: right;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  margin-left: auto;
   :after {
     content: '';
     display: inline-block;
@@ -51,5 +63,8 @@ export const Creator = styled.a`
   }
   :hover:after {
     background: url('/images/footer-domenart_hover.png');
+  }
+  ${props => props.theme.media.below.md} {
+    font-size: 12px;
   }
 `

@@ -7,4 +7,8 @@ export const Container = styled.div`
   padding-right: 2rem;
   margin-left: auto;
   margin-right: auto;
+  ${props => props.theme.media.below.md} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 `

@@ -18,5 +18,13 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 3rem;
     line-height: 1;
     font-weight: 700;
+    ${props => props.theme.media.below.md} {
+      font-size: 2.25rem;
+      font-weight: 600;
+    }
+  }
+  #__next {
+    width: 100%;
+    overflow: hidden;
   }
 `

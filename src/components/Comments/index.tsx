@@ -72,7 +72,7 @@ export function Comments ({
         Комментарии
       </div>
 
-      <div className="pt-16 pb-16 transition duration-300 ease-out bg-gray-100 dark:bg-gray-600">
+      <div className="p-16 transition duration-300 ease-out bg-gray-100 dark:bg-gray-800 rounded-3xl">
         <div className="max-w-2xl ml-auto mr-auto">
           <CommentsForm
             formId="createForm"

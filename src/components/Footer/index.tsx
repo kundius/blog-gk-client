@@ -15,7 +15,7 @@ export const Footer = () => {
   return (
     <styles.Wrapper>
       <Container>
-        <styles.Primary className="transition duration-300 ease-out flex justify-between items-start gap-12 border-t border-gray-200 dark:border-gray-600">
+        <styles.Primary className="transition duration-300 ease-out flex flex-wrap lg:flex-nowrap justify-between items-start gap-12 border-t border-gray-200 dark:border-gray-600">
           <div>
             <FooterMenu
               section={{

@@ -4,15 +4,12 @@ import queryString from 'query-string'
 const { publicRuntimeConfig } = getRuntimeConfig()
 
 export interface GetArticlesArgs {
-  alias: string
-  page: number
+  aliasIn?: string[]
+  aliasNotIn?: string[]
   limit: number
 }
 
 export interface GetArticlesData {
-  meta: {
-    filter_count: number
-  }
   data: {
     alias: string
     name: string
@@ -40,46 +37,17 @@ export interface GetArticlesData {
 export type GetArticlesResult = [string, (url: string) => Promise<GetArticlesData>]
 
 export function getArticles ({
-  alias,
-  page,
+  aliasIn,
+  aliasNotIn,
   limit
 }: GetArticlesArgs): GetArticlesResult {
   const params = queryString.stringify({
-    'filter[category][section][alias][_eq]': alias,
+    'filter[category][alias][_in]': aliasIn,
+    'filter[category][alias][_nin]': aliasNotIn,
     fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,hits_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
-    limit,
-    page,
-    meta: 'filter_count'
+    limit
   })
   const key = `${publicRuntimeConfig.API_URL}/items/articles?${params}`
   const fetcher = url => fetch(url).then(r => r.json())
-  return [key, fetcher]
-}
-
-export interface GetSectionArgs {
-  alias: string
-}
-
-export interface GetSectionData {
-  data: {
-    alias: string
-    name: string
-    seo_title: string
-    seo_keywords: string
-    seo_description: string
-  } | undefined
-}
-
-export type GetSectionResult = [string, (url: string) => Promise<GetSectionData>]
-
-export function getSection ({
-  alias
-}: GetSectionArgs): GetSectionResult {
-  const params = queryString.stringify({
-    'filter[alias][_eq]': alias,
-    fields: 'alias,name,seo_title,seo_keywords,seo_description'
-  })
-  const key = `${publicRuntimeConfig.API_URL}/items/sections?${params}`
-  const fetcher = url => fetch(url).then(r => r.json()).then(r => ({ data: r?.data?.[0] }))
   return [key, fetcher]
 }
