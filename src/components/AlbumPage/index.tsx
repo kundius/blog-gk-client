@@ -31,7 +31,9 @@ export function AlbumPage ({
     initialData: preload[key]
   })
 
-  const images = result?.data?.images?.map(item => `${publicRuntimeConfig.API_URL}/assets/${item.file?.filename_disk}`) || []
+  const imagesSource = result?.data?.images || []
+  const imagesFiltered = imagesSource.filter(item => !!item.file)
+  const images = imagesFiltered.map(item => `${publicRuntimeConfig.API_URL}/assets/${item.file?.filename_disk}`) || []
 
   return (
     <MainLayout>
@@ -55,7 +57,7 @@ export function AlbumPage ({
       )}
       
       <div className="gap-4 grid grid-cols-3">
-        {result?.data?.images?.map((item, i) => (
+        {imagesFiltered.map((item, i) => (
           <div
             className="overflow-hidden shadow-lg rounded-lg w-full bg-white dark:bg-gray-500 transition duration-300 ease-out"
             key={item.file.id}
