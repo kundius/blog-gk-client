@@ -92,7 +92,7 @@ export const Toggle = styled.button<{
     margin-top: ${props => props.isActive ? '0' : '8px'};
     transition: .3s ease-out;
   }
-  .isHeaderFixed & {
-    top: 0.5rem;
+  ${props => props.theme.media.above.md} {
+    display: none;
   }
 `

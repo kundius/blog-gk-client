@@ -60,25 +60,17 @@ export function CommentsForm ({
         <img src={getAvatar()} alt="" />
       </styles.Avatar>
       <styles.Form>
-        <div className="grid grid-cols-2 gap-8 mb-2">
-          <div className="flex gap-2 items-center flex-grow">
-            <div className="text-sm whitespace-nowrap">
-              Ваше имя:
-            </div>
-            <styles.Input
-              value={authorName}
-              onChange={e => onChangeAuthorName?.(e.target.value)}
-            />
-          </div>
-          <div className="flex gap-2 items-center flex-grow">
-            <div className="text-sm whitespace-nowrap">
-            Ваш e-mail:
-            </div>
-            <styles.Input
-              value={authorEmail}
-              onChange={e => onChangeAuthorEmail?.(e.target.value)}
-            />
-          </div>
+        <div className="grid grid-cols-2 gap-2 mb-2">
+          <styles.Input
+            value={authorName}
+            onChange={e => onChangeAuthorName?.(e.target.value)}
+            placeholder="Ваше имя:"
+          />
+          <styles.Input
+            value={authorEmail}
+            onChange={e => onChangeAuthorEmail?.(e.target.value)}
+            placeholder="Ваш e-mail:"
+          />
         </div>
         <styles.Field htmlFor={formId}>
           {renderReply()}

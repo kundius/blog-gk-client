@@ -60,8 +60,8 @@ export function ArticleRelated ({ id }: ArticleRelatedProps) {
 
   return (
     <section>
-      <div className="mb-12 text-gray-400 text-5xl">Смотрите также</div>
-      <div className="grid grid-cols-3 gap-4 lg:gap-8">
+      <div className="mb-8 md:mb-12 text-gray-400 text-3xl md:text-5xl">Смотрите также</div>
+      <div className="grid md:grid-cols-3 gap-4 lg:gap-8">
         {items}
       </div>
     </section>

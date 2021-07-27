@@ -7,6 +7,9 @@ export const Wrapper = styled.form`
   padding: 32px 4rem;
   display: flex;
   align-items: center;
+  ${props => props.theme.media.below.md} {
+    padding: 1rem 1rem 2rem;
+  }
 `
 
 export const Help = styled.div`
@@ -24,6 +27,9 @@ export const Help = styled.div`
 export const Label = styled.label`
   margin-right: 16px;
   color: #000;
+  ${props => props.theme.media.below.md} {
+    display: none;
+  }
 `
 
 export const Field = styled.input`

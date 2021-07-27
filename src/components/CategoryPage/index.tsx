@@ -98,7 +98,7 @@ export function CategoryPage ({
               commentsCount={article.comments_count || 0}
               hitsCount={article.hits_count || 0}
               excerpt={article.excerpt}
-              createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD')}
+              createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD').replace(' г.', '')}
               thumbnail={
                 article.thumbnail
                   ? {

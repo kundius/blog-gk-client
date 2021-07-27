@@ -78,22 +78,22 @@ export function ArticlePage ({
       {result?.data && (
         <div className="grid gap-24">
           <div className="max-w-2xl ml-auto mr-auto">
-            <div className="mb-8 flex justify-around items-center tracking-wide">
-              <div className="flex gap-1 text-xs uppercase text-red-400">
+            <div className="mb-8 flex gap-4 justify-around items-center tracking-wide">
+              <div className="text-xs uppercase text-red-400">
                 <Link href={`/${result.data.category.section.alias}`} passHref>
                   <a className="hover:text-red-400">{result.data.category.section.name}</a>
                 </Link>
-                /
+                <span className="ml-1 mr-1">/</span>
                 <Link href={`/${result.data.category.section.alias}/${result.data.category.alias}`} passHref>
                   <a className="hover:text-red-400">{result.data.category.name}</a>
                 </Link>
               </div>
-              <div className="text-xs text-gray-400">
-                {DateTime.fromISO(result.data.date_created).setLocale('ru').toFormat('DDD')}
+              <div className="text-xs text-gray-400 whitespace-nowrap">
+                {DateTime.fromISO(result.data.date_created).setLocale('ru').toFormat('DDD').replace(' г.', '')}
               </div>
             </div>
 
-            <h1 className="text-5xl text-center font-bold tracking-wide">
+            <h1 className="text-4xl md:text-5xl text-center font-bold tracking-wide">
               {result.data.name}
             </h1>
 
@@ -164,7 +164,7 @@ export function ArticlePage ({
               Реклама
             </styles.Advert>
 
-            {result.data.tags && (
+            {result.data.tags?.[0] && (
               <div className="flex items-start leading-none mt-16">
                 <div className="flex items-center">
                   <AiOutlineTag />
@@ -181,7 +181,7 @@ export function ArticlePage ({
             )}
           </div>
 
-          <div className="transition duration-300 ease-out flex items-center justify-between gap-8 pt-4 pb-4 border-t border-b border-gray-200 dark:border-gray-600">
+          <div className="transition duration-300 ease-out flex flex-col md:flex-row items-center justify-between gap-4 pt-4 pb-4 border-t border-b border-gray-200 dark:border-gray-600">
             <div className="flex items-center gap-8">
               <div className="text-sm leading-none text-gray-400 hidden lg:block">
                 Понравилась статья?<br />
@@ -214,7 +214,7 @@ export function ArticlePage ({
             <div className="flex items-center gap-2">
               {previousResult?.data && (
                 <Link href={`/${previousResult.data.category.section.alias}/${previousResult.data.category.alias}/${previousResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-sm tracking-widest leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
+                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
                     <HiOutlineChevronDoubleLeft className="mr-1" />
                     Предыдущая
                   </a>
@@ -222,7 +222,7 @@ export function ArticlePage ({
               )}
               {nextResult?.data && (
                 <Link href={`/${nextResult.data.category.section.alias}/${nextResult.data.category.alias}/${nextResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-sm tracking-widest leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
+                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
                     Следующая
                     <HiOutlineChevronDoubleRight className="mr-1" />
                   </a>

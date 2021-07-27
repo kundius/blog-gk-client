@@ -32,5 +32,18 @@ export const Advert = styled.div`
     z-index: 1;
     transition: 300ms ease-out
   }
-  
+  ${props => props.theme.media.below.md} {
+    ::before {
+      top: -12px;
+      left: -12px;
+      right: -12px;
+      bottom: -12px;
+    }
+    ::after {
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+    }
+  }
 `

@@ -27,6 +27,7 @@ export const Date = styled.div`
   color: #999;
   font-size: 12px;
   letter-spacing: 1px;
+  white-space: nowrap;
 `
 
 export const Name = styled.div`
@@ -41,6 +42,9 @@ export const Name = styled.div`
       color: #c66;
     }
   }
+  ${props => props.theme.media.below.md} {
+    font-size: 36px;
+  }
 `
 
 export const Info = styled.div`
@@ -48,6 +52,9 @@ export const Info = styled.div`
   margin-top: 3.5rem;
   line-height: 1;
   transition: 300ms ease-out;
+  ${props => props.theme.media.below.md} {
+    margin-top: 2.5rem;
+  }
 `
 
 export const InfoItem = styled.div`

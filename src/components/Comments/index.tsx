@@ -68,11 +68,11 @@ export function Comments ({
 
   return (
     <styles.Wrapper id="comments">
-      <div className="mb-12 text-gray-400 text-5xl">
+      <div className="mb-8 md:mb-12 text-gray-400 text-3xl md:text-5xl">
         Комментарии
       </div>
 
-      <div className="p-16 transition duration-300 ease-out bg-gray-100 dark:bg-gray-800 rounded-3xl">
+      <div className="-mr-4 md:mr-0 -ml-4 md:ml-0 p-4 md:p-16 transition duration-300 ease-out bg-gray-100 dark:bg-gray-800 md:rounded-3xl">
         <div className="max-w-2xl ml-auto mr-auto">
           <CommentsForm
             formId="createForm"

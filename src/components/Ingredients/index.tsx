@@ -22,7 +22,7 @@ export function Ingredients ({
             {item.value && (
               <>
                 <div className="transition duration-300 ease-out flex-grow border-b border-dotted border-gray-300 dark:border-gray-600"></div>
-                <div>{item.value}</div>
+                <div className="text-right">{item.value}</div>
               </>
             )}
           </div>

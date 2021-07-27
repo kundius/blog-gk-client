@@ -37,6 +37,10 @@ export const Input = styled.input`
   color: #000;
   width: 100%;
   box-sizing: border-box;
+  font-size: 14px;
+  ${props => props.theme.media.below.md} {
+    padding: 0 8px;
+  }
 `
 
 export const Field = styled.label`
@@ -78,6 +82,9 @@ export const Field = styled.label`
     &::after {
       border-right-color: #f5faff;
     }
+  }
+  ${props => props.theme.media.below.md} {
+    padding: 8px;
   }
 `
 

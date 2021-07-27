@@ -53,10 +53,10 @@ export function HomePage () {
         <meta name="keywords" content="блог кулинария рецепты кулинарные первые вторые блюда домашняя выпечка храмы церкви истории статьи путешествия по святым местам Галина Кундиус" />
       </Helmet>
       <div className="space-y-24">
-        <section className="transition duration-300 ease-out space-y-6 bg-gray-100 dark:bg-gray-800 p-12 rounded-3xl">
-          <div className="items-center lg:flex gap-12">
-            <div className="lg:w-3/5">
-              <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 transition duration-300 ease-out">
+        <section className="transition duration-300 ease-out space-y-6 bg-gray-100 dark:bg-gray-800 p-8 md:p-12 rounded-3xl">
+          <div className="items-center grid grid-cols-5 gap-8 md:gap-12">
+            <div className="col-span-5 lg:col-span-3">
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 transition duration-300 ease-out">
                 Галина Кундиус
               </h1>
 
@@ -91,7 +91,7 @@ export function HomePage () {
               </div>
             </div>
 
-            <div className="mt-8 lg:mt-0 lg:w-2/5">
+            <div className="col-span-5 lg:col-span-2 order-first md:order-last">
               <div className="rounded-md shadow overflow-hidden">
                 <Image
                   src="/images/about.jpeg"
@@ -130,8 +130,8 @@ export function HomePage () {
   }) {
     return (
       <section>
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl">{title}</h2>
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-2">
+          <h2 className="text-2xl md:text-3xl">{title}</h2>
           <Link href="/cooking" passHref>
             <a className="text-red-500 inline-flex items-center md:mb-2 lg:mb-0">
               смотреть все
@@ -141,7 +141,7 @@ export function HomePage () {
             </a>
           </Link>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {data?.map(article => (
             <ArticleCardLatest
               key={article.alias}
