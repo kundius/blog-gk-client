@@ -104,18 +104,18 @@ export const Footer = () => {
             <FooterMenu
               section={{
                 title: 'Альбомы',
-                href: '#',
+                href: '/albums',
                 icon: <BsBook />
               }}
               items={[{
                 title: 'Природа',
-                href: '#'
+                href: '/albums/nature'
               }, {
                 title: 'Храмы',
-                href: '#'
+                href: '/albums/temples'
               }, {
                 title: 'Альбомы',
-                href: '#'
+                href: '/albums/stuff'
               }]}
             />
           </div>
@@ -123,7 +123,7 @@ export const Footer = () => {
             <FooterMenu
               section={{
                 title: 'Карта сайта',
-                href: '#',
+                href: '/sitemap',
                 icon: <BiSitemap />
               }}
               items={[{
