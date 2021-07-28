@@ -89,7 +89,7 @@ export function CategoryPage ({
         {articlesResult?.data?.map(article => (
           <div
             key={article.alias}
-            className="max-w-2xl mx-auto"
+            className="max-w-2xl w-full mx-auto"
           >
             <ArticleCardMain
               name={article.name}
