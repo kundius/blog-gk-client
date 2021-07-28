@@ -3,10 +3,11 @@ const { parsed: localEnv } = require('dotenv').config()
 const CLIENT_URL = localEnv.CLIENT_URL ? localEnv.CLIENT_URL : 'http://localhost:3000'
 const API_URL = localEnv.API_URL ? localEnv.API_URL : 'http://localhost:4000'
 const GRAPHQL_URL = localEnv.GRAPHQL_URL ? localEnv.GRAPHQL_URL : 'http://localhost:4000/graphql'
+const IMAGE_DOMAINS = localEnv.IMAGE_DOMAINS ? localEnv.IMAGE_DOMAINS : 'localhost'
 
 module.exports = {
   images: {
-    domains: ['localhost'],
+    domains: IMAGE_DOMAINS.split(','),
   },
   serverRuntimeConfig: {
     mySecret: 'secret'
@@ -20,7 +21,7 @@ module.exports = {
     return [
       {
         source: '/assets/:slug',
-        destination: 'http://localhost:8055/assets/:slug',
+        destination: `${API_URL}/assets/:slug`,
         permanent: true
       }
     ]
