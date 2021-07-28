@@ -33,7 +33,6 @@ import { Comments } from '@components/Comments'
 import { Ingredients } from '@components/Ingredients'
 
 import * as api from './api'
-import * as styles from './styles'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
 
