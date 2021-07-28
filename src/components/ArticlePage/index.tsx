@@ -214,7 +214,7 @@ export function ArticlePage ({
             <div className="flex items-center gap-2">
               {previousResult?.data && (
                 <Link href={`/${previousResult.data.category.section.alias}/${previousResult.data.category.alias}/${previousResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
+                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 md:leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
                     <HiOutlineChevronDoubleLeft className="mr-1" />
                     Предыдущая
                   </a>
@@ -222,7 +222,7 @@ export function ArticlePage ({
               )}
               {nextResult?.data && (
                 <Link href={`/${nextResult.data.category.section.alias}/${nextResult.data.category.alias}/${nextResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
+                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 md:leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
                     Следующая
                     <HiOutlineChevronDoubleRight className="mr-1" />
                   </a>
