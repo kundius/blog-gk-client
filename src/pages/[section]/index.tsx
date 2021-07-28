@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const paths = sections.data.map((section) => ({
     params: { section: section.alias }
   }))
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 export async function getStaticProps({ params }) {
@@ -22,7 +22,7 @@ export async function getStaticProps({ params }) {
 
   const apiArticles = api.getArticles({
     alias: params.section,
-    limit: 10,
+    limit: 5,
     page: 1
   })
 

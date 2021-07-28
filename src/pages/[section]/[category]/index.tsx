@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const paths = categories.data.map((category) => ({
     params: { category: category.alias, section: category.section.alias }
   }))
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 }
 
 export async function getStaticProps({ params }) {
@@ -22,7 +22,7 @@ export async function getStaticProps({ params }) {
 
   const [articlesKey, articlesFetcher] = api.getArticles({
     alias: params.category,
-    limit: 10,
+    limit: 5,
     page: 1
   })
 
