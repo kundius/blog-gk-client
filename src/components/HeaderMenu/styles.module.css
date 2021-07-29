@@ -103,14 +103,14 @@
   display: block;
 }
 
-.isHeaderFixed .Logo {
+:global(.isHeaderFixed) .Logo {
   top: 0;
   width: 60px;
   height: 60px;
 }
 
 @media (--below-md) {
-  .isHeaderFixed .Logo {
+  :global(.isHeaderFixed) .Logo {
     top: 3px;
     width: 54px;
     height: 54px;
@@ -196,6 +196,6 @@
   transition: 300ms ease-out
 }
 
-.isHeaderFixed .Wrapper {
+:global(.isHeaderFixed) .Wrapper {
   height: 60px;
 }

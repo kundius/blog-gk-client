@@ -45,6 +45,7 @@ export function getArticles ({
   limit
 }: GetArticlesArgs): GetArticlesResult {
   const params = queryString.stringify({
+    sort: '-date_created',
     'filter[category][alias][_eq]': alias,
     fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,hits_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
     limit,

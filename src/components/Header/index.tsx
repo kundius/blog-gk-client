@@ -42,7 +42,7 @@ export const Header = () => {
     <>
       <div className={`${styles.Placeholder} ${isFixed ? 'block' : 'hidden'}`} />
       <animated.div
-        className={`${styles.Wrapper} ${isFixed ? styles.isHeaderFixed : undefined}`}
+        className={`${styles.Wrapper} ${isFixed ? 'isHeaderFixed' : undefined}`}
         style={{
           transform: isFixed ? headerSpring.y.to(y => `translateY(${y}%)`) : undefined
         }}

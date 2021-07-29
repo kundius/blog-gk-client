@@ -29,7 +29,7 @@
   transition: 300ms ease-out;
 }
 
-.isHeaderFixed .Inner::after {
+:global(.isHeaderFixed) .Inner::after {
   display: none;
 }
 
@@ -49,7 +49,7 @@
   transition: 300ms ease-out;
 }
 
-.isHeaderFixed .Inner::before {
+:global(.isHeaderFixed) .Inner::before {
   display: none;
 }
 
@@ -86,7 +86,7 @@
   }
 }
 
-.isHeaderFixed .Slogan {
+:global(.isHeaderFixed) .Slogan {
   top: 60px;
   border-top: 0;
   letter-spacing: 10px;
@@ -95,7 +95,7 @@
   z-index: 1;
 }
 
-.isHeaderFixed .Slogan::before {
+:global(.isHeaderFixed) .Slogan::before {
   content: '';
   position: absolute;
   left: -3px;
@@ -111,7 +111,7 @@
   transition: 300ms ease-out;
 }
 
-.isHeaderFixed .Slogan::after {
+:global(.isHeaderFixed) .Slogan::after {
   content: '';
   position: absolute;
   left: 0;
@@ -134,12 +134,12 @@
   z-index: 20;
 }
 
-.isHeaderFixed .Search {
+:global(.isHeaderFixed) .Search {
   display: none;
 }
 
 @media (--below-md) {
-  .isHeaderFixed .Search {
+  :global(.isHeaderFixed) .Search {
     display: block;
   }
 }
@@ -159,7 +159,7 @@
   }
 }
 
-.isHeaderFixed .Buttons {
+:global(.isHeaderFixed) .Buttons {
   display: none;
 }
 
@@ -185,6 +185,6 @@
   position: relative;
 }
 
-.Wrapper.isHeaderFixed {
+.Wrapper:global(.isHeaderFixed) {
   position: fixed;
 }

@@ -1,7 +1,6 @@
 declare const styles: {
   readonly "Placeholder": string;
   readonly "Inner": string;
-  readonly "isHeaderFixed": string;
   readonly "Slogan": string;
   readonly "Search": string;
   readonly "Buttons": string;
