@@ -3,6 +3,7 @@ import { AiOutlineCoffee } from 'react-icons/ai'
 import { BsBook, BsPencilSquare } from 'react-icons/bs'
 import { BiSitemap } from 'react-icons/bi'
 
+import { YandexMetrica } from '@components/YandexMetrica'
 import { Container } from '@components/Container'
 import { FooterMenu } from '@components/FooterMenu'
 import { TablewareIcon } from '@components/Icon/tableware'
@@ -140,25 +141,7 @@ export const Footer = () => {
             Копирование материалов сайта возможно только с&nbsp;указанием активной действующей ссылки на&nbsp;источник.
           </div>
           <div>
-            <a
-              href="https://metrika.yandex.ru/stat/?id=35935260&amp;from=informer"
-              target="_blank"
-              rel="nofollow"
-            >
-              <img
-                src="https://informer.yandex.ru/informer/35935260/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"
-                style={{
-                  width: 88,
-                  height: 31,
-                  border: 0
-                }}
-                alt="Яндекс.Метрика"
-                title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)"
-                className="ym-advanced-informer"
-                data-cid="35935260"
-                data-lang="ru"
-              />
-            </a>
+            <YandexMetrica id={35935260} />
           </div>
           <a
             href="http://domenart-studio.ru/"
