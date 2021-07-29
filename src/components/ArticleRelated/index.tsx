@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import useSWR from 'swr'
 import { DateTime } from 'luxon'
 
+import { YandexRTB } from '@components/YandexRTB'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 import { ArticleCardRelated } from '@components/ArticleCardRelated'
 import { PreloadContext } from '@components/PreloadContext'
@@ -57,28 +58,7 @@ export function ArticleRelated ({ id }: ArticleRelatedProps) {
   ))
 
   items.splice(randomInteger(0, relatedResult.data.length), 0, (
-    <div dangerouslySetInnerHTML={{ __html: `
-      <!-- Yandex.RTB R-A-518351-1 -->
-      <div id="yandex_rtb_R-A-518351-1"></div>
-      <script type="text/javascript">
-          (function(w, d, n, s, t) {
-              w[n] = w[n] || [];
-              w[n].push(function() {
-                  Ya.Context.AdvManager.render({
-                      blockId: "R-A-518351-1",
-                      renderTo: "yandex_rtb_R-A-518351-1",
-                      async: true
-                  });
-              });
-              t = d.getElementsByTagName("script")[0];
-              s = d.createElement("script");
-              s.type = "text/javascript";
-              s.src = "//an.yandex.ru/system/context.js";
-              s.async = true;
-              t.parentNode.insertBefore(s, t);
-          })(this, this.document, "yandexContextAsyncCallbacks");
-      </script>
-    ` }} />
+    <YandexRTB id={"R-A-518351-1"} horizontalAlign={false} />
   ))
 
   return (
