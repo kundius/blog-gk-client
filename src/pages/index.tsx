@@ -1,25 +1,33 @@
 import { HomePage } from '@components/HomePage'
-// import fetch from 'isomorphic-unfetch'
-// import getConfig from 'next/config'
-// import { createApolloClient } from '@app/lib/apolloClient'
-// import * as HeaderMenuSchema from '@components/HeaderMenu/schema.generated'
+import * as api from '@components/HomePage/api'
 
-// const { publicRuntimeConfig } = getConfig()
+export async function getStaticProps() {
+  const [keyFirstSection, fetcherFirstSection] = api.getArticles({
+    aliasIn: ['baking', 'cookies', 'cakes'],
+    limit: 6
+  })
 
-// export async function getStaticProps() {
-  // const apolloClient = createApolloClient()
-  
-  // await apolloClient.query<HeaderMenuSchema.HeaderMenuCategoriesQuery, HeaderMenuSchema.HeaderMenuCategoriesQueryVariables>({
-  //   query: HeaderMenuSchema.HeaderMenuCategoriesDocument
-  // })
-  // return {
-  //   props: {
-  //     initialApolloState: apolloClient.cache.extract()
-  //   }
-  // }
-//   const response = await fetch(`${publicRuntimeConfig.API_URL}/items/categories?fields=name,alias,section.alias`)
-//   const json = await response.json()
-//   return { props: { categories: json } }
-// }
+  const [keySecondSection, fetcherSecondSection] = api.getArticles({
+    aliasIn: ['entrees', 'main-dishes'],
+    limit: 6
+  })
+
+  const [keyThirdSection, fetcherThirdSection] = api.getArticles({
+    aliasNotIn: ['baking', 'cookies', 'cakes', 'entrees', 'main-dishes'],
+    limit: 6
+  })
+
+  const preloadData = {
+    [keyFirstSection]: await fetcherFirstSection(keyFirstSection),
+    [keySecondSection]: await fetcherSecondSection(keySecondSection),
+    [keyThirdSection]: await fetcherThirdSection(keyThirdSection),
+  }
+
+  return {
+    props: {
+      preloadData
+    }
+  }
+}
 
 export default HomePage
