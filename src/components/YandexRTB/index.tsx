@@ -11,12 +11,12 @@ export const YandexRTB = ({
 }: YandexRTBProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
 
-  const elId = Math.random().toString(36).substring(7)
-
   useEffect(() => {
     if (!ref.current) return
 
-    console.log('effect rtb')
+    ref.current.innerHTML = ''
+
+    const elId = Math.random().toString(36).substring(7)
 
     const yaDiv = document.createElement('div')
     yaDiv.setAttribute('id', `yandex_rtb_${elId}`)
