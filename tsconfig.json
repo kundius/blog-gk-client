@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "baseUrl": "./src",
     "paths": {
       "@app/*": ["./*"],
@@ -23,5 +22,5 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules"],
-  "include": ["additional.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

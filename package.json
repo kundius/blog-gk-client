@@ -1,8 +1,8 @@
 {
   "name": "rossk-admin",
   "scripts": {
-    "dev": "next",
-    "prebuild": "tcm -p 'src/**/*.module.css' .",
+    "typegen-css": "tcm -w -p 'src/**/*.module.css' .",
+    "dev": "concurrently --kill-others npm:typegen-css next",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --watch"
@@ -16,11 +16,11 @@
     "@types/react": "^17.0.0",
     "@types/throttle-debounce": "^2.1.0",
     "autoprefixer": "^10.2.1",
+    "concurrently": "^6.2.0",
     "postcss": "^8.2.4",
     "postcss-custom-media": "^8.0.0",
     "typed-css-modules": "^0.7.0",
-    "typescript": "^4.2.3",
-    "typescript-plugin-css-modules": "^3.4.0"
+    "typescript": "^4.2.3"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
