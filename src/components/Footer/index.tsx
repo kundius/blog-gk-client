@@ -139,7 +139,7 @@ export const Footer = () => {
         <div className={`${styles.Secondary} transition duration-300 ease-out border-t border-gray-200 dark:border-gray-600`}>
           <div className={`${styles.Copyright} text-gray-700 dark:text-gray-400`}>
             © {new Date().getFullYear()} Блог Галины Кундиус - Все о вкусной еде.<br />
-            Копирование материалов сайта возможно только с указанием активной действующей ссылки на источник.
+            Копирование материалов сайта возможно только с&nbsp;указанием активной действующей ссылки на&nbsp;источник.
           </div>
           <div>
             <div dangerouslySetInnerHTML={{ __html: `
