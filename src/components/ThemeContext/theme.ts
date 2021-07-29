@@ -63,30 +63,3 @@ export const mediaQueries: MediaQueriesType = {
   tablet: json2mq({ minWidth: breakpoints.md, maxWidth: breakpoints.lg }),
   desktop: json2mq({ minWidth: breakpoints.lg })
 }
-
-export const theme = {
-  defaultTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-  media: {
-    above: {
-      xs: `@media ${mediaQueries.above.xs}`,
-      sm: `@media ${mediaQueries.above.sm}`,
-      md: `@media ${mediaQueries.above.md}`,
-      lg: `@media ${mediaQueries.above.lg}`,
-      xl: `@media ${mediaQueries.above.xl}`,
-      xxl: `@media ${mediaQueries.above.xxl}`
-    },
-
-    below: {
-      xs: `@media ${mediaQueries.below.xs}`,
-      sm: `@media ${mediaQueries.below.sm}`,
-      md: `@media ${mediaQueries.below.md}`,
-      lg: `@media ${mediaQueries.below.lg}`,
-      xl: `@media ${mediaQueries.below.xl}`,
-      xxl: `@media ${mediaQueries.below.xxl}`
-    },
-
-    mobile: `@media ${mediaQueries.mobile}`,
-    tablet: `@media ${mediaQueries.tablet}`,
-    desktop: `@media ${mediaQueries.desktop}`
-  }
-}

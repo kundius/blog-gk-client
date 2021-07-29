@@ -1,11 +1,6 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
-
-/* Start purging... */
-@tailwind components;
-/* Stop purging. */
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -27,14 +22,6 @@ body {
   font-family: Gilroy, sans-serif;
 }
 
-:focus {
-  /* outline: ${props => props.theme.focusVisible ? 'initial' : '0 !important'}; */
-}
-
-::-moz-focus-inner {
-  /* border: ${props => props.theme.focusVisible ? 'initial' : '0 !important'}; */
-}
-
 h1 {
   letter-spacing: 0.025em;
   font-size: 3rem;
@@ -53,6 +40,26 @@ h1 {
   width: 100%;
   overflow: hidden;
 }
+
+*:focus {
+  outline: 0;
+}
+
+*::-moz-focus-inner {
+  border: 0;
+}
+
+.focusVisible *:focus {
+  outline: initial;
+}
+
+.focusVisible *::-moz-focus-inner {
+  border: initial;
+}
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
 
 /* Write your own custom component styles here */
 .btn-blue {

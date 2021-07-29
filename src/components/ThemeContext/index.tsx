@@ -5,14 +5,14 @@ import {
   COLOR_MODE_KEY,
   INITIAL_COLOR_MODE_CSS_PROP
 } from './constants'
-import { theme } from './theme'
 import { useFocusVisible } from './useFocusVisible'
 
 export type ColorMode = 'light' | 'dark'
 
 export const ThemeContext = createContext<{
   colorMode?: ColorMode,
-  setColorMode?: (value: ColorMode) => void
+  setColorMode?: (value: ColorMode) => void,
+  focusVisible?: boolean,
 }>({})
 
 export const ThemeProvider = ({ children }) => {
@@ -41,7 +41,7 @@ export const ThemeProvider = ({ children }) => {
   }
 
   return (
-    <ThemeContext.Provider value={{ colorMode, setColorMode }}>
+    <ThemeContext.Provider value={{ colorMode, setColorMode, focusVisible }}>
       {children}
     </ThemeContext.Provider>
   )

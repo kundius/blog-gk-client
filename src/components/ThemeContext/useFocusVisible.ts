@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export const useFocusVisible = () => {
+export const useFocusVisible = (): [boolean, React.Dispatch<React.SetStateAction<boolean>>] => {
   const [focusVisible, setFocusVisible] = useState(true)
   const handleKeyDown = () => {
+    const root = window.document.documentElement
+    root.classList.add('focusVisible')
     setFocusVisible(true)
   }
   const handleMouseDown = () => {
+    const root = window.document.documentElement
+    root.classList.remove('focusVisible')
     setFocusVisible(false)
   }
   useEffect(() => {
