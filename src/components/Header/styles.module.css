@@ -185,6 +185,6 @@
   position: relative;
 }
 
-.Wrapper:global(.isHeaderFixed) {
+:global(.isHeaderFixed) .Wrapper {
   position: fixed;
 }

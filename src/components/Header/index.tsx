@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FaRss } from 'react-icons/fa'
 import { useSpring, animated } from 'react-spring'
 import { throttle } from 'throttle-debounce'
-// import Link from 'next/link'
 
+import { ScrollTop } from '@components/ScrollTop'
 import { Container } from '@components/Container'
 import { HeaderMenu } from '@components/HeaderMenu'
 import { MobileMenu } from '@components/MobileMenu'
@@ -39,10 +39,10 @@ export const Header = () => {
   }
 
   return (
-    <>
+    <div className={isFixed ? 'isHeaderFixed' : undefined}>
       <div className={`${styles.Placeholder} ${isFixed ? 'block' : 'hidden'}`} />
       <animated.div
-        className={`${styles.Wrapper} ${isFixed ? 'isHeaderFixed' : undefined}`}
+        className={styles.Wrapper}
         style={{
           transform: isFixed ? headerSpring.y.to(y => `translateY(${y}%)`) : undefined
         }}
@@ -72,6 +72,7 @@ export const Header = () => {
         </Container>
       </animated.div>
       <MobileMenu />
-    </>
+      <ScrollTop />
+    </div>
   )
 }
