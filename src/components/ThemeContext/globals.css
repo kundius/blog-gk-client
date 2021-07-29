@@ -41,20 +41,12 @@ h1 {
   overflow: hidden;
 }
 
-*:focus {
-  outline: 0;
+.focusDisable :focus {
+  outline: 0 !important;
 }
 
-*::-moz-focus-inner {
-  border: 0;
-}
-
-.focusVisible *:focus {
-  outline: initial;
-}
-
-.focusVisible *::-moz-focus-inner {
-  border: initial;
+.focusDisable ::-moz-focus-inner {
+  border: 0 !important;
 }
 
 /* Start purging... */

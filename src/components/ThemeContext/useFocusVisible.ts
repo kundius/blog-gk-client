@@ -4,12 +4,12 @@ export const useFocusVisible = (): [boolean, React.Dispatch<React.SetStateAction
   const [focusVisible, setFocusVisible] = useState(true)
   const handleKeyDown = () => {
     const root = window.document.documentElement
-    root.classList.add('focusVisible')
+    root.classList.remove('focusDisable')
     setFocusVisible(true)
   }
   const handleMouseDown = () => {
     const root = window.document.documentElement
-    root.classList.remove('focusVisible')
+    root.classList.add('focusDisable')
     setFocusVisible(false)
   }
   useEffect(() => {
