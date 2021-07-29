@@ -162,7 +162,32 @@ export const Footer = () => {
                 data-lang="ru"
               />
             </a>
-            <YMInitializer accounts={[35935260]} />
+
+            {/* <YMInitializer accounts={[35935260]} /> */}
+            {/* <div dangerouslySetInnerHTML={{ __html: `
+              <!-- Yandex.Metrika informer -->
+              <a href="https://metrika.yandex.ru/stat/?id=35935260&amp;from=informer"
+              target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/35935260/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"
+              style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="35935260" data-lang="ru" /></a>
+              <!-- /Yandex.Metrika informer -->
+
+              <!-- Yandex.Metrika counter -->
+              <script type="text/javascript" >
+                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+                ym(35935260, "init", {
+                      clickmap:true,
+                      trackLinks:true,
+                      accurateTrackBounce:true,
+                      webvisor:true,
+                      trackHash:true
+                });
+              </script>
+              <noscript><div><img src="https://mc.yandex.ru/watch/35935260" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+              <!-- /Yandex.Metrika counter -->
+            ` }} /> */}
           </div>
           <a
             href="http://domenart-studio.ru/"
