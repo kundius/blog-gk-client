@@ -3,6 +3,7 @@ import { AiOutlineCoffee } from 'react-icons/ai'
 import { BsBook, BsPencilSquare } from 'react-icons/bs'
 import { BiSitemap } from 'react-icons/bi'
 
+import { ScrollTop } from '@components/ScrollTop'
 import { YandexMetrica } from '@components/YandexMetrica'
 import { Container } from '@components/Container'
 import { FooterMenu } from '@components/FooterMenu'
@@ -154,6 +155,7 @@ export const Footer = () => {
             </span>
           </a>
         </div>
+        <ScrollTop />
       </Container>
     </div>
   )
