@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 export interface BreadcrumbsProps {
   items: {
@@ -14,7 +14,7 @@ export function Breadcrumbs ({
   items
 }: BreadcrumbsProps) {
   return (
-    <styles.Wrapper className="text-gray-400 border-b border-gray-200 dark:border-gray-600">
+    <ul className={`${styles.Wrapper} text-gray-400 border-b border-gray-200 dark:border-gray-600`}>
       {items.map((item, i) => (
         <li>
           {
@@ -28,6 +28,6 @@ export function Breadcrumbs ({
           }
         </li>
       ))}
-    </styles.Wrapper>
+    </ul>
   )
 }

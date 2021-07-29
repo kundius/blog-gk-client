@@ -1,10 +1,11 @@
+// @ts-nocheck
 import React from 'react'
 import { default as NextImage, ImageProps as NextImageProps } from 'next/image'
 import { decode, isBlurhashValid } from 'blurhash'
 
-import styled from 'styled-components'
+import styles from './styles.module.css'
 
-export type ImageProps = Omit<NextImageProps, 'placeholder' | 'blurDataURL'> & {
+export type ImageProps = Omit<NextImageProps, 'placeholder' | 'blurDataURL' | 'className'> & {
   blurHash?: string | null
 }
 
@@ -31,7 +32,8 @@ export const Image = ({ blurHash, ...props }: ImageProps) => {
     const dataUrl = getDataUrlFromBlurHash(blurHash)
     if (dataUrl) {
       return (
-        <Element
+        <NextImage
+          className={styles.Element}
           placeholder="blur"
           blurDataURL={dataUrl}
           {...props}
@@ -40,13 +42,10 @@ export const Image = ({ blurHash, ...props }: ImageProps) => {
     }
   }
   return (
-    <Element
+    <NextImage
+      className={styles.Element}
       placeholder="empty"
       {...props}
     />
   )
 }
-
-const Element = styled(NextImage)`
-  filter: none !important;
-`

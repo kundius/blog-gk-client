@@ -6,7 +6,7 @@ import { Image } from '@components/Image'
 import Skeleton from 'react-loading-skeleton'
 
 import * as api from '../api'
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export interface CardProps {
   name: string
@@ -31,10 +31,10 @@ export const Card = ({
   thumbnail
 }: CardProps) => {
   return (
-    <styles.Wrapper>
+    <div className={styles.Wrapper}>
       {thumbnail && (
         <Link href={href}>
-          <styles.Thumbnail>
+          <div className={styles.Thumbnail}>
             <Image
               src={thumbnail.url}
               alt={thumbnail.name}
@@ -44,24 +44,24 @@ export const Card = ({
               objectFit="cover"
               layout="responsive"
             />
-          </styles.Thumbnail>
+          </div>
         </Link>
       )}
-      <styles.Info>
-        <styles.Category>
+      <div className={styles.Info}>
+        <div className={styles.Category}>
           <Link href={category.href} passHref>
             <a>{category.name}</a>
           </Link>
-        </styles.Category>
-        <styles.Title>
+        </div>
+        <div className={styles.Title}>
           <Link href={href} passHref>
             <a>{name}</a>
           </Link>
-        </styles.Title>
-        <styles.Date className="text-gray-400">
+        </div>
+        <div className={`${styles.Date} text-gray-400`}>
           {createdAt}
-        </styles.Date>
-      </styles.Info>
-    </styles.Wrapper>
+        </div>
+      </div>
+    </div>
   )
 }

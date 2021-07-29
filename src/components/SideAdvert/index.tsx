@@ -1,11 +1,11 @@
 import React from 'react'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export function SideAdvert () {
   return (
-    <styles.Wrapper>
+    <div className={styles.Wrapper}>
       Реклама
-    </styles.Wrapper>
+    </div>
   )
 }

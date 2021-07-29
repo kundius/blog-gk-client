@@ -34,7 +34,7 @@ import { Ingredients } from '@components/Ingredients'
 
 import { Hits } from './Hits'
 import * as api from './api'
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
 
@@ -160,9 +160,9 @@ export function ArticlePage ({
 
             <Content dangerouslySetInnerHTML={{ __html: result.data.content }} />
 
-            <styles.Advert className="mt-16">
+            <div className={`${styles.Advert} mt-16`}>
               Реклама
-            </styles.Advert>
+            </div>
 
             {result.data.tags?.[0] && (
               <div className="flex items-start leading-none mt-16">

@@ -5,7 +5,7 @@ import useSWR from 'swr'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 
 import { Card } from './Card'
-import * as styles from './styles'
+import styles from './styles.module.css'
 import * as api from './api'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
@@ -21,7 +21,7 @@ export function SidePopular () {
 
   return (
     <div>
-      <styles.Title>Популярное</styles.Title>
+      <div className={styles.Title}>Популярное</div>
       {result.data.map(item => (
         <Card
           key={item.alias}

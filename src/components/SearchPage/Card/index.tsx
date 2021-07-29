@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Skeleton from 'react-loading-skeleton'
 
 import * as api from '../api'
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export interface CardProps {
   id: string
@@ -31,18 +31,18 @@ export const Card = ({
   }
 
   return (
-    <styles.Wrapper>
-      <styles.Date>
+    <div className={styles.Wrapper}>
+      <div className={styles.Date}>
         {DateTime.fromISO(result.data.date_created).setLocale('ru').toFormat('DDD')}
-      </styles.Date>
-      <styles.Title>
+      </div>
+      <div className={styles.Title}>
         <Link href={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`} passHref>
           <a>{result.data.name}</a>
         </Link>
-      </styles.Title>
-      <styles.Excerpt>
+      </div>
+      <div className={styles.Excerpt}>
         {result.data.excerpt}
-      </styles.Excerpt>
-    </styles.Wrapper>
+      </div>
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export interface FooterMenuProps {
   section: {
@@ -20,18 +20,18 @@ export function FooterMenu ({
   items
 }: FooterMenuProps) {
   return (
-    <styles.Wrapper>
+    <div className={styles.Wrapper}>
       <Link href={section.href} passHref>
-        <styles.Section>
-          <styles.SectionIcon className="text-gray-600 dark:text-gray-300">
+        <a className={styles.Section}>
+          <span className={`${styles.SectionIcon} text-gray-600 dark:text-gray-300`}>
             {section.icon}
-          </styles.SectionIcon>
-          <styles.SectionName>
+          </span>
+          <span className={styles.SectionName}>
             {section.title}
-          </styles.SectionName>
-        </styles.Section>
+          </span>
+        </a>
       </Link>
-      <styles.List>
+      <ul className={styles.List}>
         {items.map((item, i) => (
           <li key={i}>
             <Link href={item.href} passHref>
@@ -39,7 +39,7 @@ export function FooterMenu ({
             </Link>
           </li>
         ))}
-      </styles.List>
-    </styles.Wrapper>
+      </ul>
+    </div>
   )
 }

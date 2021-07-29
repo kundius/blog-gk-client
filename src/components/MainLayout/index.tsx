@@ -9,7 +9,7 @@ import { SideAdvert } from '@components/SideAdvert'
 import { SidePopular } from '@components/SidePopular'
 import { SideLatest } from '@components/SideLatest'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export interface MainLayout {
   children?: React.ReactNode
@@ -22,18 +22,18 @@ export function MainLayout ({
     <>
       <Header />
       <Container className="mt-20 mb-20">
-        <styles.Main>
-          <styles.Content>
+        <div className={styles.Main}>
+          <div className={styles.Content}>
             {children}
-          </styles.Content>
-          <styles.Side className="flex flex-col gap-24">
+          </div>
+          <div className={`${styles.Side} flex flex-col gap-24`}>
             <SideAuthor />
             <SideAdvert />
             <SidePopular />
             <SubscribeForm />
             <SideLatest />
-          </styles.Side>
-        </styles.Main>
+          </div>
+        </div>
       </Container>
       <Footer />
     </>

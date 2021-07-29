@@ -7,7 +7,7 @@ import { ToqueIcon } from '@components/Icon/toque'
 import { EyeIcon } from '@components/Icon/eye'
 import { CommentsIcon } from '@components/Icon/comments'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 export interface ArticleCardMainProps {
   name: string
@@ -42,19 +42,19 @@ export function ArticleCardMain ({
   excerpt
 }: ArticleCardMainProps) {
   return (
-    <styles.Wrapper>
-      <styles.Meta>
+    <div className={styles.Wrapper}>
+      <div className={styles.Meta}>
         <Link href={category.url} passHref>
-          <styles.Category>{category.name}</styles.Category>
+          <a className={styles.Category}>{category.name}</a>
         </Link>
-        <styles.Date>{createdAt}</styles.Date>
-      </styles.Meta>
-      <styles.Name>
+        <div className={styles.Date}>{createdAt}</div>
+      </div>
+      <div className={styles.Name}>
         <Link href={url} passHref>
           <a>{name}</a>
         </Link>
-      </styles.Name>
-      <styles.Info className="flex items-center gap-8 justify-between border-b border-gray-200 dark:border-gray-600">
+      </div>
+      <div className={`${styles.Info} flex items-center gap-8 justify-between border-b border-gray-200 dark:border-gray-600`}>
         <div className="flex items-center gap-8">
           {cookingTime && (
             <div className="flex items-center gap-2">
@@ -103,10 +103,10 @@ export function ArticleCardMain ({
             </a>
           </Link>
         </div>
-      </styles.Info>
+      </div>
       {thumbnail && (
         <Link href={url}>
-          <styles.Thumbnail>
+          <figure className={styles.Thumbnail}>
             <Image
               src={thumbnail.url}
               alt={thumbnail.name}
@@ -116,17 +116,17 @@ export function ArticleCardMain ({
               objectFit="cover"
               layout="responsive"
             />
-          </styles.Thumbnail>
+          </figure>
         </Link>
       )}
       {excerpt && (
-        <styles.Excerpt>
+        <div className={styles.Excerpt}>
           {excerpt}
-        </styles.Excerpt>
+        </div>
       )}
       <Link href={url} passHref>
-        <styles.More>Читать дальше</styles.More>
+        <a className={styles.More}>Читать дальше</a>
       </Link>
-    </styles.Wrapper>
+    </div>
   )
 }

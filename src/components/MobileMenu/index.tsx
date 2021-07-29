@@ -5,7 +5,7 @@ import { FaRss } from 'react-icons/fa'
 import { ThemeContext } from '@components/ThemeContext'
 import { useLightToggle } from '@components/Header/useLightToggle'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export const MobileMenu = () => {
   const [isShowMenu, setIsShowMenu] = useState(false)
@@ -22,8 +22,8 @@ export const MobileMenu = () => {
 
   return (
     <>
-      <styles.Drawer isVisible={isShowMenu}>
-        <styles.List>
+      <div className={`${styles.Drawer} ${isShowMenu ? styles.DrawerIsVisible : ''}`}>
+        <ul className={styles.List}>
           <li>
             <Link href="/pages/about" passHref>
               <a>Обо мне</a>
@@ -33,7 +33,7 @@ export const MobileMenu = () => {
             <Link href="/cooking" passHref>
               <a>Кулинария</a>
             </Link>
-            <styles.SecondList>
+            <ul className={styles.SecondList}>
               <li>
                 <Link href="/cooking/krem-i-glazur-dlya-tortov" passHref>
                   <a>Крем и глазурь для тортов</a>
@@ -84,7 +84,7 @@ export const MobileMenu = () => {
                   <a>Рыбные блюда</a>
                 </Link>
               </li>
-            </styles.SecondList>
+            </ul>
           </li>
           <li>
             <Link href="/article/temples" passHref>
@@ -95,7 +95,7 @@ export const MobileMenu = () => {
             <Link href="/notes" passHref>
               <a>Заметки</a>
             </Link>
-            <styles.SecondList>
+            <ul className={styles.SecondList}>
               <li>
                 <Link href="/notes/zametki-o-vtoryh-blyudah" passHref>
                   <a>Вторые блюда</a>
@@ -121,13 +121,13 @@ export const MobileMenu = () => {
                   <a>Заметки о напитках</a>
                 </Link>
               </li>
-            </styles.SecondList>
+            </ul>
           </li>
           <li>
             <Link href="/article" passHref>
               <a>Статьи</a>
             </Link>
-            <styles.SecondList>
+            <ul className={styles.SecondList}>
               <li>
                 <Link href="/article/supernatural" passHref>
                   <a>Сверхъестественное</a>
@@ -143,30 +143,30 @@ export const MobileMenu = () => {
                   <a>Жизненные истории</a>
                 </Link>
               </li>
-            </styles.SecondList>
+            </ul>
           </li>
           <li>
             <Link href="/albums" passHref>
               <a>Альбомы</a>
             </Link>
           </li>
-        </styles.List>
-        <styles.Buttons>
+        </ul>
+        <div className={styles.Buttons}>
           {colorMode && (
-            <styles.Button onClick={handleToggleTheme}>
+            <button className={styles.Button} onClick={handleToggleTheme}>
               {lightToggle}
-            </styles.Button>
+            </button>
           )}
           <a href="/rss" target="_blank">
-            <styles.Button>
+            <button className={styles.Button}>
               <FaRss />
-            </styles.Button>
+            </button>
           </a>
-        </styles.Buttons>
-      </styles.Drawer>
-      <styles.Toggle
+        </div>
+      </div>
+      <button
+        className={`${styles.Toggle} ${isShowMenu ? styles.ToggleIsActive : ''}`}
         onClick={handleToggleMenu}
-        isActive={isShowMenu}
       />
     </>
   )

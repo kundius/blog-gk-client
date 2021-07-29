@@ -1,6 +1,6 @@
 import React from 'react'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export interface IngredientsProps {
   items: {
@@ -13,7 +13,7 @@ export function Ingredients ({
   items
 }: IngredientsProps) {
   return (
-    <styles.Wrapepr>
+    <div className={styles.Wrapepr}>
       <div className="text-lg mb-4 uppercase tracking-widest">Ингредиенты</div>
       <div className="space-y-4">
         {items.map((item, i) => (
@@ -28,6 +28,6 @@ export function Ingredients ({
           </div>
         ))}
       </div>
-    </styles.Wrapepr>
+    </div>
   )
 }

@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
 import {
   VARIABLES,
@@ -43,13 +42,7 @@ export const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={{ colorMode, setColorMode }}>
-      <StyledThemeProvider theme={{
-        ...theme,
-        focusVisible,
-        colorMode
-      }}>
-        {children}
-      </StyledThemeProvider>
+      {children}
     </ThemeContext.Provider>
   )
 }

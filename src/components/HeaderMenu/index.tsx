@@ -3,12 +3,12 @@ import Link from 'next/link'
 
 import { Popover } from '@components/Popover'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export const HeaderMenu = () => {
   return (
-    <styles.Wrapper>
-      <styles.List>
+    <div className={styles.Wrapper}>
+      <ul className={styles.List}>
         <li>
           <Link href="/pages/about" passHref>
             <a>Обо мне</a>
@@ -16,7 +16,7 @@ export const HeaderMenu = () => {
         </li>
         <Popover
           content={
-            <styles.SecondList>
+            <ul className={styles.SecondList}>
               <li>
                 <Link href="/cooking/krem-i-glazur-dlya-tortov" passHref>
                   <a>Крем и глазурь для тортов</a>
@@ -67,7 +67,7 @@ export const HeaderMenu = () => {
                   <a>Рыбные блюда</a>
                 </Link>
               </li>
-            </styles.SecondList>
+            </ul>
           }
           showClose={false}
           wrapperStyle={{
@@ -79,7 +79,11 @@ export const HeaderMenu = () => {
               <Link href="/cooking" passHref>
                 <a {...hoverListeners}>Кулинария</a>
               </Link>
-              <styles.Dropdown ref={setReferenceElement} {...clickListeners} />
+              <button
+                className={styles.Dropdown}
+                ref={setReferenceElement}
+                {...clickListeners}
+              />
             </li>
           )}
         </Popover>
@@ -88,16 +92,16 @@ export const HeaderMenu = () => {
             <a>Храмы</a>
           </Link>
         </li>
-      </styles.List>
+      </ul>
       <Link href="/" passHref>
-        <styles.Logo>
+        <a className={styles.Logo}>
           <img src="/images/logo.png" alt="" />
-        </styles.Logo>
+        </a>
       </Link>
-      <styles.List>
+      <ul className={styles.List}>
         <Popover
           content={
-            <styles.SecondList>
+            <ul className={styles.SecondList}>
               <li>
                 <Link href="/notes/zametki-o-vtoryh-blyudah" passHref>
                   <a>Вторые блюда</a>
@@ -123,7 +127,7 @@ export const HeaderMenu = () => {
                   <a>Заметки о напитках</a>
                 </Link>
               </li>
-            </styles.SecondList>
+            </ul>
           }
           showClose={false}
           wrapperStyle={{
@@ -135,13 +139,17 @@ export const HeaderMenu = () => {
               <Link href="/notes" passHref>
                 <a {...hoverListeners}>Заметки</a>
               </Link>
-              <styles.Dropdown ref={setReferenceElement} {...clickListeners} />
+              <button
+                className={styles.Dropdown}
+                ref={setReferenceElement}
+                {...clickListeners}
+              />
             </li>
           )}
         </Popover>
         <Popover
           content={
-            <styles.SecondList>
+            <ul className={styles.SecondList}>
               <li>
                 <Link href="/article/supernatural" passHref>
                   <a>Сверхъестественное</a>
@@ -157,7 +165,7 @@ export const HeaderMenu = () => {
                   <a>Жизненные истории</a>
                 </Link>
               </li>
-            </styles.SecondList>
+            </ul>
           }
           showClose={false}
           wrapperStyle={{
@@ -169,7 +177,11 @@ export const HeaderMenu = () => {
               <Link href="/article" passHref>
                 <a {...hoverListeners}>Статьи</a>
               </Link>
-              <styles.Dropdown ref={setReferenceElement} {...clickListeners} />
+              <button
+                className={styles.Dropdown}
+                ref={setReferenceElement}
+                {...clickListeners}
+              />
             </li>
           )}
         </Popover>
@@ -178,7 +190,7 @@ export const HeaderMenu = () => {
             <a>Альбомы</a>
           </Link>
         </li>
-      </styles.List>
-    </styles.Wrapper>
+      </ul>
+    </div>
   )
 }

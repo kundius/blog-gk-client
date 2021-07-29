@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-import styled, { css } from 'styled-components'
 import { usePopper } from 'react-popper'
 import { Placement } from '@popperjs/core'
 import ReactDOM from 'react-dom'
 import { useTimeout } from 'rooks'
 
+import cssStyles from './styles.module.css'
+
 export interface RenderFunctionArgs<HandleType> {
   referenceElement: HandleType | null
-  setReferenceElement: (el: HandleType) => void
+  setReferenceElement: (el: HandleType | null) => void
   hoverListeners: Pick<React.DOMAttributes<HandleType>, 'onMouseEnter' | 'onMouseLeave'>,
   clickListeners: Pick<React.DOMAttributes<HandleType>, 'onClick'>,
   show: Function
@@ -161,28 +162,33 @@ export function Popover<HandleType extends HTMLElement> ({
   }
 
   const html = (
-    <Wrapper
+    <div
+      className={`
+        ${cssStyles.Wrapper}
+        ${isOpen ? cssStyles.WrapperIsOpen : ''}
+        ${size === 's' ? cssStyles.WrapperSmall : ''}
+        ${size === 'm' ? cssStyles.WrapperMedium : ''}
+        ${size === 'l' ? cssStyles.WrapperLarge : ''}
+      `}
       ref={setPopperElement}
       style={{
         ...styles.popper,
         ...wrapperStyle
       }}
       {...attributes.popper}
-      isOpen={isOpen}
-      size={size}
       {...wrapperListeners}
     >
       {((typeof showClose === 'undefined' && clamp) || showClose) && (
-        <Close onClick={hide} />
+        <button className={cssStyles.Close} onClick={hide} />
       )}
       {title && (
-        <Title>{typeof title === 'function' ? title(api) : title}</Title>
+        <div className={cssStyles.Title}>{typeof title === 'function' ? title(api) : title}</div>
       )}
       {content && (
-        <Content>{typeof content === 'function' ? content(api) : content}</Content>
+        <div className={cssStyles.Content}>{typeof content === 'function' ? content(api) : content}</div>
       )}
-      <Arrow ref={setArrowElement} style={styles.arrow} />
-    </Wrapper>
+      <div className={cssStyles.Arrow} ref={setArrowElement} style={styles.arrow} />
+    </div>
   )
 
   return (
@@ -193,180 +199,3 @@ export function Popover<HandleType extends HTMLElement> ({
     </>
   )
 }
-
-const Arrow = styled.div`
-  transition: border-color 300ms ease-out;
-`
-
-const Close = styled.button`
-  width: 16px;
-  height: 16px;
-  top: 6px;
-  right: 6px;
-  border: none;
-  background: transparent;
-  position: absolute;
-  cursor: pointer;
-  border-radius: 2px;
-  padding: 0;
-  opacity: 0.7;
-  &:hover {
-    opacity: 1;
-  }
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 1px;
-    width: 100%;
-    background-color: currentColor;
-  }
-  &::before {
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
-  &::after {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-`
-
-const Title = styled.div`
-  color: currentColor;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  overflow: hidden;
-`
-
-const Content = styled.div`
-  color: currentColor;
-  font-size: 13px;
-  line-height: 1.285;
-  font-weight: normal;
-  text-transform: none;
-  p {
-    margin: 0;
-  }
-  * + p {
-    margin-top: 12px;
-  }
-`
-
-const Wrapper = styled.div<{
-  isOpen: boolean,
-  size: 's' | 'm' | 'l'
-}>`
-  border-radius: 6px;
-  padding: 16px;
-  max-width: 260px;
-  z-index: 1050;
-  background: ${props => props.theme.colorMode === 'dark' ? '#6b7280' : '#ffffff'};
-  box-shadow: ${props => props.theme.colorMode === 'dark' ? 'rgb(255 255 255 / 2%) 0px -5.9px 2.7px, rgb(255 255 255 / 2%) 0px -1.2px 6.9px, rgb(255 255 255 / 3%) 0px 8px 14.2px, rgb(255 255 255 / 4%) 0px 21.9px 29.2px, rgb(255 255 255 / 7%) 0px 49px 80px' : 'rgb(0 0 0 / 2%) 0px -5.9px 2.7px, rgb(0 0 0 / 2%) 0px -1.2px 6.9px, rgb(0 0 0 / 3%) 0px 8px 14.2px, rgb(0 0 0 / 4%) 0px 21.9px 29.2px, rgb(0 0 0 / 7%) 0px 49px 80px'};
-  transition: background 300ms ease-out, box-shadow 300ms ease-out, visibility 300ms ease-out-in-out, opacity 300ms ease-out-in-out;
-  opacity: ${props => props.isOpen ? '1' : '0'};
-  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
-  &[data-popper-placement^="bottom"] > ${Arrow} {
-    top: -16px;
-    border-width: 0 16px 16px 16px;
-    border-color: transparent transparent ${props => props.theme.colorMode === 'dark' ? '#6b7280' : '#ffffff'} transparent;
-    filter: ${props => props.theme.colorMode === 'dark' ? 'drop-shadow(0px -4px 4px rgb(255 255 255 / 8%))' : 'drop-shadow(0px -4px 4px rgb(0 0 0 / 8%))'};
-  }
-  &[data-popper-placement^="right"] > ${Arrow} {
-    left: -16px;
-    border-width: 16px 16px 16px 0;
-    border-color: transparent ${props => props.theme.colorMode === 'dark' ? '#6b7280' : '#ffffff'} transparent transparent;
-  }
-  &[data-popper-placement^="top"] > ${Arrow} {
-    bottom: -16px;
-    border-width: 16px 16px 0 16px;
-    border-color: ${props => props.theme.colorMode === 'dark' ? '#6b7280' : '#ffffff'} transparent transparent transparent;
-    filter: ${props => props.theme.colorMode === 'dark' ? 'drop-shadow(0px 4px 4px rgb(255 255 255 / 8%))' : 'drop-shadow(0px -4px 4px rgb(0 0 0 / 8%))'};
-  }
-  &[data-popper-placement^="left"] > ${Arrow} {
-    right: -16px;
-    border-width: 16px 0 16px 16px;
-    border-color: transparent transparent transparent ${props => props.theme.colorMode === 'dark' ? '#6b7280' : '#ffffff'};
-  }
-  ${props => {
-    if (props.size === 's') {
-      return css`
-        border-radius: 4px;
-        padding: 10px;
-        max-width: 180px;
-        &[data-popper-placement^="bottom"] > ${Arrow} {
-          top: -8px;
-          border-width: 0 8px 8px 8px;
-        }
-        &[data-popper-placement^="right"] > ${Arrow} {
-          left: -8px;
-          border-width: 8px 8px 8px 0;
-        }
-        &[data-popper-placement^="top"] > ${Arrow} {
-          bottom: -8px;
-          border-width: 8px 8px 0 8px;
-        }
-        &[data-popper-placement^="left"] > ${Arrow} {
-          right: -8px;
-          border-width: 8px 0 8px 8px;
-        }
-        ${Content} {
-          font-size: 11px;
-          * + p {
-            margin-top: 8px;
-          }
-        }
-        ${Title} {
-          font-size: 10px;
-          margin-bottom: 8px;
-        }
-        ${Close} {
-          width: 12px;
-          height: 12px;
-          top: 4px;
-          right: 4px;
-        }
-      `
-    }
-    if (props.size === 'l') {
-      return css`
-        border-radius: 8px;
-        padding: 24px;
-        max-width: 340px;
-        &[data-popper-placement^="bottom"] > ${Arrow} {
-          top: -24px;
-          border-width: 0 24px 24px 24px;
-        }
-        &[data-popper-placement^="right"] > ${Arrow} {
-          left: -24px;
-          border-width: 24px 24px 24px 0;
-        }
-        &[data-popper-placement^="top"] > ${Arrow} {
-          bottom: -24px;
-          border-width: 24px 24px 0 24px;
-        }
-        &[data-popper-placement^="left"] > ${Arrow} {
-          right: -24px;
-          border-width: 24px 0 24px 24px;
-        }
-        ${Content} {
-          font-size: 14px;
-          * + p {
-            margin-top: 16px;
-          }
-        }
-        ${Title} {
-          font-size: 13px;
-          margin-bottom: 16px;
-        }
-        ${Close} {
-          width: 18px;
-          height: 18px;
-          top: 10px;
-          right: 10px;
-        }
-      `
-    }
-  }}
-`

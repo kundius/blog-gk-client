@@ -6,6 +6,9 @@ const GRAPHQL_URL = localEnv.GRAPHQL_URL ? localEnv.GRAPHQL_URL : 'http://localh
 const IMAGE_DOMAINS = localEnv.IMAGE_DOMAINS ? localEnv.IMAGE_DOMAINS : 'localhost'
 
 module.exports = {
+  typescript: {
+    // ignoreBuildErrors: true,
+  },
   images: {
     domains: IMAGE_DOMAINS.split(','),
   },

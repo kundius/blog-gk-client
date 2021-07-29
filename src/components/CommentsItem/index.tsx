@@ -5,7 +5,7 @@ import { BsFillChatQuoteFill } from 'react-icons/bs'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { DateTime } from 'luxon'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 import * as api from './api'
 import useSWR from 'swr'
 
@@ -45,16 +45,19 @@ export function CommentsItem ({
   const { data: avatarResult } = useSWR<api.GetAvatarData>(avatarKey, avatarFetcher)
 
   return (
-    <styles.Wrapper id={`comment-${id}`} isHighlight={isHighlight}>
-      <styles.Avatar>
+    <div
+      className={`${styles.Wrapper} ${isHighlight ? styles.WrapperHighlight : ''}`}
+      id={`comment-${id}`}
+    >
+      <div className={styles.Avatar}>
         <img src={avatarResult?.data} alt="" />
-      </styles.Avatar>
-      <styles.Body>
-        <styles.Headline>
-          <styles.Name>{authorName}</styles.Name>
-          <styles.Date>
+      </div>
+      <div className={styles.Body}>
+        <div className={styles.Headline}>
+          <div className={styles.Name}>{authorName}</div>
+          <div className={styles.Date}>
             <MdAccessTime /> {DateTime.fromISO(createdAt).setLocale('ru').toRelative()}
-          </styles.Date>
+          </div>
           {isChanged && (
             <span
               className="italic text-gray-400 text-base ml-4"
@@ -63,23 +66,24 @@ export function CommentsItem ({
               <AiOutlineEdit />
             </span>
           )}
-        </styles.Headline>
+        </div>
         {renderParent()}
-        <styles.Text>
+        <div className={styles.Text}>
           {content}
-        </styles.Text>
+        </div>
         <div className="flex space-x-4">
           {onReply && (
-            <styles.Action
+            <button
+              className={styles.Action}
               onClick={() => onReply(data)}
               type="button"
             >
               Ответить
-            </styles.Action>
+            </button>
           )}
         </div>
-      </styles.Body>
-    </styles.Wrapper>
+      </div>
+    </div>
   )
   
   function renderParent () {
@@ -91,15 +95,15 @@ export function CommentsItem ({
     }
 
     return (
-      <styles.Quote href={`#comment-${parent.id}`} onClick={handleClick}>
-        <styles.QuoteIcon>
+      <a className={styles.Quote} href={`#comment-${parent.id}`} onClick={handleClick}>
+        <span className={styles.QuoteIcon}>
           <BsFillChatQuoteFill />
-        </styles.QuoteIcon>
-        <styles.QuoteText>
+        </span>
+        <span className={styles.QuoteText}>
           <em>{parent.authorName} пишет:</em><br />
           {parent.content}
-        </styles.QuoteText>
-      </styles.Quote>
+        </span>
+      </a>
     )
   }
 }

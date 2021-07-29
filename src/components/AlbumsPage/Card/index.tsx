@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Image } from '@components/Image'
 import { BsImage } from 'react-icons/bs'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 export interface CardProps {
   name: string
@@ -22,9 +22,9 @@ export function Card ({
   thumbnail
 }: CardProps) {
   return (
-    <styles.Wrapper>
+    <div className={styles.Wrapper}>
       {thumbnail && (
-        <styles.Thumbnail>
+        <figure className={styles.Thumbnail}>
           <Image
             src={thumbnail.url}
             alt={thumbnail.name}
@@ -34,18 +34,18 @@ export function Card ({
             objectFit="cover"
             layout="responsive"
           />
-        </styles.Thumbnail>
+        </figure>
       )}
       {!thumbnail && (
-        <styles.ThumbnailPlaceholder className="transition duration-300 ease-out bg-gray-200 dark:bg-gray-600">
+        <figure className={`${styles.ThumbnailPlaceholder} transition duration-300 ease-out bg-gray-200 dark:bg-gray-600`}>
           <BsImage />
-        </styles.ThumbnailPlaceholder>
+        </figure>
       )}
-      <styles.Inner>
+      <div className={styles.Inner}>
         <Link href={href} passHref>
-          <styles.Name>{name}</styles.Name>
+          <div className={styles.Name}>{name}</div>
         </Link>
-      </styles.Inner>
-    </styles.Wrapper>
+      </div>
+    </div>
   )
 }

@@ -9,13 +9,13 @@ import { FooterMenu } from '@components/FooterMenu'
 import { TablewareIcon } from '@components/Icon/tableware'
 import { ThemeContext } from '@components/ThemeContext'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 export const Footer = () => {
   return (
-    <styles.Wrapper>
+    <div className={styles.Wrapper}>
       <Container>
-        <styles.Primary className="transition duration-300 ease-out flex flex-wrap lg:flex-nowrap justify-between items-start gap-12 border-t border-gray-200 dark:border-gray-600">
+        <div className={`${styles.Primary} transition duration-300 ease-out flex flex-wrap lg:flex-nowrap justify-between items-start gap-12 border-t border-gray-200 dark:border-gray-600`}>
           <div>
             <FooterMenu
               section={{
@@ -135,20 +135,24 @@ export const Footer = () => {
               }]}
             />
           </div>
-        </styles.Primary>
-        <styles.Secondary className="transition duration-300 ease-out border-t border-gray-200 dark:border-gray-600">
-          <styles.Copyright className="text-gray-700 dark:text-gray-400">
+        </div>
+        <div className={`${styles.Secondary} transition duration-300 ease-out border-t border-gray-200 dark:border-gray-600`}>
+          <div className={`${styles.Copyright} text-gray-700 dark:text-gray-400`}>
             © {new Date().getFullYear()} Блог Галины Кундиус - Все о вкусной еде.<br />
             Копирование материалов сайта возможно только с указанием активной действующей ссылки на источник.
-          </styles.Copyright>
-          <styles.Creator href="http://domenart-studio.ru/" className="text-gray-700 dark:text-gray-400" target="_blank">
+          </div>
+          <a
+            href="http://domenart-studio.ru/"
+            className={`${styles.Creator} text-gray-700 dark:text-gray-400`}
+            target="_blank"
+          >
             <span>
               Разработка, поддержка и продвижение<br />
               веб-студии <b>ДоменАРТ</b>
             </span>
-          </styles.Creator>
-        </styles.Secondary>
+          </a>
+        </div>
       </Container>
-    </styles.Wrapper>
+    </div>
   )
 }

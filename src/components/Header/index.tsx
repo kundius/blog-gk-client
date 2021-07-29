@@ -11,7 +11,7 @@ import { ThemeContext } from '@components/ThemeContext'
 
 import { useLightToggle } from './useLightToggle'
 import { Search } from './Search'
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export const Header = () => {
   const [isFixed, setIsFixed] = useState(false)
@@ -40,38 +40,37 @@ export const Header = () => {
 
   return (
     <>
-      <styles.Placeholder className={isFixed ? 'block' : 'hidden'} />
-      <styles.Wrapper
-        className={isFixed ? 'isHeaderFixed' : undefined}
-        as={animated.div}
+      <div className={`${styles.Placeholder} ${isFixed ? 'block' : 'hidden'}`} />
+      <animated.div
+        className={`${styles.Wrapper} ${isFixed ? styles.isHeaderFixed : undefined}`}
         style={{
           transform: isFixed ? headerSpring.y.to(y => `translateY(${y}%)`) : undefined
         }}
       >
         <Container>
-          <styles.Inner>
-            <styles.Search>
+          <div className={styles.Inner}>
+            <div className={styles.Search}>
               <Search />
-            </styles.Search>
-            <styles.Buttons>
+            </div>
+            <div className={styles.Buttons}>
               {colorMode && (
-                <styles.Button onClick={handleToggleTheme}>
+                <button className={styles.Button} onClick={handleToggleTheme}>
                   {lightToggle}
-                </styles.Button>
+                </button>
               )}
               <a href="/rss" target="_blank">
-                <styles.Button>
+                <button className={styles.Button}>
                   <FaRss />
-                </styles.Button>
+                </button>
               </a>
-            </styles.Buttons>
+            </div>
             <HeaderMenu />
-            <styles.Slogan>
+            <div className={styles.Slogan}>
               АВТОРСКИЙ БЛОГ
-            </styles.Slogan>
-          </styles.Inner>
+            </div>
+          </div>
         </Container>
-      </styles.Wrapper>
+      </animated.div>
       <MobileMenu />
     </>
   )

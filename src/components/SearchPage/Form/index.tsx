@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FaSearch } from 'react-icons/fa'
 import { useSpring, animated, useSpringRef, useChain } from 'react-spring'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export const Form = () => {
   const router = useRouter()
@@ -20,26 +20,28 @@ export const Form = () => {
   }, [router.query.q])
 
   return (
-    <styles.Wrapper onSubmit={handleSubmit}>
-      <styles.Label>
+    <form className={styles.Wrapper} onSubmit={handleSubmit}>
+      <label className={styles.Label}>
         Искать
-      </styles.Label>
+      </label>
       <div className="relative w-full">
-        <styles.Field
+        <input
+          className={styles.Field}
           ref={fieldRef}
           placeholder="Что будем искать?"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <styles.Button
+        <button
+          className={styles.Button}
           type="submit"
         >
           <FaSearch />
-        </styles.Button>
-        <styles.Help>
+        </button>
+        <div className={styles.Help}>
           Например, правильное питание
-        </styles.Help>
+        </div>
       </div>
-    </styles.Wrapper>
+    </form>
   )
 }

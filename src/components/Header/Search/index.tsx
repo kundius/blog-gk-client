@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FaSearch } from 'react-icons/fa'
 import { useSpring, animated, useSpringRef, useChain } from 'react-spring'
 
-import * as styles from './styles'
+import styles from './styles.module.css'
 
 export const Search = () => {
   const router = useRouter()
@@ -62,9 +62,13 @@ export const Search = () => {
   }, [])
 
   return (
-    <styles.Wrapper ref={wrapperRef} onSubmit={handleSubmit}>
-      <styles.Field
-        as={animated.input}
+    <div
+      className={styles.Wrapper}
+      ref={wrapperRef}
+      onSubmit={handleSubmit}
+    >
+      <animated.input
+        className={styles.Field}
         ref={fieldRef}
         style={{
           transform: fieldAnimateFirst.scale.to(scale => `scale(${scale})`),
@@ -75,12 +79,13 @@ export const Search = () => {
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
-      <styles.Button
+      <button
+        className={styles.Button}
         type="button"
         onClick={handleButtonCick}
       >
         <FaSearch />
-      </styles.Button>
-    </styles.Wrapper>
+      </button>
+    </div>
   )
 }

@@ -5,7 +5,7 @@ import { Image } from '@components/Image'
 import { BsImage } from 'react-icons/bs'
 import { ToqueIcon } from '@components/Icon/toque'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 export interface ArticleCardRelatedProps {
   name: string
@@ -32,11 +32,11 @@ export function ArticleCardRelated ({
   excerpt
 }: ArticleCardRelatedProps) {
   return (
-    <styles.Wrapper>
+    <div className={styles.Wrapper}>
       <Link href={url} passHref>
-        <styles.MainLink>
+        <a className={styles.MainLink}>
           {thumbnail && (
-            <styles.Thumbnail>
+            <figure className={styles.Thumbnail}>
               <Image
                 src={thumbnail.url}
                 alt={thumbnail.name}
@@ -46,29 +46,29 @@ export function ArticleCardRelated ({
                 objectFit="cover"
                 layout="responsive"
               />
-            </styles.Thumbnail>
+            </figure>
           )}
           {!thumbnail && (
-            <styles.ThumbnailPlaceholder className="transition duration-300 ease-out bg-gray-200 dark:bg-gray-600">
+            <figure className={`${styles.ThumbnailPlaceholder} transition duration-300 ease-out bg-gray-200 dark:bg-gray-600`}>
               <BsImage />
-            </styles.ThumbnailPlaceholder>
+            </figure>
           )}
-        </styles.MainLink>
+        </a>
       </Link>
 
-      <styles.Inner>
-        <styles.Info>
+      <div className={styles.Inner}>
+        <div className={styles.Info}>
           <Link href={category.url} passHref>
-            <styles.Category>{category.name}</styles.Category>
+            <a className={styles.Category}>{category.name}</a>
           </Link>
-          <styles.Date>{createdAt}</styles.Date>
-          <styles.Excerpt>{excerpt}</styles.Excerpt>
+          <div className={styles.Date}>{createdAt}</div>
+          <div className={styles.Excerpt}>{excerpt}</div>
           <Link href={url} passHref>
-            <styles.More>Читать дальше</styles.More>
+            <a className={styles.More}>Читать дальше</a>
           </Link>
-        </styles.Info>
-        <styles.Name>{name}</styles.Name>
-      </styles.Inner>
-    </styles.Wrapper>
+        </div>
+        <div className={styles.Name}>{name}</div>
+      </div>
+    </div>
   )
 }

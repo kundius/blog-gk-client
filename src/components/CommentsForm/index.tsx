@@ -4,10 +4,11 @@ import { VscClose } from 'react-icons/vsc'
 import md5 from 'blueimp-md5'
 import { BsFillChatQuoteFill } from 'react-icons/bs'
 import { TiArrowBackOutline } from 'react-icons/ti'
+import TextareaAutosize from 'react-textarea-autosize'
 
 import { Spinner } from '@components/Spinner'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 
 export interface CommentsFormReply {
   id: string
@@ -55,27 +56,30 @@ export function CommentsForm ({
   scrollToComment
 }: CommentsFormProps) {
   return (
-    <styles.Wrapper ref={formRef}>
-      <styles.Avatar className="mt-10">
+    <div className={styles.Wrapper} ref={formRef}>
+      <div className={`${styles.Avatar} mt-10`}>
         <img src={getAvatar()} alt="" />
-      </styles.Avatar>
-      <styles.Form>
+      </div>
+      <div className={styles.Form}>
         <div className="grid grid-cols-2 gap-2 mb-2">
-          <styles.Input
+          <input
+            className={styles.Input}
             value={authorName}
             onChange={e => onChangeAuthorName?.(e.target.value)}
             placeholder="Ваше имя:"
           />
-          <styles.Input
+          <input
+            className={styles.Input}
             value={authorEmail}
             onChange={e => onChangeAuthorEmail?.(e.target.value)}
             placeholder="Ваш e-mail:"
           />
         </div>
-        <styles.Field htmlFor={formId}>
+        <label className={styles.Field} htmlFor={formId}>
           {renderReply()}
           <span className="flex">
-            <styles.Textarea
+            <TextareaAutosize
+              className={styles.Textarea}
               id={formId}
               ref={fieldRef}
               minRows={1}
@@ -85,26 +89,28 @@ export function CommentsForm ({
               onChange={e => onChangeContent?.(e.target.value)}
             />
             {onCancel && (
-              <styles.Action
+              <button
+                className={styles.Action}
                 type="button"
                 onClick={onCancel}
               >
                 <TiArrowBackOutline />
-              </styles.Action>
+              </button>
             )}
             {onSubmit && (
-              <styles.Action
+              <button
+                className={styles.Action}
                 disabled={isLoading}
                 type="button"
                 onClick={onSubmit}
               >
                 {isLoading ? <Spinner size={20} /> : <AiOutlineSend />}
-              </styles.Action>
+              </button>
             )}
           </span>
-        </styles.Field>
-      </styles.Form>
-    </styles.Wrapper>
+        </label>
+      </div>
+    </div>
   )
 
   function renderReply () {
@@ -122,20 +128,20 @@ export function CommentsForm ({
     }
 
     return (
-      <styles.Quote href={`#comment-${reply.id}`} onClick={handleClick}>
-        <styles.QuoteIcon>
+      <a className={styles.Quote} href={`#comment-${reply.id}`} onClick={handleClick}>
+        <span className={styles.QuoteIcon}>
           <BsFillChatQuoteFill />
-        </styles.QuoteIcon>
-        <styles.QuoteText>
+        </span>
+        <span className={styles.QuoteText}>
           <em>{reply.authorName} пишет:</em><br />
           {reply.content}
-        </styles.QuoteText>
+        </span>
         {onRemoveReply && (
-          <styles.QuoteRemove type="button" onClick={handleRemove}>
+          <button className={styles.QuoteRemove} type="button" onClick={handleRemove}>
             <VscClose />
-          </styles.QuoteRemove>
+          </button>
         )}
-      </styles.Quote>
+      </a>
     )
   }
 

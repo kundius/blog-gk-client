@@ -9,7 +9,7 @@ import { CommentsItem, CommentsItemData } from '@components/CommentsItem'
 import { CommentsItemSkeleton } from '@components/CommentsItem/skeleton'
 import { PreloadContext } from '@components/PreloadContext'
 
-import * as styles from './styles'
+import * as styles from './styles.module.css'
 import * as api from './api'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
@@ -67,7 +67,7 @@ export function Comments ({
   })) || []
 
   return (
-    <styles.Wrapper id="comments">
+    <div className={styles.Wrapper} id="comments">
       <div className="mb-8 md:mb-12 text-gray-400 text-3xl md:text-5xl">
         Комментарии
       </div>
@@ -106,7 +106,7 @@ export function Comments ({
           ))}
         </div>
       </div>
-    </styles.Wrapper>
+    </div>
   )
 
   // actions

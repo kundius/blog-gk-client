@@ -5,8 +5,7 @@ import { AppProps } from 'next/app'
 import { ThemeProvider } from '@components/ThemeContext'
 import { PreloadContext } from '@components/PreloadContext'
 // import { useApollo } from '@app/lib/apolloClient'
-import { GlobalStyle } from '@components/GlobalStyle'
-import '@components/GlobalStyle/globals.css'
+import '@components/ThemeContext/globals.css'
 import '@components/Pagination/styles.css'
 import 'react-image-lightbox/style.css'
 
@@ -37,7 +36,6 @@ export default function App ({ Component, pageProps }: AppProps) {
     <PreloadContext.Provider value={pageProps.preloadData || {}}>
       <ThemeProvider>
         {/* <ApolloProvider client={apolloClient}> */}
-          <GlobalStyle />
           <Component {...pageProps} />
         {/* </ApolloProvider> */}
       </ThemeProvider>
