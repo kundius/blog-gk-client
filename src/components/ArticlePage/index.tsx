@@ -139,7 +139,7 @@ export function ArticlePage ({
             </div>
 
             {result.data.thumbnail && (
-              <figure className="mt-8 mb-8">
+              <figure className="mt-8 mb-8 overflow-hidden">
                 <Image
                   src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
                   alt={result.data.thumbnail?.title}

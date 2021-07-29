@@ -33,3 +33,9 @@
 .Content p {
   margin: 24px 0;
 }
+
+.Content img[width="400"] {
+  width: 100%;
+  height: auto;
+  /* border-radius: 0.5rem; */
+}
