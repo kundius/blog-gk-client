@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { DateTime } from 'luxon'
 import { AiOutlineTag } from 'react-icons/ai'
 import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi'
@@ -52,11 +52,11 @@ export function ContentPage ({
 
   return (
     <MainLayout>
-      <Helmet>
+      <Head>
         <title>{result?.data.seo_title || result?.data.name}</title>
         <meta name="description" content={result?.data.seo_keywords} />
         <meta name="keywords" content={result?.data.seo_description} />
-      </Helmet>
+      </Head>
 
       <h1 className="mb-12">{result?.data.name}</h1>
 

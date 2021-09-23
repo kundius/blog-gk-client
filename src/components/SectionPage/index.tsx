@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { DateTime } from 'luxon'
 
 import { Pagination } from '@components/Pagination'
@@ -67,11 +67,11 @@ export function SectionPage ({
 
   return (
     <MainLayout>
-      <Helmet>
+      <Head>
         <title>{sectionResult?.data?.seo_title || sectionResult?.data?.name}</title>
         <meta name="description" content={sectionResult?.data?.seo_keywords} />
         <meta name="keywords" content={sectionResult?.data?.seo_description} />
-      </Helmet>
+      </Head>
 
       <div
         className="grid gap-32"

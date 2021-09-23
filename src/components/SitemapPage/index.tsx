@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import Link from 'next/link'
 
 import { Content } from '@components/Content'
@@ -20,9 +20,9 @@ export function SitemapPage () {
 
   return (
     <MainLayout>
-      <Helmet>
+      <Head>
         <title>Карта сайта</title>
-      </Helmet>
+      </Head>
 
       <h1 className="mb-12">Карта сайта</h1>
 

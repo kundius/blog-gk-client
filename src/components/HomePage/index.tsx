@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { BsArrowRightShort } from 'react-icons/bs'
 import { FaVk, FaOdnoklassniki, FaFacebookF } from 'react-icons/fa'
 import { DateTime } from 'luxon'
@@ -48,11 +48,11 @@ export function HomePage () {
 
   return (
     <WideLayout>
-      <Helmet>
+      <Head>
         <title>Кулинарные рецепты Галины Кундиус</title>
         <meta name="description" content="Блог с рецептами кулинарных блюд для домашнего приготовления и обычные истории из жизни. На сайте можно найти интересные рецепты; салатов, первых, вторых блюд и выпечки." />
         <meta name="keywords" content="блог кулинария рецепты кулинарные первые вторые блюда домашняя выпечка храмы церкви истории статьи путешествия по святым местам Галина Кундиус" />
-      </Helmet>
+      </Head>
       <div className="space-y-24">
         <section className="transition duration-300 ease-out space-y-6 bg-gray-100 dark:bg-gray-800 p-8 md:p-12 rounded-3xl">
           <div className="items-center grid grid-cols-5 gap-8 md:gap-12">

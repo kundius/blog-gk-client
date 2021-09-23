@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { DateTime } from 'luxon'
 
 import { Pagination } from '@components/Pagination'
@@ -25,9 +25,9 @@ export function AlbumsPage () {
 
   return (
     <MainLayout>
-      <Helmet>
+      <Head>
         <title>Альбомы</title>
-      </Helmet>
+      </Head>
 
       <h1 className="mb-12">Альбомы</h1>
 

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import Lightbox from 'react-image-lightbox'
 
 import { Image } from '@components/Image'
@@ -37,11 +37,11 @@ export function AlbumPage ({
 
   return (
     <MainLayout>
-      <Helmet>
+      <Head>
         <title>{result?.data?.seo_title || result?.data?.name}</title>
         <meta name="description" content={result?.data?.seo_keywords} />
         <meta name="keywords" content={result?.data?.seo_description} />
-      </Helmet>
+      </Head>
 
       <h1 className="mb-12">{result?.data?.name}</h1>
       

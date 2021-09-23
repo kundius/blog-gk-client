@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { Helmet } from 'react-helmet'
+import Head from 'next/head'
 import { DateTime } from 'luxon'
 import { AiOutlineTag } from 'react-icons/ai'
 import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi'
@@ -71,11 +71,11 @@ export function ArticlePage ({
 
   return (
     <WideLayout>
-      <Helmet>
+      <Head>
         <title>{result?.data?.seo_title || result?.data?.name}</title>
         <meta name="description" content={result?.data?.seo_keywords} />
         <meta name="keywords" content={result?.data?.seo_description} />
-      </Helmet>
+      </Head>
       {result?.data && (
         <div className="grid gap-24">
           <div className="max-w-2xl ml-auto mr-auto">
