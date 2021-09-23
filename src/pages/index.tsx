@@ -26,7 +26,8 @@ export async function getStaticProps() {
   return {
     props: {
       preloadData
-    }
+    },
+    revalidate: 10
   }
 }
 

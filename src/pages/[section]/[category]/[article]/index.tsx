@@ -42,7 +42,8 @@ export async function getStaticProps({ params }) {
     props: {
       preloadData,
       alias: params.article
-    }
+    },
+    revalidate: 10
   }
 }
 

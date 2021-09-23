@@ -30,7 +30,8 @@ export async function getStaticProps({ params }) {
     props: {
       preloadData,
       alias: params.album
-    }
+    },
+    revalidate: 10
   }
 }
 

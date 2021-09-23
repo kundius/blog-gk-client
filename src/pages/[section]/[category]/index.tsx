@@ -35,7 +35,8 @@ export async function getStaticProps({ params }) {
     props: {
       preloadData,
       alias: params.category
-    }
+    },
+    revalidate: 10
   }
 }
 
