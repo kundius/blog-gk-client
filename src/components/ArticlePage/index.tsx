@@ -101,7 +101,9 @@ export function ArticlePage({ alias }: ArticlePageProps) {
           itemScope
           itemType="http://schema.org/Article"
         >
-          <div className="max-w-2xl ml-auto mr-auto">
+          <div className="max-w-2xl ml-auto mr-auto"
+          itemScope
+          itemType="http://schema.org/Recipe">
             <div className="mb-8 flex gap-4 justify-around items-center tracking-wide">
               <div
                 className="text-xs uppercase text-red-400"
@@ -187,7 +189,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
 
             <h1
               className="text-4xl md:text-5xl text-center font-bold tracking-wide"
-              itemProp="headline"
+              itemProp="headline name"
             >
               {result.data.name}
             </h1>
