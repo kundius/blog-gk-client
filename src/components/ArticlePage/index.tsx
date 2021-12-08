@@ -188,9 +188,6 @@ export function ArticlePage({ alias }: ArticlePageProps) {
               </time>
             </div>
 
-            {/* <div 
-          itemScope
-          itemType="http://schema.org/Article"></div> */}
             <h1
               className="text-4xl md:text-5xl text-center font-bold tracking-wide"
               itemProp="headline name"
@@ -199,28 +196,32 @@ export function ArticlePage({ alias }: ArticlePageProps) {
             </h1>
 
             <div className="transition duration-300 ease-out border-b border-gray-200 dark:border-gray-600 mt-14 pb-2 flex items-center gap-8 justify-between">
-              <div className="flex items-center gap-8">
-                {result.data.cooking_time && (
+              {isRecipe && (
+                <div className="flex items-center gap-8">
                   <div className="flex items-center gap-2">
                     <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                       <ToqueIcon />
                     </div>
                     <div className="text-xs uppercase">
-                      {result.data.cooking_time}
+                      <meta
+                        itemProp="totalTime"
+                        content={`PT${
+                          result.data.cooking_time.replace(/[^0-9]/g, '') || 45
+                        }M`}
+                      />
+                      {result.data.cooking_time || '45 минут'}
                     </div>
                   </div>
-                )}
-                {result.data.portion_count && (
                   <div className="flex items-center gap-2">
                     <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                       <ClocheIcon />
                     </div>
-                    <div className="text-xs uppercase">
-                      {result.data.portion_count || 0}
+                    <div className="text-xs uppercase" itemProp="recipeYield">
+                      {result.data.portion_count || 1}
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
               <div className="flex items-center gap-8">
                 <Hits
                   id={result.data.id}
@@ -260,7 +261,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                 />
                 <img
                   className="hidden"
-                  itemProp="url contentUrl"
+                  itemProp="url contentUrl resultPhoto"
                   src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
                 />
                 <meta itemProp="width" content={String(675)} />
@@ -282,7 +283,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
 
             <Content
               dangerouslySetInnerHTML={{ __html: result.data.content }}
-              itemProp="articleBody"
+              itemProp={isRecipe ? 'recipeInstructions' : 'articleBody'}
             />
 
             <div className={`${styles.Advert} mt-16`}>
