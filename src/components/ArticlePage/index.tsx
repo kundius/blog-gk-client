@@ -264,7 +264,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                 />
                 <img
                   className="hidden"
-                  itemProp="url contentUrl resultPhoto"
+                  itemProp="url contentUrl"
                   src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
                 />
                 <meta itemProp="width" content={String(675)} />
@@ -276,6 +276,14 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                   )}
                 />
               </figure>
+            )}
+
+            {isRecipe && (
+              <img
+                className="hidden"
+                itemProp="resultPhoto"
+                src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
+              />
             )}
 
             {result.data.ingredients && (
