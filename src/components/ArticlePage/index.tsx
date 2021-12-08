@@ -224,6 +224,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                   </div>
                 </div>
               )}
+              <div />
               <div className="flex items-center gap-8">
                 <Hits
                   id={result.data.id}
