@@ -206,7 +206,9 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                       <meta
                         itemProp="totalTime"
                         content={`PT${
-                          result.data.cooking_time.replace(/[^0-9]/g, '') || 45
+                          result.data.cooking_time
+                            ? result.data.cooking_time.replace(/[^0-9]/g, '')
+                            : 45
                         }M`}
                       />
                       {result.data.cooking_time || '45 минут'}
