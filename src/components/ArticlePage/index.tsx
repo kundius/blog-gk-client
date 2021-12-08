@@ -4,7 +4,10 @@ import useSWR from 'swr'
 import Head from 'next/head'
 import { DateTime } from 'luxon'
 import { AiOutlineTag } from 'react-icons/ai'
-import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi'
+import {
+  HiOutlineChevronDoubleLeft,
+  HiOutlineChevronDoubleRight
+} from 'react-icons/hi'
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -43,9 +46,7 @@ interface ArticlePageProps {
   alias: string
 }
 
-export function ArticlePage ({
-  alias
-}: ArticlePageProps) {
+export function ArticlePage({ alias }: ArticlePageProps) {
   const preload = useContext(PreloadContext)
 
   const [key, fetcher] = api.getArticle({ alias })
@@ -66,35 +67,128 @@ export function ArticlePage ({
     })
   }
 
-  const { data: previousResult } = useSWR<api.GetPreviousData>(() => previousApi?.[0] || null, previousApi?.[1] || null)
-  const { data: nextResult } = useSWR<api.GetNextData>(() => nextApi?.[0] || null, nextApi?.[1] || null)
+  const { data: previousResult } = useSWR<api.GetPreviousData>(
+    () => previousApi?.[0] || null,
+    previousApi?.[1] || null
+  )
+  const { data: nextResult } = useSWR<api.GetNextData>(
+    () => nextApi?.[0] || null,
+    nextApi?.[1] || null
+  )
+
+  const pageUrl = `${publicRuntimeConfig.CLIENT_URL}/${result?.data?.category.section.alias}/${result?.data?.category.alias}/${result?.data?.alias}`
+  const imageUrl = `${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}`
 
   return (
     <WideLayout>
       <Head>
         <title>{result?.data?.seo_title || result?.data?.name}</title>
-        <meta name="description" content={result?.data?.seo_keywords} />
-        <meta name="keywords" content={result?.data?.seo_description} />
+        <meta name="description" content={result?.data?.seo_description} />
+        <meta name="keywords" content={result?.data?.seo_keywords} />
+
+        <meta property="og:title" content={result?.data?.name} />
+        <meta
+          property="og:description"
+          content={result?.data?.seo_description}
+        />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={pageUrl} />
       </Head>
       {result?.data && (
-        <div className="grid gap-24">
+        <div
+          className="grid gap-24"
+          itemScope
+          itemType="http://schema.org/Article"
+        >
           <div className="max-w-2xl ml-auto mr-auto">
-            <div className="mb-8 flex gap-4 justify-around items-center tracking-wide">
+            <div
+              className="mb-8 flex gap-4 justify-around items-center tracking-wide"
+              itemScope
+              itemType="http://schema.org/BreadcrumbList"
+            >
               <div className="text-xs uppercase text-red-400">
-                <Link href={`/${result.data.category.section.alias}`} passHref>
-                  <a className="hover:text-red-400">{result.data.category.section.name}</a>
-                </Link>
+                <span
+                  itemProp="itemListElement"
+                  itemScope
+                  itemType="http://schema.org/ListItem"
+                >
+                  <Link
+                    href={`/${result.data.category.section.alias}`}
+                    passHref
+                  >
+                    <a className="hover:text-red-400" itemProp="item">
+                      <span itemProp="name">
+                        {result.data.category.section.name}
+                      </span>
+                      <meta itemProp="position" content="1" />
+                    </a>
+                  </Link>
+                </span>
                 <span className="ml-1 mr-1">/</span>
-                <Link href={`/${result.data.category.section.alias}/${result.data.category.alias}`} passHref>
-                  <a className="hover:text-red-400">{result.data.category.name}</a>
-                </Link>
+                <span
+                  itemProp="itemListElement"
+                  itemScope
+                  itemType="http://schema.org/ListItem"
+                >
+                  <Link
+                    href={`/${result.data.category.section.alias}/${result.data.category.alias}`}
+                    passHref
+                  >
+                    <a className="hover:text-red-400" itemProp="item">
+                      <span itemProp="name">{result.data.category.name}</span>
+                      <meta itemProp="position" content="2" />
+                    </a>
+                  </Link>
+                </span>
               </div>
-              <div className="text-xs text-gray-400 whitespace-nowrap">
-                {DateTime.fromISO(result.data.date_created).setLocale('ru').toFormat('DDD').replace(' г.', '')}
+              <div className="hidden">
+                <span itemProp="author">Галина Кундиус</span>
+                <div
+                  itemProp="publisher"
+                  itemScope
+                  itemType="https://schema.org/Organization"
+                >
+                  <div
+                    itemProp="logo"
+                    itemScope
+                    itemType="https://schema.org/ImageObject"
+                  >
+                    <img itemProp="url image" src="/images/logo.png" />
+                    <meta itemProp="width" content="118" />
+                    <meta itemProp="height" content="118" />
+                  </div>
+                  <meta itemProp="name" content="Блог Галины Кундиус" />
+                  {/* <meta itemProp="telephone" content="+7 800 333 22 33" />
+                  <meta itemProp="address" content="г. Пенза, ул. Московская, д. 3" /> */}
+                </div>
+                <meta
+                  itemProp="dateModified"
+                  content={result.data.date_updated}
+                />
+                <meta
+                  itemScope
+                  itemProp="mainEntityOfPage"
+                  itemType="https://schema.org/WebPage"
+                  itemID={pageUrl}
+                />
               </div>
+              <time
+                className="text-xs text-gray-400 whitespace-nowrap"
+                itemProp="datePublished"
+                dateTime={result.data.date_created}
+              >
+                {DateTime.fromISO(result.data.date_created)
+                  .setLocale('ru')
+                  .toFormat('DDD')
+                  .replace(' г.', '')}
+              </time>
             </div>
 
-            <h1 className="text-4xl md:text-5xl text-center font-bold tracking-wide">
+            <h1
+              className="text-4xl md:text-5xl text-center font-bold tracking-wide"
+              itemProp="headline"
+            >
               {result.data.name}
             </h1>
 
@@ -140,15 +234,36 @@ export function ArticlePage ({
             </div>
 
             {result.data.thumbnail && (
-              <figure className="mt-8 mb-8 overflow-hidden">
+              <figure
+                className="mt-8 mb-8 overflow-hidden"
+                itemScope
+                itemProp="image"
+                itemType="http://schema.org/ImageObject"
+              >
                 <Image
                   src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
                   alt={result.data.thumbnail?.title}
+                  itemProp="url contentUrl"
                   blurHash={result.data.thumbnail.blurhash}
                   width={675}
-                  height={(675 / result.data.thumbnail.width * result.data.thumbnail.height)}
+                  height={
+                    (675 / result.data.thumbnail.width) *
+                    result.data.thumbnail.height
+                  }
                   objectFit="cover"
                   layout="responsive"
+                />
+                <meta
+                  itemProp="url"
+                  content={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
+                />
+                <meta itemProp="width" content={String(675)} />
+                <meta
+                  itemProp="height"
+                  content={String(
+                    (675 / result.data.thumbnail.width) *
+                      result.data.thumbnail.height
+                  )}
                 />
               </figure>
             )}
@@ -159,22 +274,23 @@ export function ArticlePage ({
               </div>
             )}
 
-            <Content dangerouslySetInnerHTML={{ __html: result.data.content }} />
+            <Content
+              dangerouslySetInnerHTML={{ __html: result.data.content }}
+              itemProp="articleBody"
+            />
 
             <div className={`${styles.Advert} mt-16`}>
-              <YandexRTB id={"R-A-518351-3"} />
+              <YandexRTB id={'R-A-518351-3'} />
             </div>
 
             {result.data.tags?.[0] && (
               <div className="flex items-start leading-none mt-16">
                 <div className="flex items-center">
                   <AiOutlineTag />
-                  <div className="text-sm ml-2">
-                    Теги
-                  </div>
+                  <div className="text-sm ml-2">Теги</div>
                 </div>
                 <div className="ml-4 flex flex-wrap text-sm text-gray-400 uppercase gap-1">
-                  {result.data.tags.map(item => (
+                  {result.data.tags.map((item) => (
                     <a key={item.tag.alias}>#{item.tag.name}</a>
                   ))}
                 </div>
@@ -185,27 +301,31 @@ export function ArticlePage ({
           <div className="transition duration-300 ease-out flex flex-col md:flex-row items-center justify-between gap-4 pt-4 pb-4 border-t border-b border-gray-200 dark:border-gray-600">
             <div className="flex items-center gap-8">
               <div className="text-sm leading-none text-gray-400 hidden lg:block">
-                Понравилась статья?<br />
+                Понравилась статья?
+                <br />
                 Поделись с друзьями
               </div>
               <div className="flex gap-2">
-                <FacebookShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
+                <FacebookShareButton url={pageUrl}>
                   <FacebookIcon size={32} borderRadius={32} />
                 </FacebookShareButton>
-                <TwitterShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
+                <TwitterShareButton url={pageUrl}>
                   <TwitterIcon size={32} borderRadius={32} />
                 </TwitterShareButton>
-                <VKShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
+                <VKShareButton url={pageUrl}>
                   <VKIcon size={32} borderRadius={32} />
                 </VKShareButton>
-                <OKShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
+                <OKShareButton url={pageUrl}>
                   <OKIcon size={32} borderRadius={32} />
                 </OKShareButton>
-                <TelegramShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`}>
+                <TelegramShareButton url={pageUrl}>
                   <TelegramIcon size={32} borderRadius={32} />
                 </TelegramShareButton>
                 {result.data.thumbnail && (
-                  <PinterestShareButton url={`/${result.data.category.section.alias}/${result.data.category.alias}/${result.data.alias}`} media={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail.filename_disk}`}>
+                  <PinterestShareButton
+                    url={pageUrl}
+                    media={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail.filename_disk}`}
+                  >
                     <PinterestIcon size={32} borderRadius={32} />
                   </PinterestShareButton>
                 )}
@@ -214,16 +334,30 @@ export function ArticlePage ({
 
             <div className="flex items-center gap-2">
               {previousResult?.data && (
-                <Link href={`/${previousResult.data.category.section.alias}/${previousResult.data.category.alias}/${previousResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 md:leading-8 uppercase px-5 rounded-full" title={previousResult.data.name}>
+                <Link
+                  href={`/${previousResult.data.category.section.alias}/${previousResult.data.category.alias}/${previousResult.data.alias}`}
+                  passHref
+                >
+                  <a
+                    rel="prev"
+                    className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 md:leading-8 uppercase px-5 rounded-full"
+                    title={previousResult.data.name}
+                  >
                     <HiOutlineChevronDoubleLeft className="mr-1" />
                     Предыдущая
                   </a>
                 </Link>
               )}
               {nextResult?.data && (
-                <Link href={`/${nextResult.data.category.section.alias}/${nextResult.data.category.alias}/${nextResult.data.alias}`} passHref>
-                  <a rel="prev" className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 md:leading-8 uppercase px-5 rounded-full" title={nextResult.data.name}>
+                <Link
+                  href={`/${nextResult.data.category.section.alias}/${nextResult.data.category.alias}/${nextResult.data.alias}`}
+                  passHref
+                >
+                  <a
+                    rel="prev"
+                    className="flex items-center bg-red-400 hover:bg-red-600 text-white text-xs md:text-sm md:tracking-widest leading-8 md:leading-8 uppercase px-5 rounded-full"
+                    title={nextResult.data.name}
+                  >
                     Следующая
                     <HiOutlineChevronDoubleRight className="mr-1" />
                   </a>
@@ -231,15 +365,10 @@ export function ArticlePage ({
               )}
             </div>
           </div>
-          
-          <ArticleRelated
-            id={result.data.id}
-          />
-          
-          <Comments
-            threadId={result.data.id}
-            threadType="articles"
-          />
+
+          <ArticleRelated id={result.data.id} />
+
+          <Comments threadId={result.data.id} threadType="articles" />
         </div>
       )}
     </WideLayout>

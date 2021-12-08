@@ -69,8 +69,8 @@ export function CategoryPage ({
     <MainLayout>
       <Head>
         <title>{categoryResult?.data?.seo_title || categoryResult?.data?.name}</title>
-        <meta name="description" content={categoryResult?.data?.seo_keywords} />
-        <meta name="keywords" content={categoryResult?.data?.seo_description} />
+        <meta name="description" content={categoryResult?.data?.seo_description} />
+        <meta name="keywords" content={categoryResult?.data?.seo_keywords} />
       </Head>
 
       <div

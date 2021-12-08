@@ -1,28 +1,17 @@
 import React, { useEffect } from 'react'
 import { AppProps } from 'next/app'
-// import { ApolloProvider } from '@apollo/client'
 
 import { ThemeProvider } from '@components/ThemeContext'
 import { PreloadContext } from '@components/PreloadContext'
-// import { useApollo } from '@app/lib/apolloClient'
 import '@components/ThemeContext/globals.css'
 import '@components/Pagination/styles.css'
 import 'react-image-lightbox/style.css'
 
 export default function App ({ Component, pageProps }: AppProps) {
-  // const apolloClient = useApollo({
-  //   initialState: pageProps.initialApolloState
-  // })
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       import('webfontloader').then(({ default: WebFont }) => {
         WebFont.load({
-          // google: {
-          //   families: [
-          //     'Lato:300,400,400i,600,700&amp;subset=cyrillic'
-          //   ]
-          // },
           custom: {
             families: ['Gilroy:n4,i4,n6,n7'],
             urls: ['/fonts/Gilroy/stylesheet.css']
@@ -35,9 +24,7 @@ export default function App ({ Component, pageProps }: AppProps) {
   return (
     <PreloadContext.Provider value={pageProps.preloadData || {}}>
       <ThemeProvider>
-        {/* <ApolloProvider client={apolloClient}> */}
-          <Component {...pageProps} />
-        {/* </ApolloProvider> */}
+        <Component {...pageProps} />
       </ThemeProvider>
     </PreloadContext.Provider>
   )

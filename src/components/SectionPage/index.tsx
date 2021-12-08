@@ -69,8 +69,8 @@ export function SectionPage ({
     <MainLayout>
       <Head>
         <title>{sectionResult?.data?.seo_title || sectionResult?.data?.name}</title>
-        <meta name="description" content={sectionResult?.data?.seo_keywords} />
-        <meta name="keywords" content={sectionResult?.data?.seo_description} />
+        <meta name="description" content={sectionResult?.data?.seo_description} />
+        <meta name="keywords" content={sectionResult?.data?.seo_keywords} />
       </Head>
 
       <div
