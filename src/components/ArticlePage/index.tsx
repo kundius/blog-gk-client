@@ -102,12 +102,12 @@ export function ArticlePage({ alias }: ArticlePageProps) {
           itemType="http://schema.org/Article"
         >
           <div className="max-w-2xl ml-auto mr-auto">
-            <div
-              className="mb-8 flex gap-4 justify-around items-center tracking-wide"
-              itemScope
-              itemType="http://schema.org/BreadcrumbList"
-            >
-              <div className="text-xs uppercase text-red-400">
+            <div className="mb-8 flex gap-4 justify-around items-center tracking-wide">
+              <div
+                className="text-xs uppercase text-red-400"
+                itemScope
+                itemType="http://schema.org/BreadcrumbList"
+              >
                 <span
                   itemProp="itemListElement"
                   itemScope
@@ -159,8 +159,8 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                     <meta itemProp="height" content="118" />
                   </div>
                   <meta itemProp="name" content="Блог Галины Кундиус" />
-                  {/* <meta itemProp="telephone" content="+7 800 333 22 33" />
-                  <meta itemProp="address" content="г. Пенза, ул. Московская, д. 3" /> */}
+                  <meta itemProp="telephone" content="+7 961 028 0539" />
+                  <meta itemProp="address" content="г. Воронеж" />
                 </div>
                 <meta
                   itemProp="dateModified"
@@ -243,7 +243,6 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                 <Image
                   src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
                   alt={result.data.thumbnail?.title}
-                  itemProp="url contentUrl"
                   blurHash={result.data.thumbnail.blurhash}
                   width={675}
                   height={
@@ -253,9 +252,10 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                   objectFit="cover"
                   layout="responsive"
                 />
-                <meta
-                  itemProp="url"
-                  content={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
+                <img
+                  className="hidden"
+                  itemProp="url contentUrl"
+                  src={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}
                 />
                 <meta itemProp="width" content={String(675)} />
                 <meta
