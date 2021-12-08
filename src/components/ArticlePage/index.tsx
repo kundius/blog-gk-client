@@ -78,6 +78,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
 
   const pageUrl = `${publicRuntimeConfig.CLIENT_URL}/${result?.data?.category.section.alias}/${result?.data?.category.alias}/${result?.data?.alias}`
   const imageUrl = `${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}`
+  const isRecipe = !!result?.data?.ingredients
 
   return (
     <WideLayout>
@@ -99,11 +100,11 @@ export function ArticlePage({ alias }: ArticlePageProps) {
         <div
           className="grid gap-24"
           itemScope
-          itemType="http://schema.org/Article"
+          itemType={
+            isRecipe ? 'http://schema.org/Recipe' : 'http://schema.org/Article'
+          }
         >
-          <div className="max-w-2xl ml-auto mr-auto"
-          itemScope
-          itemType="http://schema.org/Recipe">
+          <div className="max-w-2xl ml-auto mr-auto">
             <div className="mb-8 flex gap-4 justify-around items-center tracking-wide">
               <div
                 className="text-xs uppercase text-red-400"
@@ -187,6 +188,9 @@ export function ArticlePage({ alias }: ArticlePageProps) {
               </time>
             </div>
 
+            {/* <div 
+          itemScope
+          itemType="http://schema.org/Article"></div> */}
             <h1
               className="text-4xl md:text-5xl text-center font-bold tracking-wide"
               itemProp="headline name"
