@@ -17,9 +17,7 @@ interface SectionPageProps {
   alias: string
 }
 
-export function SectionPage ({
-  alias
-}: SectionPageProps) {
+export function SectionPage({ alias }: SectionPageProps) {
   const preload = useContext(PreloadContext)
 
   const listRef = useRef<HTMLDivElement>(null)
@@ -42,9 +40,13 @@ export function SectionPage ({
     alias
   })
 
-  const { data: sectionResult } = useSWR<api.GetSectionData>(keySection, fetcherSection, {
-    initialData: preload[keySection]
-  })
+  const { data: sectionResult } = useSWR<api.GetSectionData>(
+    keySection,
+    fetcherSection,
+    {
+      initialData: preload[keySection]
+    }
+  )
 
   const [keyArticles, fetcherArticles] = api.getArticles({
     alias,
@@ -52,11 +54,15 @@ export function SectionPage ({
     page
   })
 
-  const { data: articlesResult } = useSWR<api.GetArticlesData>(keyArticles, fetcherArticles, {
-    initialData: preload[keyArticles]
-  })
+  const { data: articlesResult } = useSWR<api.GetArticlesData>(
+    keyArticles,
+    fetcherArticles,
+    {
+      initialData: preload[keyArticles]
+    }
+  )
 
-  function scrollToList () {
+  function scrollToList() {
     if (listRef.current) {
       listRef.current.scrollIntoView({
         block: 'start',
@@ -68,9 +74,19 @@ export function SectionPage ({
   return (
     <MainLayout>
       <Head>
-        <title>{sectionResult?.data?.seo_title || sectionResult?.data?.name}</title>
-        <meta name="description" content={sectionResult?.data?.seo_description} />
+        <title>
+          {sectionResult?.data?.seo_title || sectionResult?.data?.name}
+        </title>
+        <meta
+          name="description"
+          content={sectionResult?.data?.seo_description}
+        />
         <meta name="keywords" content={sectionResult?.data?.seo_keywords} />
+
+        <link
+          rel="canonical"
+          href={`${publicRuntimeConfig.CLIENT_URL}/${sectionResult?.data?.alias}`}
+        />
       </Head>
 
       <div
@@ -86,11 +102,8 @@ export function SectionPage ({
           </div>
         )}
 
-        {articlesResult?.data?.map(article => (
-          <div
-            key={article.alias}
-            className="max-w-2xl w-full mx-auto"
-          >
+        {articlesResult?.data?.map((article) => (
+          <div key={article.alias} className="max-w-2xl w-full mx-auto">
             <ArticleCardMain
               name={article.name}
               portionCount={article.portion_count}
@@ -98,7 +111,10 @@ export function SectionPage ({
               commentsCount={article.comments_count || 0}
               hitsCount={article.hits_count || 0}
               excerpt={article.excerpt}
-              createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD').replace(' г.', '')}
+              createdAt={DateTime.fromISO(article.date_created)
+                .setLocale('ru')
+                .toFormat('DDD')
+                .replace(' г.', '')}
               thumbnail={
                 article.thumbnail
                   ? {

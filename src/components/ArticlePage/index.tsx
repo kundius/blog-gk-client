@@ -95,6 +95,8 @@ export function ArticlePage({ alias }: ArticlePageProps) {
         <meta property="og:image" content={imageUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={pageUrl} />
+
+        <link rel="canonical" href={pageUrl} />
       </Head>
       {result?.data && (
         <div

@@ -17,9 +17,7 @@ interface CategoryPageProps {
   alias: string
 }
 
-export function CategoryPage ({
-  alias
-}: CategoryPageProps) {
+export function CategoryPage({ alias }: CategoryPageProps) {
   const preload = useContext(PreloadContext)
 
   const listRef = useRef<HTMLDivElement>(null)
@@ -42,9 +40,13 @@ export function CategoryPage ({
     alias
   })
 
-  const { data: categoryResult } = useSWR<api.GetCategoryData>(keyCategory, fetcherCategory, {
-    initialData: preload[keyCategory]
-  })
+  const { data: categoryResult } = useSWR<api.GetCategoryData>(
+    keyCategory,
+    fetcherCategory,
+    {
+      initialData: preload[keyCategory]
+    }
+  )
 
   const [keyArticles, fetcherArticles] = api.getArticles({
     alias,
@@ -52,11 +54,15 @@ export function CategoryPage ({
     page
   })
 
-  const { data: articlesResult } = useSWR<api.GetArticlesData>(keyArticles, fetcherArticles, {
-    initialData: preload[keyArticles]
-  })
+  const { data: articlesResult } = useSWR<api.GetArticlesData>(
+    keyArticles,
+    fetcherArticles,
+    {
+      initialData: preload[keyArticles]
+    }
+  )
 
-  function scrollToList () {
+  function scrollToList() {
     if (listRef.current) {
       listRef.current.scrollIntoView({
         block: 'start',
@@ -68,9 +74,19 @@ export function CategoryPage ({
   return (
     <MainLayout>
       <Head>
-        <title>{categoryResult?.data?.seo_title || categoryResult?.data?.name}</title>
-        <meta name="description" content={categoryResult?.data?.seo_description} />
+        <title>
+          {categoryResult?.data?.seo_title || categoryResult?.data?.name}
+        </title>
+        <meta
+          name="description"
+          content={categoryResult?.data?.seo_description}
+        />
         <meta name="keywords" content={categoryResult?.data?.seo_keywords} />
+
+        <link
+          rel="canonical"
+          href={`${publicRuntimeConfig.CLIENT_URL}/${categoryResult?.data?.section.alias}/${categoryResult?.data?.alias}`}
+        />
       </Head>
 
       <div
@@ -86,11 +102,8 @@ export function CategoryPage ({
           </div>
         )}
 
-        {articlesResult?.data?.map(article => (
-          <div
-            key={article.alias}
-            className="max-w-2xl w-full mx-auto"
-          >
+        {articlesResult?.data?.map((article) => (
+          <div key={article.alias} className="max-w-2xl w-full mx-auto">
             <ArticleCardMain
               name={article.name}
               portionCount={article.portion_count}
@@ -98,7 +111,10 @@ export function CategoryPage ({
               commentsCount={article.comments_count || 0}
               hitsCount={article.hits_count || 0}
               excerpt={article.excerpt}
-              createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD').replace(' г.', '')}
+              createdAt={DateTime.fromISO(article.date_created)
+                .setLocale('ru')
+                .toFormat('DDD')
+                .replace(' г.', '')}
               thumbnail={
                 article.thumbnail
                   ? {
