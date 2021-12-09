@@ -19,8 +19,8 @@ export interface ArticleCardMainProps {
   portionCount?: string
   cookingTime?: string
   commentsCount: number
-  hitsCount?: number
-  likesCount?: number
+  hitsCount: number
+  likesCount: number
   excerpt?: string
   category: {
     name: string
@@ -84,18 +84,16 @@ export function ArticleCardMain ({
           )}
         </div>
         <div className="flex items-center gap-8">
-          {typeof hitsCount !== 'undefined' && (
-            <span className="flex items-center gap-8">
-              <span className="flex items-center gap-2">
-                <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
-                  <EyeIcon />
-                </span>
-                <span className="text-xs uppercase">
-                  {hitsCount}
-                </span>
+          <span className="flex items-center gap-8">
+            <span className="flex items-center gap-2">
+              <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
+                <EyeIcon />
+              </span>
+              <span className="text-xs uppercase">
+                {hitsCount}
               </span>
             </span>
-          )}
+          </span>
           <Link href={`${url}#comments`} passHref>
             <a className="flex items-center gap-8">
               <span className="flex items-center gap-2">
