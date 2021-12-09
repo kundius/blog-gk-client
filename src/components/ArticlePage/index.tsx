@@ -35,6 +35,7 @@ import { PreloadContext } from '@components/PreloadContext'
 import { ArticleRelated } from '@components/ArticleRelated'
 import { Comments } from '@components/Comments'
 import { Ingredients } from '@components/Ingredients'
+import { ArticleLikes } from '@components/ArticleLikes'
 
 import { Hits } from './Hits'
 import * as api from './api'
@@ -242,6 +243,10 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                     </span>
                   </span>
                 </a>
+                <ArticleLikes
+                  id={result.data.id}
+                  initialCount={result.data.likes_count || 0}
+                />
               </div>
             </div>
 

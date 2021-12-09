@@ -17,7 +17,7 @@ export async function getStaticPaths() {
       section: article.category.section.alias
     }
   }))
-  return { paths, fallback: true }
+  return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps({ params }) {

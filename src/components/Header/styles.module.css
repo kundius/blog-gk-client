@@ -87,7 +87,7 @@
 }
 
 :global(.isHeaderFixed) .Slogan {
-  top: 60px;
+  top: 64px;
   border-top: 0;
   letter-spacing: 10px;
   font-size: 12px;

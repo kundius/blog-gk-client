@@ -14,6 +14,7 @@ export interface GetArticlesData {
     filter_count: number
   }
   data: {
+    id: string
     alias: string
     name: string
     date_created: string
@@ -21,6 +22,7 @@ export interface GetArticlesData {
     cooking_time?: string
     comments_count: number | null
     hits_count: number | null
+    likes_count: number | null
     excerpt?: string
     category: {
       name: string
@@ -47,7 +49,7 @@ export function getArticles ({
   const params = queryString.stringify({
     sort: '-date_created',
     'filter[category][alias][_eq]': alias,
-    fields: 'alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,hits_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
+    fields: 'id,alias,name,date_created,portion_count,cooking_time,excerpt,comments_count,likes_count,hits_count,category.name,category.alias,category.section.alias,thumbnail.filename_disk,thumbnail.title,thumbnail.blurhash',
     limit,
     page,
     meta: 'filter_count'

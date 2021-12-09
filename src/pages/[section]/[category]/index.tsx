@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const paths = categories.data.map((category) => ({
     params: { category: category.alias, section: category.section.alias }
   }))
-  return { paths, fallback: true }
+  return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps({ params }) {

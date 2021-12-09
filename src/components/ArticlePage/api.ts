@@ -20,6 +20,7 @@ export interface GetArticleData {
     excerpt?: string
     comments_count: number | null
     hits_count: number | null
+    likes_count: number | null
     seo_title: string
     seo_keywords: string
     seo_description: string
@@ -58,7 +59,7 @@ export function getArticle ({
 }: GetArticleArgs): GetArticleResult {
   const params = queryString.stringify({
     'filter[alias][_eq]': alias,
-    fields: 'id,alias,content,name,date_created,date_updated,portion_count,cooking_time,excerpt,ingredients,comments_count,hits_count,seo_title,seo_keywords,seo_description,category.name,category.alias,category.section.alias,category.section.name,thumbnail.filename_disk,thumbnail.title,thumbnail.width,thumbnail.height,thumbnail.blurhash,tags.tag.name,tags.tag.alias'
+    fields: 'id,alias,content,name,date_created,date_updated,portion_count,cooking_time,excerpt,ingredients,comments_count,likes_count,hits_count,seo_title,seo_keywords,seo_description,category.name,category.alias,category.section.alias,category.section.name,thumbnail.filename_disk,thumbnail.title,thumbnail.width,thumbnail.height,thumbnail.blurhash,tags.tag.name,tags.tag.alias'
   })
   const key = `${publicRuntimeConfig.API_URL}/items/articles?${params}`
   const fetcher = url => fetch(url).then(r => r.json()).then(r => ({ data: r?.data?.[0] }))

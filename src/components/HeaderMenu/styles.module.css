@@ -111,7 +111,7 @@
 
 @media (--below-md) {
   :global(.isHeaderFixed) .Logo {
-    top: 3px;
+    top: 5px;
     width: 54px;
     height: 54px;
   }
@@ -197,5 +197,5 @@
 }
 
 :global(.isHeaderFixed) .Wrapper {
-  height: 60px;
+  height: 64px;
 }

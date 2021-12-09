@@ -5,11 +5,14 @@ import { Image } from '@components/Image'
 import { ClocheIcon } from '@components/Icon/cloche'
 import { ToqueIcon } from '@components/Icon/toque'
 import { EyeIcon } from '@components/Icon/eye'
+import { HeartIcon } from '@components/Icon/heart'
 import { CommentsIcon } from '@components/Icon/comments'
+import { ArticleLikes } from '@components/ArticleLikes'
 
 import * as styles from './styles.module.css'
 
 export interface ArticleCardMainProps {
+  id: string
   name: string
   url: string
   createdAt: string
@@ -17,6 +20,7 @@ export interface ArticleCardMainProps {
   cookingTime?: string
   commentsCount: number
   hitsCount?: number
+  likesCount?: number
   excerpt?: string
   category: {
     name: string
@@ -30,6 +34,7 @@ export interface ArticleCardMainProps {
 }
 
 export function ArticleCardMain ({
+  id,
   name,
   url,
   category,
@@ -38,6 +43,7 @@ export function ArticleCardMain ({
   cookingTime,
   commentsCount,
   hitsCount,
+  likesCount,
   thumbnail,
   excerpt
 }: ArticleCardMainProps) {
@@ -79,7 +85,7 @@ export function ArticleCardMain ({
         </div>
         <div className="flex items-center gap-8">
           {typeof hitsCount !== 'undefined' && (
-            <a className="flex items-center gap-8">
+            <span className="flex items-center gap-8">
               <span className="flex items-center gap-2">
                 <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                   <EyeIcon />
@@ -88,7 +94,7 @@ export function ArticleCardMain ({
                   {hitsCount}
                 </span>
               </span>
-            </a>
+            </span>
           )}
           <Link href={`${url}#comments`} passHref>
             <a className="flex items-center gap-8">
@@ -102,6 +108,7 @@ export function ArticleCardMain ({
               </span>
             </a>
           </Link>
+          <ArticleLikes id={id} initialCount={likesCount} />
         </div>
       </div>
       {thumbnail && (

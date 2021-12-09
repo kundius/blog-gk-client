@@ -14,7 +14,7 @@ export async function getStaticPaths() {
       album: album.alias
     }
   }))
-  return { paths, fallback: true }
+  return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps({ params }) {

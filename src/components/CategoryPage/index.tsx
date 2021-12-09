@@ -103,13 +103,15 @@ export function CategoryPage({ alias }: CategoryPageProps) {
         )}
 
         {articlesResult?.data?.map((article) => (
-          <div key={article.alias} className="max-w-2xl w-full mx-auto">
+          <div key={article.id} className="max-w-2xl w-full mx-auto">
             <ArticleCardMain
+              id={article.id}
               name={article.name}
               portionCount={article.portion_count}
               cookingTime={article.cooking_time}
               commentsCount={article.comments_count || 0}
               hitsCount={article.hits_count || 0}
+              likesCount={article.likes_count || 0}
               excerpt={article.excerpt}
               createdAt={DateTime.fromISO(article.date_created)
                 .setLocale('ru')
