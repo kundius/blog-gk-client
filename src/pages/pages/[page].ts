@@ -26,12 +26,18 @@ export async function getStaticProps({ params }) {
   const pageData = await pageFetcher(pageKey)
   preloadData[pageKey] = pageData
 
+  if (!pageData.data) {
+    return {
+      notFound: true
+    }
+  }
+
   return {
     props: {
       preloadData,
       alias: params.page
     },
-    revalidate: 10
+    revalidate: 900
   }
 }
 
