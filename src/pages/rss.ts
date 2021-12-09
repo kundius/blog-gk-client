@@ -10,7 +10,7 @@ const blogPostsRssXml = articles => {
     const postDate = Date.parse(article.date_created)
 
     // Remember to change this URL to your own!
-    const postHref = `https://blog-gk/${article.category.section.alias}/${article.category.alias}/${article.alias}`
+    const postHref = `${publicRuntimeConfig.CLIENT_URL}/${article.category.section.alias}/${article.category.alias}/${article.alias}`
 
     if (!latestPostDate || postDate > Date.parse(latestPostDate)) {
       latestPostDate = article.date_created
