@@ -31,12 +31,18 @@ export async function getStaticProps({ params }) {
     [articlesKey]: await articlesFetcher(articlesKey)
   }
 
+  if (!preloadData[categoryKey].data) {
+    return {
+      notFound: true
+    }
+  }
+
   return {
     props: {
       preloadData,
       alias: params.category
     },
-    revalidate: 10
+    revalidate: 900
   }
 }
 

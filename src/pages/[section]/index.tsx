@@ -31,12 +31,18 @@ export async function getStaticProps({ params }) {
     [apiSection[0]]: await apiSection[1](apiSection[0])
   }
 
+  if (!preloadData[apiSection[0]].data) {
+    return {
+      notFound: true
+    }
+  }
+
   return {
     props: {
       preloadData,
       alias: params.section
     },
-    revalidate: 10
+    revalidate: 900
   }
 }
 

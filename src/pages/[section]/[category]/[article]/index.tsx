@@ -29,21 +29,25 @@ export async function getStaticProps({ params }) {
   const articleData = await articleFetcher(articleKey)
   preloadData[articleKey] = articleData
 
-  if (articleData.data) {
-    const [relatedKey, relatedFetcher] = relatedApi.getRelated({
-      id: articleData.data.id,
-      limit: 2
-    })
-    const relatedData = await relatedFetcher(relatedKey)
-    preloadData[relatedKey] = relatedData
+  if (!articleData.data) {
+    return {
+      notFound: true
+    }
   }
+
+  const [relatedKey, relatedFetcher] = relatedApi.getRelated({
+    id: articleData.data.id,
+    limit: 2
+  })
+  const relatedData = await relatedFetcher(relatedKey)
+  preloadData[relatedKey] = relatedData
 
   return {
     props: {
       preloadData,
       alias: params.article
     },
-    revalidate: 10
+    revalidate: 900
   }
 }
 
