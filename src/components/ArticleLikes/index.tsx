@@ -18,7 +18,9 @@ export function ArticleLikes({ id }: ArticleLikesProps) {
 
   const run = async (action) => {
     setLoadng(true)
-    const response = await fetch(`${publicRuntimeConfig.API_URL}/custom/articles/${id}/${action}`)
+    const response = await fetch(
+      `${publicRuntimeConfig.API_URL}/custom/articles/${id}/${action}`
+    )
     const data = await response.json()
     if (typeof data.data === 'number') {
       setCount(data.data)
@@ -61,12 +63,16 @@ export function ArticleLikes({ id }: ArticleLikesProps) {
       onClick={handler}
       disabled={loading}
     >
-      {loading ? <Spinner /> : (
+      {loading ? (
+        <Spinner />
+      ) : (
         <span className="flex items-center gap-2">
-          <span className={classNames("transition duration-300 ease-out text-lg", {
-            'text-gray-600 dark:text-gray-200': !active,
-            'text-red-400': active
-          })}>
+          <span
+            className={classNames('transition duration-300 ease-out text-lg', {
+              'text-gray-600 dark:text-gray-200': !active,
+              'text-red-400': active
+            })}
+          >
             <HeartIcon filled={active} />
           </span>
           <span className="text-xs uppercase">{count}</span>
