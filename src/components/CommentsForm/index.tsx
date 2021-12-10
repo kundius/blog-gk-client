@@ -104,7 +104,7 @@ export function CommentsForm ({
                 type="button"
                 onClick={onSubmit}
               >
-                {isLoading ? <Spinner size={20} /> : <AiOutlineSend />}
+                {isLoading ? <Spinner /> : <AiOutlineSend />}
               </button>
             )}
           </span>
