@@ -1,23 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { FaSearch } from 'react-icons/fa'
-import { useSpring, animated, useSpringRef, useChain } from 'react-spring'
 
 import styles from './styles.module.css'
 
-export const Form = () => {
+export interface FormProps {
+  query: string
+}
+
+export const Form = ({
+  query
+}: FormProps) => {
   const router = useRouter()
   const fieldRef = useRef<HTMLInputElement>(null)
-  const [search, setSearch] = useState('')
+  const [value, setValue] = useState(query)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    router.push(`/search?q=${search}`)
+    router.push(`/search/${value}`)
   }
 
   useEffect(() => {
-    setSearch(String(router.query.q))
-  }, [router.query.q])
+    setValue(query)
+  }, [query])
 
   return (
     <form className={styles.Wrapper} onSubmit={handleSubmit}>
@@ -29,8 +34,8 @@ export const Form = () => {
           className={styles.Field}
           ref={fieldRef}
           placeholder="Что будем искать?"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+          value={value}
+          onChange={e => setValue(e.target.value)}
         />
         <button
           className={styles.Button}

@@ -7,7 +7,9 @@ import * as pageApi from '@components/ContentPage/api'
 const { publicRuntimeConfig } = getRuntimeConfig()
 
 export async function getStaticPaths() {
-  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/pages?fields=alias`)
+  const res = await fetch(
+    `${publicRuntimeConfig.API_URL}/items/pages?fields=alias`
+  )
   const pages = await res.json()
   const paths = pages.data.map((page) => ({
     params: {
@@ -24,13 +26,14 @@ export async function getStaticProps({ params }) {
     alias: params.page
   })
   const pageData = await pageFetcher(pageKey)
-  preloadData[pageKey] = pageData
 
   if (!pageData.data) {
     return {
       notFound: true
     }
   }
+  
+  preloadData[pageKey] = pageData
 
   return {
     props: {

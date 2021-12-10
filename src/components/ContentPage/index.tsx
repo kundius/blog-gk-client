@@ -1,54 +1,19 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
-import Link from 'next/link'
+import React from 'react'
 import useSWR from 'swr'
 import Head from 'next/head'
-import { DateTime } from 'luxon'
-import { AiOutlineTag } from 'react-icons/ai'
-import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from 'react-icons/hi'
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  OKShareButton,
-  OKIcon,
-  PinterestShareButton,
-  PinterestIcon,
-  TelegramShareButton,
-  TelegramIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  VKShareButton,
-  VKIcon
-} from 'react-share'
 
 import { Content } from '@components/Content'
-import { Image } from '@components/Image'
-import { ClocheIcon } from '@components/Icon/cloche'
-import { ToqueIcon } from '@components/Icon/toque'
-import { CommentsIcon } from '@components/Icon/comments'
-import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 import { MainLayout } from '@components/MainLayout'
-import { PreloadContext } from '@components/PreloadContext'
-import { ArticleRelated } from '@components/ArticleRelated'
-import { Comments } from '@components/Comments'
-import { Ingredients } from '@components/Ingredients'
 
 import * as api from './api'
-
-const { publicRuntimeConfig } = getRuntimeConfig()
 
 interface ContentPageProps {
   alias: string
 }
 
-export function ContentPage ({
-  alias
-}: ContentPageProps) {
-  const preload = useContext(PreloadContext)
-
+export function ContentPage({ alias }: ContentPageProps) {
   const [key, fetcher] = api.getPage({ alias })
-  const { data: result } = useSWR<api.GetPageData>(key, fetcher, {
-    initialData: preload[key]
-  })
+  const { data: result } = useSWR<api.GetPageData>(key, fetcher)
 
   return (
     <MainLayout>

@@ -1,22 +1,19 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import useSWR from 'swr'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { Content } from '@components/Content'
 import { MainLayout } from '@components/MainLayout'
-import { PreloadContext } from '@components/PreloadContext'
 
 import * as api from './api'
 
-export function SitemapPage () {
-  const preload = useContext(PreloadContext)
-
+export function SitemapPage() {
   const [keyArticles, fetcherArticles] = api.getArticles({})
 
-  const { data: resultArticles } = useSWR<api.GetArticlesData>(keyArticles, fetcherArticles, {
-    initialData: preload[keyArticles]
-  })
+  const { data: resultArticles } = useSWR<api.GetArticlesData>(
+    keyArticles,
+    fetcherArticles
+  )
 
   return (
     <MainLayout>
@@ -163,9 +160,11 @@ export function SitemapPage () {
 
       <h2 className="text-3xl mb-4 mt-24">Статьи</h2>
       <ul className="uppercase text-sm leading-tight text-red-400 space-y-2">
-        {resultArticles?.data.map(item => (
+        {resultArticles?.data.map((item) => (
           <li key={item.id}>
-            <Link href={`/${item.category.section.alias}/${item.category.alias}/${item.alias}`}>
+            <Link
+              href={`/${item.category.section.alias}/${item.category.alias}/${item.alias}`}
+            >
               <a>{item.name}</a>
             </Link>
           </li>

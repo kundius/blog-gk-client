@@ -7,7 +7,9 @@ import * as albumApi from '@components/AlbumPage/api'
 const { publicRuntimeConfig } = getRuntimeConfig()
 
 export async function getStaticPaths() {
-  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/albums?fields=alias`)
+  const res = await fetch(
+    `${publicRuntimeConfig.API_URL}/items/albums?fields=alias`
+  )
   const albums = await res.json()
   const paths = albums.data.map((album) => ({
     params: {
@@ -24,6 +26,13 @@ export async function getStaticProps({ params }) {
     alias: params.album
   })
   const albumData = await albumFetcher(albumKey)
+
+  if (!albumData.data) {
+    return {
+      notFound: true
+    }
+  }
+
   preloadData[albumKey] = albumData
 
   return {

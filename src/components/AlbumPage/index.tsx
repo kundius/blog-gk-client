@@ -5,7 +5,6 @@ import Lightbox from 'react-image-lightbox'
 
 import { Image } from '@components/Image'
 import { MainLayout } from '@components/MainLayout'
-import { PreloadContext } from '@components/PreloadContext'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 
 import * as api from './api'
@@ -16,10 +15,7 @@ interface AlbumPageProps {
   alias: string
 }
 
-export function AlbumPage ({
-  alias
-}: AlbumPageProps) {
-  const preload = useContext(PreloadContext)
+export function AlbumPage({ alias }: AlbumPageProps) {
   const [lightboxIsOpen, setLightboxIsOpen] = useState(false)
   const [lightboxPhotoIndex, setLightboxPhotoIndex] = useState(0)
 
@@ -27,13 +23,15 @@ export function AlbumPage ({
     alias
   })
 
-  const { data: result } = useSWR<api.GetAlbumData>(key, fetcher, {
-    initialData: preload[key]
-  })
+  const { data: result } = useSWR<api.GetAlbumData>(key, fetcher)
 
   const imagesSource = result?.data?.images || []
-  const imagesFiltered = imagesSource.filter(item => !!item.file)
-  const images = imagesFiltered.map(item => `${publicRuntimeConfig.API_URL}/assets/${item.file?.filename_disk}`) || []
+  const imagesFiltered = imagesSource.filter((item) => !!item.file)
+  const images =
+    imagesFiltered.map(
+      (item) =>
+        `${publicRuntimeConfig.API_URL}/assets/${item.file?.filename_disk}`
+    ) || []
 
   return (
     <MainLayout>
@@ -44,18 +42,26 @@ export function AlbumPage ({
       </Head>
 
       <h1 className="mb-12">{result?.data?.name}</h1>
-      
+
       {lightboxIsOpen && (
         <Lightbox
           mainSrc={images[lightboxPhotoIndex]}
           nextSrc={images[(lightboxPhotoIndex + 1) % images.length]}
-          prevSrc={images[(lightboxPhotoIndex + images.length - 1) % images.length]}
+          prevSrc={
+            images[(lightboxPhotoIndex + images.length - 1) % images.length]
+          }
           onCloseRequest={() => setLightboxIsOpen(false)}
-          onMovePrevRequest={() => setLightboxPhotoIndex((lightboxPhotoIndex + images.length - 1) % images.length)}
-          onMoveNextRequest={() => setLightboxPhotoIndex((lightboxPhotoIndex + 1) % images.length)}
+          onMovePrevRequest={() =>
+            setLightboxPhotoIndex(
+              (lightboxPhotoIndex + images.length - 1) % images.length
+            )
+          }
+          onMoveNextRequest={() =>
+            setLightboxPhotoIndex((lightboxPhotoIndex + 1) % images.length)
+          }
         />
       )}
-      
+
       <div className="gap-4 grid grid-cols-3">
         {imagesFiltered.map((item, i) => (
           <div
@@ -85,9 +91,7 @@ export function AlbumPage ({
             </div>
           </div>
         ))}
-
       </div>
-
     </MainLayout>
   )
 }

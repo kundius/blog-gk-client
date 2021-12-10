@@ -7,7 +7,6 @@ import { Pagination } from '@components/Pagination'
 import { ArticleCardMain } from '@components/ArticleCardMain'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 import { MainLayout } from '@components/MainLayout'
-import { PreloadContext } from '@components/PreloadContext'
 
 import * as api from './api'
 
@@ -18,8 +17,6 @@ interface CategoryPageProps {
 }
 
 export function CategoryPage({ alias }: CategoryPageProps) {
-  const preload = useContext(PreloadContext)
-
   const listRef = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
   const [page, setPage] = useState(1)
@@ -42,10 +39,7 @@ export function CategoryPage({ alias }: CategoryPageProps) {
 
   const { data: categoryResult } = useSWR<api.GetCategoryData>(
     keyCategory,
-    fetcherCategory,
-    {
-      initialData: preload[keyCategory]
-    }
+    fetcherCategory
   )
 
   const [keyArticles, fetcherArticles] = api.getArticles({
@@ -56,10 +50,7 @@ export function CategoryPage({ alias }: CategoryPageProps) {
 
   const { data: articlesResult } = useSWR<api.GetArticlesData>(
     keyArticles,
-    fetcherArticles,
-    {
-      initialData: preload[keyArticles]
-    }
+    fetcherArticles
   )
 
   function scrollToList() {

@@ -1,18 +1,23 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
-import { useRouter } from 'next/router'
+import React, { useState, useEffect, useRef } from 'react'
 import useSWR from 'swr'
+import Head from 'next/head'
 
 import { MainLayout } from '@components/MainLayout'
 import { Breadcrumbs } from '@components/Breadcrumbs'
 import { Pagination } from '@components/Pagination'
+import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 
 import { Form } from './Form'
 import { Card } from './Card'
 import * as api from './api'
 
-export function SearchPage () {
-  const router = useRouter()
+const { publicRuntimeConfig } = getRuntimeConfig()
 
+export interface SearchPageProps {
+  query: string
+}
+
+export function SearchPage({ query }: SearchPageProps) {
   const listRef = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
   const [page, setPage] = useState(1)
@@ -27,20 +32,20 @@ export function SearchPage () {
 
   useEffect(() => {
     setPage(1)
-  }, [router.query.q])
+  }, [query])
 
-  let searchApi: api.SearchResult | undefined
-  if (router.query.q) {
-    searchApi = api.Search({
-      search: String(router.query.q),
-      limit,
-      page
-    })
-  }
+  const [searchKey, searchFetcher] = api.Search({
+    search: query,
+    limit,
+    page
+  })
 
-  const { data: searchResult } = useSWR<api.SearchData>(() => searchApi?.[0] || null, searchApi?.[1] || null)
+  const { data: searchResult } = useSWR<api.SearchData>(
+    searchKey,
+    searchFetcher
+  )
 
-  function scrollToList () {
+  function scrollToList() {
     if (listRef.current) {
       listRef.current.scrollIntoView({
         block: 'start',
@@ -51,18 +56,30 @@ export function SearchPage () {
 
   return (
     <MainLayout>
+      <Head>
+        <title>{`Поиск «${query || '...'}»`}</title>
+
+        <link
+          rel="canonical"
+          href={`${publicRuntimeConfig.CLIENT_URL}/search/${query}`}
+        />
+      </Head>
+
       <Breadcrumbs
-        items={[{
-          title: 'Главная',
-          href: '/'
-        }, {
-          title: `Поиск «${router.query.q || '...'}»`
-        }]}
+        items={[
+          {
+            title: 'Главная',
+            href: '/'
+          },
+          {
+            title: `Поиск «${query || '...'}»`
+          }
+        ]}
       />
 
       <h1 className="mb-8 mt-16">Поиск</h1>
 
-      <Form />
+      <Form query={query} />
 
       <div
         className="grid gap-12 mt-16"
@@ -77,11 +94,8 @@ export function SearchPage () {
           </div>
         )}
 
-        {searchResult?.data?.map(id => (
-          <Card
-            key={id}
-            id={id}
-          />
+        {searchResult?.data?.map((id) => (
+          <Card key={id} id={id} />
         ))}
 
         {(searchResult?.meta?.search_count || 0) > limit && (

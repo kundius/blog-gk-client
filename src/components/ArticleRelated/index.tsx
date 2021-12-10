@@ -5,7 +5,6 @@ import { DateTime } from 'luxon'
 import { YandexRTB } from '@components/YandexRTB'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 import { ArticleCardRelated } from '@components/ArticleCardRelated'
-import { PreloadContext } from '@components/PreloadContext'
 
 import * as api from './api'
 
@@ -20,26 +19,27 @@ interface ArticleRelatedProps {
   id: string
 }
 
-export function ArticleRelated ({ id }: ArticleRelatedProps) {
-  const preload = useContext(PreloadContext)
-
+export function ArticleRelated({ id }: ArticleRelatedProps) {
   const [relatedKey, relatedFetcher] = api.getRelated({
     id,
     limit: 2
   })
 
-  const { data: relatedResult } = useSWR<api.GetRelatedData>(relatedKey, relatedFetcher, {
-    initialData: preload[relatedKey]
-  })
+  const { data: relatedResult } = useSWR<api.GetRelatedData>(
+    relatedKey,
+    relatedFetcher
+  )
 
   if (!relatedResult?.data || relatedResult.data.length === 0) return null
 
-  const items = relatedResult.data.map(item => (
+  const items = relatedResult.data.map((item) => (
     <ArticleCardRelated
       key={item.alias}
       name={item.name}
       excerpt={item.excerpt}
-      createdAt={DateTime.fromISO(item.date_created).setLocale('ru').toFormat('DDD')}
+      createdAt={DateTime.fromISO(item.date_created)
+        .setLocale('ru')
+        .toFormat('DDD')}
       thumbnail={
         item.thumbnail
           ? {
@@ -57,16 +57,18 @@ export function ArticleRelated ({ id }: ArticleRelatedProps) {
     />
   ))
 
-  items.splice(randomInteger(0, relatedResult.data.length), 0, (
-    <YandexRTB id={"R-A-518351-1"} horizontalAlign={false} />
-  ))
+  items.splice(
+    randomInteger(0, relatedResult.data.length),
+    0,
+    <YandexRTB id={'R-A-518351-1'} horizontalAlign={false} />
+  )
 
   return (
     <section>
-      <div className="mb-8 md:mb-12 text-gray-400 text-3xl md:text-5xl">Смотрите также</div>
-      <div className="grid md:grid-cols-3 gap-4 lg:gap-8">
-        {items}
+      <div className="mb-8 md:mb-12 text-gray-400 text-3xl md:text-5xl">
+        Смотрите также
       </div>
+      <div className="grid md:grid-cols-3 gap-4 lg:gap-8">{items}</div>
     </section>
   )
 }

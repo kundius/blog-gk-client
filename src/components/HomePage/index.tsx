@@ -8,7 +8,6 @@ import Link from 'next/link'
 
 import { Image } from '@components/Image'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
-import { PreloadContext } from '@components/PreloadContext'
 import { ArticleCardLatest } from '@components/ArticleCardLatest'
 import { WideLayout } from '@components/WideLayout'
 
@@ -16,42 +15,49 @@ import * as api from './api'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
 
-export function HomePage () {
-  const preload = useContext(PreloadContext)
-
+export function HomePage() {
   const [keyFirstSection, fetcherFirstSection] = api.getArticles({
     aliasIn: ['baking', 'cookies', 'cakes'],
     limit: 6
   })
 
-  const { data: resultFirstSection } = useSWR<api.GetArticlesData>(keyFirstSection, fetcherFirstSection, {
-    initialData: preload[keyFirstSection]
-  })
+  const { data: resultFirstSection } = useSWR<api.GetArticlesData>(
+    keyFirstSection,
+    fetcherFirstSection
+  )
 
   const [keySecondSection, fetcherSecondSection] = api.getArticles({
     aliasIn: ['entrees', 'main-dishes'],
     limit: 6
   })
 
-  const { data: resultSecondSection } = useSWR<api.GetArticlesData>(keySecondSection, fetcherSecondSection, {
-    initialData: preload[keySecondSection]
-  })
+  const { data: resultSecondSection } = useSWR<api.GetArticlesData>(
+    keySecondSection,
+    fetcherSecondSection
+  )
 
   const [keyThirdSection, fetcherThirdSection] = api.getArticles({
     aliasNotIn: ['baking', 'cookies', 'cakes', 'entrees', 'main-dishes'],
     limit: 6
   })
 
-  const { data: resultThirdSection } = useSWR<api.GetArticlesData>(keyThirdSection, fetcherThirdSection, {
-    initialData: preload[keyThirdSection]
-  })
+  const { data: resultThirdSection } = useSWR<api.GetArticlesData>(
+    keyThirdSection,
+    fetcherThirdSection
+  )
 
   return (
     <WideLayout>
       <Head>
         <title>Кулинарные рецепты Галины Кундиус</title>
-        <meta name="description" content="Блог с рецептами кулинарных блюд для домашнего приготовления и обычные истории из жизни. На сайте можно найти интересные рецепты; салатов, первых, вторых блюд и выпечки." />
-        <meta name="keywords" content="блог кулинария рецепты кулинарные первые вторые блюда домашняя выпечка храмы церкви истории статьи путешествия по святым местам Галина Кундиус" />
+        <meta
+          name="description"
+          content="Блог с рецептами кулинарных блюд для домашнего приготовления и обычные истории из жизни. На сайте можно найти интересные рецепты; салатов, первых, вторых блюд и выпечки."
+        />
+        <meta
+          name="keywords"
+          content="блог кулинария рецепты кулинарные первые вторые блюда домашняя выпечка храмы церкви истории статьи путешествия по святым местам Галина Кундиус"
+        />
       </Head>
       <div className="space-y-24">
         <section className="transition duration-300 ease-out space-y-6 bg-gray-100 dark:bg-gray-800 p-8 md:p-12 rounded-3xl">
@@ -62,28 +68,57 @@ export function HomePage () {
               </h1>
 
               <p className="mt-4 text-gray-500 dark:text-gray-400">
-                Приветствую Вас на&nbsp;моем блоге. Здесь Вы найдете кулинарные рецепты, по&nbsp;которым я готовила для&nbsp;своей семьи в&nbsp;повседневной жизни и&nbsp;на&nbsp;торжества. Моим близким и&nbsp;друзьям очень нравится мое кулинарное мастерство, может быть Вам тоже понравится. Здесь все рецепты проверенные мной, это рецепты наших бабушек, подруг и&nbsp;знакомых. Ещё&nbsp;расскажу как я&nbsp;похудела без диеты, лекарств и&nbsp;препаратов.
+                Приветствую Вас на&nbsp;моем блоге. Здесь Вы найдете кулинарные
+                рецепты, по&nbsp;которым я готовила для&nbsp;своей семьи
+                в&nbsp;повседневной жизни и&nbsp;на&nbsp;торжества. Моим близким
+                и&nbsp;друзьям очень нравится мое кулинарное мастерство, может
+                быть Вам тоже понравится. Здесь все рецепты проверенные мной,
+                это рецепты наших бабушек, подруг и&nbsp;знакомых.
+                Ещё&nbsp;расскажу как я&nbsp;похудела без диеты, лекарств
+                и&nbsp;препаратов.
               </p>
 
               <div className="flex items-center mt-6 -mx-2">
-                <a className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400" href="https://vk.com/kundius1962" target="_blank">
+                <a
+                  className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                  href="https://vk.com/kundius1962"
+                  target="_blank"
+                >
                   <FaVk />
                 </a>
 
-                <a className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400" href="https://ok.ru/profile/551711869164" target="_blank">
+                <a
+                  className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                  href="https://ok.ru/profile/551711869164"
+                  target="_blank"
+                >
                   <FaOdnoklassniki />
                 </a>
 
-                <a className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400" href="https://ok.ru/profile/551711869164" target="_blank">
+                <a
+                  className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                  href="https://ok.ru/profile/551711869164"
+                  target="_blank"
+                >
                   <FaFacebookF />
                 </a>
 
-                <a className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400" href="https://zen.yandex.ru/id/5fde7b4beb463f42c5e96c37" target="_blank">
+                <a
+                  className="mx-2 transition duration-300 ease-out w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                  href="https://zen.yandex.ru/id/5fde7b4beb463f42c5e96c37"
+                  target="_blank"
+                >
                   {/* <svg width="1em" height="1em" fill="none" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 28C0 12.536 12.536 0 28 0C43.464 0 56 12.536 56 28C56 43.464 43.464 56 28 56C12.536 56 0 43.464 0 28Z" fill="currentColor"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M27.4334 0C27.3011 11.5194 26.5478 17.9662 22.257 22.257C17.9662 26.5478 11.5194 27.3011 0 27.4334V29.1051C11.5194 29.2373 17.9662 29.9906 22.257 34.2814C26.4805 38.5049 27.2766 44.8173 27.4267 56H29.1118C29.2618 44.8173 30.0579 38.5049 34.2814 34.2814C38.5049 30.0579 44.8173 29.2618 56 29.1118V27.4266C44.8173 27.2766 38.5049 26.4805 34.2814 22.257C29.9906 17.9662 29.2373 11.5194 29.1051 0H27.4334Z" fill="white" />
                   </svg> */}
-                  <svg width="1em" height="1em" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 18 18"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path d="M17 9.24194V8.75806C14.1121 8.58296 12.478 8.20496 11.1214 6.87857C9.79504 5.52203 9.41704 3.88792 9.24194 1H8.75806C8.58296 3.88792 8.20496 5.52203 6.87857 6.87857C5.52203 8.20496 3.88792 8.58296 1 8.75806V9.24194C3.88792 9.41704 5.52203 9.79504 6.87857 11.1214C8.20496 12.478 8.58296 14.1121 8.75806 17H9.24194C9.41704 14.1121 9.79504 12.478 11.1214 11.1214C12.478 9.79504 14.1121 9.41704 17 9.24194Z" />
                   </svg>
                   {/* <svg width="106" height="18" viewBox="0 0 172 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,10 +167,7 @@ export function HomePage () {
     </WideLayout>
   )
 
-  function renderLatestCooking ({
-    data,
-    title
-  }) {
+  function renderLatestCooking({ data, title }) {
     return (
       <section>
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-2">
@@ -150,7 +182,7 @@ export function HomePage () {
           </Link>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data?.map(article => (
+          {data?.map((article) => (
             <ArticleCardLatest
               key={article.alias}
               name={article.name}
@@ -159,7 +191,9 @@ export function HomePage () {
               commentsCount={article.comments_count || 0}
               hitsCount={article.hits_count || 0}
               excerpt={article.excerpt}
-              createdAt={DateTime.fromISO(article.date_created).setLocale('ru').toFormat('DDD')}
+              createdAt={DateTime.fromISO(article.date_created)
+                .setLocale('ru')
+                .toFormat('DDD')}
               thumbnail={
                 article.thumbnail
                   ? {

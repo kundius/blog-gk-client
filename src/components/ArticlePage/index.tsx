@@ -31,7 +31,6 @@ import { ToqueIcon } from '@components/Icon/toque'
 import { CommentsIcon } from '@components/Icon/comments'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 import { WideLayout } from '@components/WideLayout'
-import { PreloadContext } from '@components/PreloadContext'
 import { ArticleRelated } from '@components/ArticleRelated'
 import { Comments } from '@components/Comments'
 import { Ingredients } from '@components/Ingredients'
@@ -48,12 +47,8 @@ interface ArticlePageProps {
 }
 
 export function ArticlePage({ alias }: ArticlePageProps) {
-  const preload = useContext(PreloadContext)
-
   const [key, fetcher] = api.getArticle({ alias })
-  const { data: result } = useSWR<api.GetArticleData>(key, fetcher, {
-    initialData: preload[key]
-  })
+  const { data: result } = useSWR<api.GetArticleData>(key, fetcher)
 
   let previousApi: api.GetPreviousResult | undefined
   let nextApi: api.GetNextResult | undefined

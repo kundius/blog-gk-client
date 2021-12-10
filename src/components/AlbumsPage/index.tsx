@@ -7,21 +7,19 @@ import { Pagination } from '@components/Pagination'
 import { ArticleCardMain } from '@components/ArticleCardMain'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 import { MainLayout } from '@components/MainLayout'
-import { PreloadContext } from '@components/PreloadContext'
 
 import * as api from './api'
 import { Card } from './Card'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
 
-export function AlbumsPage () {
-  const preload = useContext(PreloadContext)
-
+export function AlbumsPage() {
   const [albumsKey, albumsFetcher] = api.getAlbums()
 
-  const { data: albumsResult } = useSWR<api.GetAlbumsData>(albumsKey, albumsFetcher, {
-    initialData: preload[albumsKey]
-  })
+  const { data: albumsResult } = useSWR<api.GetAlbumsData>(
+    albumsKey,
+    albumsFetcher
+  )
 
   return (
     <MainLayout>
@@ -38,8 +36,7 @@ export function AlbumsPage () {
       )}
 
       <div className="grid grid-cols-2 gap-12">
-
-        {albumsResult?.data?.map(album => (
+        {albumsResult?.data?.map((album) => (
           <Card
             key={album.alias}
             name={album.name}

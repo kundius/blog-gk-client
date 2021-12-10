@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { AppProps } from 'next/app'
+import { SWRConfig } from 'swr'
 
 import { ThemeProvider } from '@components/ThemeContext'
-import { PreloadContext } from '@components/PreloadContext'
 import '@components/ThemeContext/globals.css'
 import '@components/Pagination/styles.css'
 import 'react-image-lightbox/style.css'
@@ -22,10 +22,10 @@ export default function App ({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <PreloadContext.Provider value={pageProps.preloadData || {}}>
+    <SWRConfig value={{ fallback: pageProps.preloadData || {} }}>
       <ThemeProvider>
         <Component {...pageProps} />
       </ThemeProvider>
-    </PreloadContext.Provider>
+    </SWRConfig>
   )
 }

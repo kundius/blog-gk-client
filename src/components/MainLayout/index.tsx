@@ -15,17 +15,13 @@ export interface MainLayout {
   children?: React.ReactNode
 }
 
-export function MainLayout ({
-  children
-}: MainLayout) {
+export function MainLayout({ children }: MainLayout) {
   return (
     <>
       <Header />
       <Container className="mt-20 mb-20">
         <div className={styles.Main}>
-          <div className={styles.Content}>
-            {children}
-          </div>
+          <div className={styles.Content}>{children}</div>
           <div className={`${styles.Side} flex flex-col gap-24`}>
             <SideAuthor />
             <SideAdvert />

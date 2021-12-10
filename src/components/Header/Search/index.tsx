@@ -39,13 +39,13 @@ export const Search = () => {
       setOpened(true)
       fieldRef.current?.focus()
     } else {
-      router.push(`/search?q=${search}`)
+      router.push(`/search/${search}`)
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    router.push(`/search?q=${search}`)
+    router.push(`/search/${search}`)
   }
 
   const handleClickOutside = (e) => {
