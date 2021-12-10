@@ -33,7 +33,7 @@ export interface ArticleCardMainProps {
   }
 }
 
-export function ArticleCardMain ({
+export function ArticleCardMain({
   id,
   name,
   url,
@@ -60,16 +60,16 @@ export function ArticleCardMain ({
           <a>{name}</a>
         </Link>
       </div>
-      <div className={`${styles.Info} flex items-center gap-8 justify-between border-b border-gray-200 dark:border-gray-600`}>
+      <div
+        className={`${styles.Info} flex items-center gap-8 justify-between border-b border-gray-200 dark:border-gray-600`}
+      >
         <div className="flex items-center gap-8">
           {cookingTime && (
             <div className="flex items-center gap-2">
               <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                 <ToqueIcon />
               </div>
-              <div className="text-xs uppercase">
-                {cookingTime}
-              </div>
+              <div className="text-xs uppercase">{cookingTime}</div>
             </div>
           )}
           {portionCount && (
@@ -77,9 +77,7 @@ export function ArticleCardMain ({
               <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                 <ClocheIcon />
               </div>
-              <div className="text-xs uppercase">
-                {portionCount}
-              </div>
+              <div className="text-xs uppercase">{portionCount}</div>
             </div>
           )}
         </div>
@@ -89,9 +87,7 @@ export function ArticleCardMain ({
               <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                 <EyeIcon />
               </span>
-              <span className="text-xs uppercase">
-                {hitsCount}
-              </span>
+              <span className="text-xs uppercase">{hitsCount}</span>
             </span>
           </span>
           <Link href={`${url}#comments`} passHref>
@@ -100,13 +96,11 @@ export function ArticleCardMain ({
                 <span className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
                   <CommentsIcon />
                 </span>
-                <span className="text-xs uppercase">
-                  {commentsCount}
-                </span>
+                <span className="text-xs uppercase">{commentsCount}</span>
               </span>
             </a>
           </Link>
-          <ArticleLikes id={id} initialCount={likesCount} />
+          <ArticleLikes id={id} />
         </div>
       </div>
       {thumbnail && (
@@ -124,11 +118,7 @@ export function ArticleCardMain ({
           </figure>
         </Link>
       )}
-      {excerpt && (
-        <div className={styles.Excerpt}>
-          {excerpt}
-        </div>
-      )}
+      {excerpt && <div className={styles.Excerpt}>{excerpt}</div>}
       <Link href={url} passHref>
         <a className={styles.More}>Читать дальше</a>
       </Link>

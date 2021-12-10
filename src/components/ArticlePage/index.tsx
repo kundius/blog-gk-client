@@ -243,10 +243,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                     </span>
                   </span>
                 </a>
-                <ArticleLikes
-                  id={result.data.id}
-                  initialCount={result.data.likes_count || 0}
-                />
+                <ArticleLikes id={result.data.id} />
               </div>
             </div>
 
