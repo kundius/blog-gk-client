@@ -63,21 +63,17 @@ export function ArticleLikes({ id }: ArticleLikesProps) {
       onClick={handler}
       disabled={loading}
     >
-      {loading ? (
-        <Spinner />
-      ) : (
-        <span className="flex items-center gap-2">
-          <span
-            className={classNames('transition duration-300 ease-out text-lg', {
-              'text-gray-600 dark:text-gray-200': !active,
-              'text-red-400': active
-            })}
-          >
-            <HeartIcon filled={active} />
-          </span>
-          <span className="text-xs uppercase">{count}</span>
+      <span className="flex items-center gap-2">
+        <span
+          className={classNames('transition duration-300 ease-out text-lg', {
+            'text-gray-600 dark:text-gray-200': !active,
+            'text-red-400': active
+          })}
+        >
+          {loading ? <Spinner /> : <HeartIcon filled={active} />}
         </span>
-      )}
+        <span className="text-xs uppercase">{count}</span>
+      </span>
     </button>
   )
 }
