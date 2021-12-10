@@ -2,28 +2,28 @@ import React from 'react'
 import classNames from 'classnames'
 import { getRuntimeConfig } from '@app/utils/getRuntimeConfig'
 
+import { Spinner } from '@components/Spinner'
 import { HeartIcon } from '@components/Icon/heart'
 
 const { publicRuntimeConfig } = getRuntimeConfig()
 
 export interface ArticleLikesProps {
   id: string
-  initialCount: number
 }
 
-export function ArticleLikes({ id, initialCount }: ArticleLikesProps) {
-  const [count, setCount] = React.useState(initialCount)
+export function ArticleLikes({ id }: ArticleLikesProps) {
+  const [loading, setLoadng] = React.useState(false)
+  const [count, setCount] = React.useState(0)
   const [active, setActive] = React.useState(false)
 
-  const run = (action) => {
-    fetch(`${publicRuntimeConfig.API_URL}/custom/articles/${id}/${action}`)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(action, json.data)
-        if (typeof json.data === 'number') {
-          setCount(json.data)
-        }
-      })
+  const run = async (action) => {
+    setLoadng(true)
+    const response = await fetch(`${publicRuntimeConfig.API_URL}/custom/articles/${id}/${action}`)
+    const data = await response.json()
+    if (typeof data.data === 'number') {
+      setCount(data.data)
+    }
+    setLoadng(false)
   }
 
   const getStoredIDs = () => {
@@ -31,43 +31,47 @@ export function ArticleLikes({ id, initialCount }: ArticleLikesProps) {
     return storedLikes.split(',')
   }
 
-  const handler = () => {
+  const handler = async () => {
     const arrayOfIds = getStoredIDs()
     const currentIndex = arrayOfIds.indexOf(id)
     if (currentIndex !== -1) {
+      await run('likes/remove')
       arrayOfIds.splice(currentIndex, 1)
       setActive(false)
-      run('likes/remove')
     } else {
+      await run('likes/add')
       arrayOfIds.push(id)
       setActive(true)
-      run('likes/add')
     }
     localStorage.setItem('likes', arrayOfIds.join(','))
   }
 
-  React.useEffect(() => {
+  const init = async () => {
+    await run('likes/count')
     setActive(getStoredIDs().includes(id))
-  }, [id])
+  }
 
   React.useEffect(() => {
-    setCount(initialCount)
-  }, [initialCount])
+    init()
+  }, [id])
 
   return (
     <button
       className="flex items-center gap-8 p-0 border-0 bg-transparent"
       onClick={handler}
+      disabled={loading}
     >
-      <span className="flex items-center gap-2">
-        <span className={classNames("transition duration-300 ease-out text-lg", {
-          'text-gray-600 dark:text-gray-200': !active,
-          'text-red-400': active
-        })}>
-          <HeartIcon filled={active} />
+      {loading ? <Spinner /> : (
+        <span className="flex items-center gap-2">
+          <span className={classNames("transition duration-300 ease-out text-lg", {
+            'text-gray-600 dark:text-gray-200': !active,
+            'text-red-400': active
+          })}>
+            <HeartIcon filled={active} />
+          </span>
+          <span className="text-xs uppercase">{count}</span>
         </span>
-        <span className="text-xs uppercase">{count}</span>
-      </span>
+      )}
     </button>
   )
 }

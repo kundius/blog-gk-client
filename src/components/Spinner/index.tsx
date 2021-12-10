@@ -1,24 +1,16 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import styles from './styles.module.css'
 
 export interface SpinnerProps {
-  size?: number
-  color?: string
+  className?: string
 }
 
-export const Spinner = ({
-  size = 18,
-  color = 'currentColor'
-}: SpinnerProps) => {
+export const Spinner = ({ className }: SpinnerProps) => {
   return (
-    <div
-      className={styles.Spinner}
-      style={{
-        width: size,
-        height: size,
-        borderColor: color
-      }}
-    />
+    <svg className={classNames(styles.Spinner, className)} viewBox="0 0 50 50">
+      <circle cx="25" cy="25" r="20" fill="none" strokeWidth="5" />
+    </svg>
   )
 }
