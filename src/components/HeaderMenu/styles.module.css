@@ -183,6 +183,12 @@
   transition: 300ms ease-out
 }
 
+@media (--below-md) {
+  .Wrapper::before {
+    border-top: 0;
+  }
+}
+
 .Wrapper::after {
   content: '';
   position: absolute;
@@ -195,6 +201,12 @@
   display: block;
   z-index: 1;
   transition: 300ms ease-out
+}
+
+@media (--below-md) {
+  .Wrapper::after {
+    border-bottom: 0;
+  }
 }
 
 :global(.isHeaderFixed) .Wrapper {

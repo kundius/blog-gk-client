@@ -12,3 +12,10 @@
   z-index: 10;
   top: 54px;
 }
+
+@media (--below-md) {
+  .Garland {
+    top: 136px;
+    width: 768px;
+  }
+}
