@@ -72,6 +72,7 @@
   text-indent: 12px;
   position: absolute;
   line-height: 1;
+  z-index: 20;
   white-space: nowrap;
   top: 292px;
   left: 50%;
@@ -92,7 +93,7 @@
   letter-spacing: 10px;
   font-size: 12px;
   padding: 3px;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 :global(.isHeaderFixed) .Slogan::before {

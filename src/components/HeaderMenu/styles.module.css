@@ -160,6 +160,7 @@
   transition: background 300ms ease-out;
   height: 80px;
   gap: 118px;
+  z-index: 40;
 }
 
 @media (--below-md) {
