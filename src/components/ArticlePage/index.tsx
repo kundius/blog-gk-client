@@ -193,7 +193,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
               {result.data.name}
             </h1>
 
-            <div className="transition duration-300 ease-out border-b border-gray-200 dark:border-gray-600 mt-14 pb-2 flex items-center gap-8 justify-between">
+            <div className="transition duration-300 ease-out border-b border-gray-200 dark:border-gray-600 mt-14 pb-2 flex items-center justify-between gap-4 md:gap-8 flex-col md:flex-row">
               {isRecipe && (
                 <div className="flex items-center gap-8">
                   <div className="flex items-center gap-2">
@@ -222,7 +222,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                   </div>
                 </div>
               )}
-              <div />
+              <div className="hidden md:block" />
               <div className="flex items-center gap-8">
                 <Hits
                   id={result.data.id}

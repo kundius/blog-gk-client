@@ -61,7 +61,7 @@ export function ArticleCardMain({
         </Link>
       </div>
       <div
-        className={`${styles.Info} flex items-center gap-8 justify-between border-b border-gray-200 dark:border-gray-600`}
+        className={`${styles.Info} flex items-center justify-between border-b border-gray-200 dark:border-gray-600 gap-4 md:gap-8 flex-col md:flex-row`}
       >
         <div className="flex items-center gap-8">
           {cookingTime && (
@@ -81,6 +81,7 @@ export function ArticleCardMain({
             </div>
           )}
         </div>
+        <div className="hidden md:block" />
         <div className="flex items-center gap-8">
           <span className="flex items-center gap-8">
             <span className="flex items-center gap-2">
