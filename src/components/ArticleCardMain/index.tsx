@@ -63,24 +63,26 @@ export function ArticleCardMain({
       <div
         className={`${styles.Info} flex items-center justify-between border-b border-gray-200 dark:border-gray-600 gap-4 md:gap-8 flex-col md:flex-row`}
       >
-        <div className="flex items-center gap-8">
-          {cookingTime && (
-            <div className="flex items-center gap-2">
-              <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
-                <ToqueIcon />
+        {(cookingTime || portionCount) && (
+          <div className="flex items-center gap-8">
+            {cookingTime && (
+              <div className="flex items-center gap-2">
+                <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
+                  <ToqueIcon />
+                </div>
+                <div className="text-xs uppercase">{cookingTime}</div>
               </div>
-              <div className="text-xs uppercase">{cookingTime}</div>
-            </div>
-          )}
-          {portionCount && (
-            <div className="flex items-center gap-2">
-              <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
-                <ClocheIcon />
+            )}
+            {portionCount && (
+              <div className="flex items-center gap-2">
+                <div className="transition duration-300 ease-out text-lg text-gray-600 dark:text-gray-200">
+                  <ClocheIcon />
+                </div>
+                <div className="text-xs uppercase">{portionCount}</div>
               </div>
-              <div className="text-xs uppercase">{portionCount}</div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
         <div className="hidden md:block" />
         <div className="flex items-center gap-8">
           <span className="flex items-center gap-8">
