@@ -13,7 +13,9 @@ export interface SearchData {
   meta: {
     search_count: number
   }
-  data: string[]
+  data: {
+    id: string
+  }[]
 }
 
 export type SearchResult = [string, (url: string) => Promise<SearchData>]
@@ -28,7 +30,7 @@ export function Search ({
     limit,
     page
   })
-  const key = `${publicRuntimeConfig.API_URL}/custom/articles/search?${params}`
+  const key = `${publicRuntimeConfig.API_URL}/items/articles?${params}`
   const fetcher = url => fetch(url).then(r => r.json())
   return [key, fetcher]
 }

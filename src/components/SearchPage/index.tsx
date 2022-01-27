@@ -94,8 +94,8 @@ export function SearchPage({ query }: SearchPageProps) {
           </div>
         )}
 
-        {searchResult?.data?.map((id) => (
-          <Card key={id} id={id} />
+        {searchResult?.data?.map((item) => (
+          <Card key={item.id} id={item.id} />
         ))}
 
         {(searchResult?.meta?.search_count || 0) > limit && (
