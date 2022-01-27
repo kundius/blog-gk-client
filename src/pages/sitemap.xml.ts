@@ -41,7 +41,7 @@ const getRssXml = blogPosts => {
 }
 
 const fetchMyPosts = async () => {
-  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/articles?fields=alias,date_updated,date_created,category.alias,category.section.alias`)
+  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/articles?fields=alias,date_updated,date_created,category.alias,category.section.alias&limit=-1`)
   const articles = await res.json()
   return articles.data
 }
