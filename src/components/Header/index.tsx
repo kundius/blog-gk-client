@@ -11,7 +11,6 @@ import { ThemeContext } from '@components/ThemeContext'
 
 import { useLightToggle } from './useLightToggle'
 import { Search } from './Search'
-import { Garland } from './Garland'
 import styles from './styles.module.css'
 
 export const Header = () => {
@@ -50,7 +49,6 @@ export const Header = () => {
       >
         <Container>
           <div className={styles.Inner}>
-            <Garland />
             <div className={styles.Search}>
               <Search />
             </div>

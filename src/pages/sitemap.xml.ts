@@ -7,19 +7,19 @@ const blogPostsRssXml = articles => {
   let latestPostDate = ''
   let sitemapItemsXml = ''
   articles.forEach(article => {
-    const postDate = Date.parse(article.date_updated)
+    const postDate = Date.parse(article.date_updated || article.date_created)
 
     // Remember to change this URL to your own!
     const postHref = `${publicRuntimeConfig.CLIENT_URL}/${article.category.section.alias}/${article.category.alias}/${article.alias}`
 
     if (!latestPostDate || postDate > Date.parse(latestPostDate)) {
-      latestPostDate = article.date_updated
+      latestPostDate = article.date_updated || article.date_created
     }
 
     sitemapItemsXml += `
       <url>
         <loc>${postHref}</loc>
-        <lastmod>${article.date_updated}</lastmod>
+        <lastmod>${article.date_updated || article.date_created}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
       </url>`
@@ -41,7 +41,7 @@ const getRssXml = blogPosts => {
 }
 
 const fetchMyPosts = async () => {
-  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/articles?fields=alias,date_updated,category.alias,category.section.alias`)
+  const res = await fetch(`${publicRuntimeConfig.API_URL}/items/articles?fields=alias,date_updated,date_created,category.alias,category.section.alias`)
   const articles = await res.json()
   return articles.data
 }
