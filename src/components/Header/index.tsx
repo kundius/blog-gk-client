@@ -11,6 +11,7 @@ import { ThemeContext } from '@components/ThemeContext'
 
 import { useLightToggle } from './useLightToggle'
 import { Search } from './Search'
+import { Garland } from './Garland'
 import styles from './styles.module.css'
 
 export const Header = () => {
@@ -73,6 +74,7 @@ export const Header = () => {
       </animated.div>
       <MobileMenu />
       <ScrollTop />
+      <Garland />
     </div>
   )
 }
