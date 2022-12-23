@@ -202,6 +202,12 @@
   z-index: -1;
 }
 
+@media (--below-md) {
+  .Garland1 {
+    left: -93px;
+  }
+}
+
 .Garland2 {
   background: url('/images/ng-right-top-2-red.png') no-repeat 50% 50%;
   background-size: contain;
@@ -212,6 +218,18 @@
   top: -163px;
   width: 529px;
   z-index: -1;
+}
+
+@media (--below-md) {
+  .Garland2 {
+    right: -380px;
+  }
+}
+
+@media (--below-sm) {
+  .Garland2 {
+    right: -460px;
+  }
 }
 
 .Garland3 {
@@ -249,7 +267,8 @@
 .Garland5 {
   background: url('/images/ng-middle-top-1.png') no-repeat;
   height: 42px;
-  left: 250px;
+  left: 50%;
+  transform: translateX(-50%);
   position: absolute;
   top: 0;
   width: 133px;
