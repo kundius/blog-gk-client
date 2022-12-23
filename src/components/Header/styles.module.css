@@ -191,7 +191,7 @@
 }
 
 .Garland1 {
-  background: url(images/ng-left-top-2-red.png) no-repeat 50% 50%;
+  background: url('/images/ng-left-top-2-red.png') no-repeat 50% 50%;
   background-size: contain;
   height: 600px;
   left: 0;
@@ -203,7 +203,7 @@
 }
 
 .Garland2 {
-  background: url(images/ng-right-top-2-red.png) no-repeat 50% 50%;
+  background: url('/images/ng-right-top-2-red.png') no-repeat 50% 50%;
   background-size: contain;
   height: 600px;
   pointer-events: none;
@@ -215,7 +215,7 @@
 }
 
 .Garland3 {
-  background: url(images/ng-left-top-1-red.png) no-repeat 50% 50%;
+  background: url('/images/ng-left-top-1-red.png') no-repeat 50% 50%;
   height: 518px;
   left: -410px;
   position: absolute;
@@ -224,7 +224,7 @@
 }
 
 .Garland4 {
-  background: url(images/ng-right-top-1.png) no-repeat;
+  background: url('/images/ng-right-top-1.png') no-repeat;
   height: 126px;
   position: absolute;
   right: -390px;
@@ -233,7 +233,7 @@
 }
 
 .Garland5 {
-  background: url(images/ng-middle-top-1.png) no-repeat;
+  background: url('/images/ng-middle-top-1.png') no-repeat;
   height: 42px;
   left: 50%;
   position: absolute;
