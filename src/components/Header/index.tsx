@@ -48,7 +48,12 @@ export const Header = () => {
           transform: isFixed ? headerSpring.y.to(y => `translateY(${y}%)`) : undefined
         }}
       >
+        <div className={styles.Garland1}></div>
+        <div className={styles.Garland2}></div>
         <Container>
+          <div className={styles.Garland3}></div>
+          <div className={styles.Garland4}></div>
+          <div className={styles.Garland5}></div>
           <div className={styles.Inner}>
             <div className={styles.Search}>
               <Search />
@@ -74,7 +79,6 @@ export const Header = () => {
       </animated.div>
       <MobileMenu />
       <ScrollTop />
-      <Garland />
     </div>
   )
 }

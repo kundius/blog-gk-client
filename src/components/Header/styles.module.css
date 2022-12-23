@@ -189,3 +189,55 @@
 :global(.isHeaderFixed) .Wrapper {
   position: fixed;
 }
+
+.Garland1 {
+  background: url(images/ng-left-top-2-red.png) no-repeat 50% 50%;
+  background-size: contain;
+  height: 600px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: -83px;
+  width: 297px;
+  z-index: 10;
+}
+
+.Garland2 {
+  background: url(images/ng-right-top-2-red.png) no-repeat 50% 50%;
+  background-size: contain;
+  height: 600px;
+  pointer-events: none;
+  position: absolute;
+  right: -88px;
+  top: -83px;
+  width: 529px;
+  z-index: 10;
+}
+
+.Garland3 {
+  background: url(images/ng-left-top-1-red.png) no-repeat 50% 50%;
+  height: 518px;
+  left: -410px;
+  position: absolute;
+  top: 0;
+  width: 428px;
+}
+
+.Garland4 {
+  background: url(images/ng-right-top-1.png) no-repeat;
+  height: 126px;
+  position: absolute;
+  right: -390px;
+  top: 0;
+  width: 398px;
+}
+
+.Garland5 {
+  background: url(images/ng-middle-top-1.png) no-repeat;
+  height: 42px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 133px;
+}
