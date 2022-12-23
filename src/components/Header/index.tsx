@@ -50,7 +50,7 @@ export const Header = () => {
       >
         <div className={styles.Garland1}></div>
         <div className={styles.Garland2}></div>
-        <Container>
+        <Container style={{ position: 'relative' }}>
           <div className={styles.Garland3}></div>
           <div className={styles.Garland4}></div>
           <div className={styles.Garland5}></div>
