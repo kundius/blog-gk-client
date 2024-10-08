@@ -22,7 +22,7 @@ interface ArticleRelatedProps {
 export function ArticleRelated({ id }: ArticleRelatedProps) {
   const [relatedKey, relatedFetcher] = api.getRelated({
     id,
-    limit: 2
+    limit: 3
   })
 
   const { data: relatedResult } = useSWR<api.GetRelatedData>(
@@ -57,11 +57,13 @@ export function ArticleRelated({ id }: ArticleRelatedProps) {
     />
   ))
 
+/*
   items.splice(
     randomInteger(0, relatedResult.data.length),
     0,
     <YandexRTB id={'R-A-518351-1'} horizontalAlign={false} />
   )
+*/
 
   return (
     <section>

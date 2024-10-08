@@ -297,7 +297,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
             />
 
             <div className={`${styles.Advert} mt-16`}>
-              <YandexRTB id={'R-A-518351-3'} />
+              <YandexRTB id={'R-A-2214092-1'} />
             </div>
 
             {result.data.tags?.[0] && (

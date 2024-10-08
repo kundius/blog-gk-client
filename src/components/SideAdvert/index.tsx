@@ -7,7 +7,7 @@ import styles from './styles.module.css'
 export function SideAdvert () {
   return (
     <div className={styles.Wrapper}>
-      <YandexRTB id={"R-A-518351-1"} />
+      <YandexRTB id={"R-A-2214092-1"} horizontalAlign={false} />
     </div>
   )
 }
