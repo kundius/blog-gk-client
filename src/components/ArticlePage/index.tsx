@@ -77,10 +77,10 @@ export function ArticlePage({ alias }: ArticlePageProps) {
   const isRecipe = !!result?.data?.ingredients
 
   useEffect(() => {
-    window.Ya.share2('ya-share2', {
-      theme: { services: 'messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp' },
-      content: { url: location.href }
-    });
+    // window.Ya.share2('ya-share2', {
+    //   theme: { services: 'messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp' },
+    //   content: { url: location.href }
+    // });
   }, [])
 
   return (
