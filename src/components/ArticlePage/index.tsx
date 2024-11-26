@@ -76,13 +76,13 @@ export function ArticlePage({ alias }: ArticlePageProps) {
   const imageUrl = `${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}`
   const isRecipe = !!result?.data?.ingredients
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(`${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}`)
     Ya.share2('ya-share2', {
       theme: { services: 'messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp' },
       content: { url: location.href, image: `${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}` }
     });
-  }, [])
+  }, [])*/
 
   return (
     <WideLayout>
@@ -330,8 +330,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                 <br />
                 Поделись с друзьями
               </div>
-              <div id="ya-share2" />
-              <div className="flex gap-2 hidden">
+              <div className="flex gap-2">
                 <FacebookShareButton url={pageUrl}>
                   <FacebookIcon size={32} borderRadius={32} />
                 </FacebookShareButton>
