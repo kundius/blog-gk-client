@@ -77,14 +77,14 @@ export function ArticlePage({ alias }: ArticlePageProps) {
   const isRecipe = !!result?.data?.ingredients
 
   useEffect(() => {
-    /*console.log(typeof Ya)
+    console.log(typeof Ya)
+    
     if (typeof Ya !== 'undefined') {
-      
-    Ya.share2('ya-share2', {
-      theme: { services: 'messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp' },
-      content: { url: location.href }
-    });
-    }*/
+      Ya.share2('ya-share2', {
+        theme: { services: 'messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp' },
+        content: { url: location.href }
+      });
+    }
   }, [])
 
   return (
