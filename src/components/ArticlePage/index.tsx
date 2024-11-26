@@ -337,7 +337,7 @@ export function ArticlePage({ alias }: ArticlePageProps) {
                 <TwitterShareButton url={pageUrl}>
                   <TwitterIcon size={32} borderRadius={32} />
                 </TwitterShareButton>
-                <VKShareButton url={pageUrl}>
+                <VKShareButton url={pageUrl} image={`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail?.filename_disk}`}>
                   <VKIcon size={32} borderRadius={32} />
                 </VKShareButton>
                 <OKShareButton url={pageUrl}>
