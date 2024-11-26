@@ -27,7 +27,6 @@ export default function App ({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <Script strategy="beforeInteractive" id="ya-context">{`window.yaContextCb=window.yaContextCb||[]`}</Script>
         <Script src="https://yandex.ru/ads/system/context.js" strategy="beforeInteractive" />
-        <Script src="https://yastatic.net/share2/share.js" strategy="beforeInteractive" />
         <Component {...pageProps} />
       </ThemeProvider>
     </SWRConfig>
