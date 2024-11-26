@@ -77,10 +77,10 @@ export function ArticlePage({ alias }: ArticlePageProps) {
   const isRecipe = !!result?.data?.ingredients
 
   useEffect(() => {
-    console.log(`${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail.filename_disk}`)
+    console.log(`${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}`)
     Ya.share2('ya-share2', {
       theme: { services: 'messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp' },
-      content: { url: location.href, image: `${publicRuntimeConfig.API_URL}/assets/${result.data.thumbnail.filename_disk}` }
+      content: { url: location.href, image: `${publicRuntimeConfig.API_URL}/assets/${result?.data?.thumbnail?.filename_disk}` }
     });
   }, [])
 
