@@ -23,6 +23,36 @@ export const HeaderMenu = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/cooking/pirogi" passHref>
+                  <a>Пироги</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cooking/cakes" passHref>
+                  <a>Торты и пирожные</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cooking/kartofelnye-bljuda" passHref>
+                  <a>Картофельные блюда</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cooking/ovoshhnye-bljuda" passHref>
+                  <a>Овощные блюда</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cooking/mjasnye-bljuda" passHref>
+                  <a>Мясные блюда</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/cooking/gribnye-blyuda" passHref>
+                  <a>Грибные блюда</a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/cooking/cakes" passHref>
                   <a>Торты, пироги и пирожные</a>
                 </Link>
