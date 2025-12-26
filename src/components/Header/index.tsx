@@ -55,6 +55,7 @@ export const Header = () => {
 {/*           <div className={styles.Garland3}></div> */}
 {/*           <div className={styles.Garland4}></div> */}
 {/*           <div className={styles.Garland5}></div> */}
+        <Garland />
           <div className={styles.Inner}>
             <div className={styles.Search}>
               <Search />
